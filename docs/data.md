@@ -28,27 +28,21 @@ Dokumentacja właścicieli źródeł:
 - [UR — budynki, w tym E4 przy Cichej 2A](https://bip.ur.edu.pl/deklaracja-dostepnosci-cyfrowej).
 - [WSPiA — adres kampusu](https://portal.wspia.eu/pl/kontakt/).
 
-## Wynik sprawdzenia danych
+## Plan pozyskania danych
 
-| Element | Wynik sprawdzenia |
+| Element | Ustalenie zespołu |
 |---|---|
-| Źródło i właściciel | Dane współtwórców OpenStreetMap, udostępniane na ODbL; odczyt przez Overpass API. |
-| Link lub sposób dostępu | Overpass Turbo albo POST do https://overpass-api.de/api/interpreter z parametrem `data`. |
-| Wymaganie, które źródło obsługuje | R1–R5: wybór miejsca zajęć, kryteria, filtr czasu, mapa i uzasadnienie rankingu. |
-| Data pobrania | 20.10.2026 |
-| Format i kodowanie | JSON, UTF-8. `sample.json` to surowa odpowiedź usług; `universities.json` to przygotowany zbiór miejsc zajęć. |
-| Liczba rekordów | Usługi: 500 — 274 sklepy, 185 przystanków, 41 parków. Uczelnie: 105 obiektów przed selekcją; po przygotowaniu 28 miejsc — UR 16, PRz 10, WSIiZ 1, WSPiA 1. |
-| Pola surowej odpowiedzi | `elements` — lista obiektów; `type` i `id` — klucz obiektu; `tags` — nazwa, adres i kategoria; `lat`, `lon` — punkt; `center` — środek obwiedni obszaru. |
-| Pola przygotowanego zbioru uczelni | `locations` — lista miejsc; `id`, `university`, `name`, `address`, `latitude`, `longitude`, `location_type`, `coordinate_type`, `osm_url`, `source_name`, `source_address`, `supplement_sources`. Ostatnie pola zachowują pochodzenie i wskazują uzupełnienia. |
-| Format dat i jednostki | Daty źródłowe: ISO 8601, UTC. Współrzędne: WGS84 w stopniach. Odległości i czas nie są pobrane — zostaną obliczone w aplikacji. |
-| Brakujące wartości | 21 usług bez nazwy; można wyświetlać kategorię. Wszystkie 28 wybranych miejsc zajęć mają nazwę, adres i współrzędne. Nie oznacza to kompletności wszystkich budynków lub usług w terenie. |
-| Limit zapytań, klucz i koszt | Bez klucza i opłaty w wykonanych próbach. Operator zaleca około maks. 10 tys. zapytań i poniżej 1 GB dziennie. |
-| Licencja i ograniczenia | Dane OpenStreetMap są udostępniane na licencji ODbL. W aplikacji zamieścimy link do źródła https://www.openstreetmap.org/copyright.|
-| Próba ponownego pobrania | Nie wykonano kontrolnego ponownego pobrania obecnych zapytań dla całego miasta.|
-| Brakujące dane | Środki 25 obszarów mieszkalnych, zweryfikowane wejścia do parków i budynków oraz ocena kompletności usług. |
-| Plan awaryjny | Wykorzystać zapisane dane; przy błędzie serwera powtórzyć pobranie później lub podzielić obszar. Braki uzupełniać dopiero po sprawdzeniu, z oznaczeniem źródła. |
-| Wybrany pomysł realizacji | Formularz, mapa i ranking: HTML/CSS/JavaScript. Import danych wcześniej, bez zapytań do Overpass przy każdym wyszukiwaniu. |
-| Odrzucony pomysł i powód | Aktualne oferty, ceny najmu i rzeczywisty czas dojazdu autobusem — brak przygotowanych danych i większy zakres realizacji. |
+| Źródło lub sposób pomiaru | OpenStreetMap przez Overpass API. Oficjalne strony UR i WSPiA służą do uzupełnienia wybranych nazw i adresów. |
+| Właściciel danych | Współtwórcy OpenStreetMap; informacje uzupełniające publikują poszczególne uczelnie. |
+| Zakres danych | Sklepy spożywcze, przystanki i parki w granicach Rzeszowa oraz wybrane miejsca zajęć UR, PRz, WSIiZ i WSPiA. |
+| Okres i częstotliwość | Dane pobrano 20.10.2026. Przetwarzanie i kontrolę powtarzalności wykonujemy na tej samej zapisanej próbce. Aktualizację planujemy przed końcową prezentacją. |
+| Jednostka obserwacji | Jeden obiekt OSM identyfikowany przez parę `type` i `id`. W wyniku: pojedyncza usługa albo wybrane miejsce zajęć. |
+| Dobór obserwacji i liczebność próby | Dobór według kategorii i granic miasta: 500 usług — 274 sklepy, 185 przystanków i 41 parków. Osobno pobrano 105 obiektów uczelnianych, z których przygotowano zestaw 28 miejsc: UR 16, PRz 10, WSIiZ 1, WSPiA 1. |
+| Sposób pobrania lub zebrania | Dwa zapytania w Overpass Turbo, zapisane poniżej, oraz eksport „raw OSM data” do JSON UTF-8. Niezmienione odpowiedzi znajdują się w `data/raw/sample.json` i `data/raw/universities.json`. Reguły wyboru i uzupełnień zapisano w `config/university-selection.json`. |
+| Limit, koszt lub wymagane uprawnienia | Pobranie bez klucza, logowania i opłaty. Operator zaleca około maks. 10 tys. zapytań i poniżej 1 GB dziennie; dostępność zależy od obciążenia serwera. |
+| Licencja i zasady publikacji | Dane OSM są udostępniane na licencji ODbL. Zamieścimy oznaczenie „© OpenStreetMap contributors” i link do https://www.openstreetmap.org/copyright. Przy udostępnianiu danych podamy licencję i link do https://opendatacommons.org/licenses/odbl/1-0/. Nie publikujemy zbędnych danych kontaktowych ani danych autorów edycji. |
+| Osoba odpowiedzialna za pozyskanie | Valentyna Boksha — pobranie, uporządkowanie danych i przygotowanie reguł wyboru lokalizacji. |
+| Plan awaryjny | Pracować na zapisanych próbkach. Przy błędzie API ponowić pobranie później lub podzielić obszar. Brakujące informacje uzupełniać ze sprawdzonych źródeł, zachowując informację o ich pochodzeniu. |
 
 ## Przygotowanie listy miejsc zajęć
 
