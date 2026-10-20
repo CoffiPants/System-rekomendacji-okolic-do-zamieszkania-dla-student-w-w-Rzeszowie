@@ -1,0 +1,29 @@
+{
+  "cases": [
+    {
+      "file": "data/test/duplicate_service.json",
+      "expected": "Duplikat ID powinien zostac odrzucony.",
+      "violations": [
+        "services[500]: powtorzony id node/10001305756"
+      ],
+      "success": true
+    },
+    {
+      "file": "data/test/invalid_coordinate.json",
+      "expected": "Latitude 200 powinna zostac odrzucona.",
+      "violations": [
+        "services[0]: nieprawidlowa latitude."
+      ],
+      "success": true
+    },
+    {
+      "file": "data/test/missing_university_address.json",
+      "expected": "Pusty adres miejsca zajec powinien zostac odrzucony.",
+      "violations": [
+        "locations[0]: brak adresu miejsca zajec."
+      ],
+      "success": true
+    }
+  ],
+  "success": true
+}

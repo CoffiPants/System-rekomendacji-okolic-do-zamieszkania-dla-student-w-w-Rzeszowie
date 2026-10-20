@@ -1,0 +1,2527 @@
+{
+  "services": {
+    "dataset": "services",
+    "records": 500,
+    "expected_fields": [
+      "address",
+      "category",
+      "coordinate_type",
+      "id",
+      "latitude",
+      "longitude",
+      "name",
+      "name_missing",
+      "osm_url",
+      "source_name"
+    ],
+    "missing_values": {
+      "address": 387,
+      "source_name": 21
+    },
+    "categories": {
+      "bus_stop": 185,
+      "park": 41,
+      "shop": 274
+    },
+    "universities": {},
+    "location_types": {},
+    "duplicate_coordinates": [],
+    "errors": 0,
+    "warnings": 0,
+    "information": 408,
+    "issues": [
+      {
+        "id": "node/10115076123",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10115246700",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10201748946",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10201748992",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10201748993",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10201748996",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10201748998",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10207838157",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10207838158",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10213215764",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10215467714",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10215467715",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10215467716",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10215488617",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10234785711",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10234786142",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10270213500",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10273652614",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10291730826",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10292948192",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10292948199",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10606155926",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10606235302",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10676381162",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10705124363",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10705124363",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10726003873",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10797378998",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10802696293",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10812143660",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10819445226",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10872194554",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10893731157",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10913909605",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10942828096",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10942828097",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/10980546930",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11028556751",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11049629814",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11049629835",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11052565446",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11093278193",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11167648261",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11335799684",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11335799685",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11358596822",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11358596822",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11400882345",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11435529948",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11685873959",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11685874079",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11685874117",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11698172314",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11835117519",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11948498426",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11967130708",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11967130709",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/11967130710",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12087431486",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12087431487",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12126469926",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12126501140",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12400797100",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12848653901",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12848653901",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12899784265",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945252989",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945252991",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945252992",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945252996",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945252997",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945256601",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945256615",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945256619",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945256621",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945458777",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945458779",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945458781",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945458782",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945458784",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945458789",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12945458795",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/12969268007",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13004876587",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13017331614",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13028537526",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13029121551",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13029121558",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13029627536",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030060758",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030060759",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030060760",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030060761",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030199580",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030199581",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030199582",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030199583",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030199584",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030199585",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030199586",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030199587",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030199588",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030199589",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030199590",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030224945",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030224946",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030224947",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13030224948",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13081671355",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13198417536",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13336687555",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13504034894",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13514430680",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13705707978",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13746839409",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13746840405",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13746842916",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13746852475",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13746864617",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13746864620",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13746864625",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13746864626",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13746890174",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13746890175",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13746896417",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/13752349985",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14028514498",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802817",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802818",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802819",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802820",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802821",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802822",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802823",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802824",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802825",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802826",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802827",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802828",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802829",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802830",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802831",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802832",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802833",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802836",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802837",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155802838",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155834197",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155834198",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155834199",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155834200",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155859701",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155859702",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155859703",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155859704",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155859705",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155859706",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14155859707",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14175637593",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14221994551",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14221994552",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14221994553",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14221994554",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14243849714",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/14247876733",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/1796063706",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/1837067532",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/1838136729",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/1891992810",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/1915878940",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/1969120157",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2070954310",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2096074759",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2122333192",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2188334220",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2312428217",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2312428217",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2339682060",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2339684002",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2390917257",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2475764519",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2523426393",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2648726875",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2648726884",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2714855966",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2923720123",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2923720147",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2961601979",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2961601988",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2961772213",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2964977018",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/2964977019",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/3055263749",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/3079320031",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/3092571091",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/3384396556",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/3390420760",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/3589722516",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/3589722524",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/3589722529",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/3848355906",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/3848355907",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/3922900964",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4077462766",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4077462767",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4077462772",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4109727639",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4297631707",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4340308508",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4355250575",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4355252598",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4385050199",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4391462032",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4556107190",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4604857952",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4604857953",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4604857967",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4753747812",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4816615666",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4827655021",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4831450921",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4837904858",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4881122920",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4917641909",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4917641915",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4919059598",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4943688304",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4950867983",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4950867989",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4980879971",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4989654787",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4992340133",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4992602566",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4992602567",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4992602568",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4992602569",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4992602570",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4992602595",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4992602596",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4992602597",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4994852801",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/4994852802",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5009290411",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5085564099",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5085564099",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5188593603",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5188593608",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5188593609",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5188593612",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5188593613",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5201654173",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5201654194",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5201654195",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5201654196",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5201654197",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5201654198",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5214324854",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5214324855",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5244111856",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5245793328",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5253660952",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5253660953",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5253660954",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5253660956",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5253660957",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5253660958",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5306985197",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5306985203",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5306985209",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5306985210",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5660388402",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/566829667",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/566829684",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/5991189484",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6033721386",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6369790526",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6487749887",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6487749888",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6487754589",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6487755186",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6502117102",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6502120588",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6993804498",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6993804499",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6993804500",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6993804501",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6993804502",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6993804503",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6993804504",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/6993804505",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7134982785",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7280410021",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7528920413",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7528920414",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7528920415",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7528920416",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7528920417",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7528920418",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7528920419",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7528920420",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7528920421",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7528920422",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7528920423",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7528920424",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7824040349",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/7835254957",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8015856494",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8238402022",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8244379321",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8280500192",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8311464114",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8339077497",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8363075384",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8363075385",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8363075386",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8363075390",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8363075392",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8363075394",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8363075396",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8363085410",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8363136217",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8363136219",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8363136221",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8363173577",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8363173579",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8363173581",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8365855999",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8485703892",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8699519279",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/8699519281",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/9052823958",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/9052823959",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/9052823960",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/9052823961",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/9490960408",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/9503423502",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/9517445981",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/9593990720",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "node/9734047356",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "relation/11501735",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "relation/13473517",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "relation/13662834",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "relation/4003784",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1013710465",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1013710465",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1045525930",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1084028005",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1090441884",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1090441884",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1099703195",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1099703195",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1115608199",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1116056913",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1119072415",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1303562403",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1360372419",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1414455642",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1414455642",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1429069833",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/143209438",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1464091908",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1464091908",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1469734746",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1469734746",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1478782934",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1478782993",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1478782993",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1549307139",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/1552800605",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/168656489",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/172960676",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/177404922",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/181439974",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/181440367",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/182389629",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/182389629",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/182570652",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/186634187",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/197201537",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/197227730",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/203006067",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/203006067",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/221974432",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/224158211",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/224158211",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/226096408",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/227698323",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/227698323",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/227701454",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/229788734",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/237851334",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/239669630",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/273849160",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/303691962",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/303691962",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/313156676",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/313560050",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/320322965",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/332350440",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/332350440",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/348510580",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/391091429",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/496658820",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/532546899",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/640129462",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/640129462",
+        "field": "name",
+        "description": "Nazwa zastępcza; możliwa weryfikacja ręczna.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/750204507",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      },
+      {
+        "id": "way/859069400",
+        "field": "address",
+        "description": "Brak adresu; sprawdzić, czy jest potrzebny.",
+        "severity": "INFO"
+      }
+    ]
+  },
+  "universities": {
+    "dataset": "universities",
+    "records": 28,
+    "expected_fields": [
+      "address",
+      "coordinate_type",
+      "id",
+      "latitude",
+      "location_type",
+      "longitude",
+      "name",
+      "osm_url",
+      "source_address",
+      "source_name",
+      "supplement_sources",
+      "university"
+    ],
+    "missing_values": {
+      "source_name": 1
+    },
+    "categories": {},
+    "universities": {
+      "PRz": 10,
+      "UR": 16,
+      "WSIiZ": 1,
+      "WSPiA": 1
+    },
+    "location_types": {
+      "building": 26,
+      "campus": 2
+    },
+    "duplicate_coordinates": [],
+    "errors": 0,
+    "warnings": 0,
+    "information": 0,
+    "issues": []
+  },
+  "summary": {
+    "total_records": 528,
+    "total_errors": 0,
+    "total_warnings": 0,
+    "total_information": 408,
+    "success": true
+  }
+}
