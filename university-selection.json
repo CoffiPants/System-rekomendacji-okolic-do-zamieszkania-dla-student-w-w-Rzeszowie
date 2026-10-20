@@ -1,0 +1,186 @@
+{
+  "description": "Jawne reguły wyboru 28 lokalizacji; nie są surowymi danymi OSM. Zmiany wartości mają wskazane źródła. Pozostałe obiekty nie należą do wybranego zestawu startowego.",
+  "selection_limitations": "Nazwy wydziałów z OSM mogą być historyczne. Zestaw nie obejmuje wszystkich korpusów. Punkty oznaczają środki obwiedni, nie wejścia.",
+  "locations": [
+    {
+      "osm_id": "way/208515700",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/198079894",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/208515697",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/208515698",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/197201421",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie.",
+      "overrides": {
+        "name": "Budynek E4 — Cicha"
+      },
+      "override_sources": {
+        "name": "https://bip.ur.edu.pl/deklaracja-dostepnosci-cyfrowej"
+      }
+    },
+    {
+      "osm_id": "way/500135711",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/499982432",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "relation/7329563",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/205861151",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/200288271",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/200325702",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/234902872",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/302517608",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/330287137",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/348754766",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/329873151",
+      "university": "UR",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/207298602",
+      "university": "PRz",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/209613248",
+      "university": "PRz",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/209613249",
+      "university": "PRz",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/209613250",
+      "university": "PRz",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/209613251",
+      "university": "PRz",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/858320232",
+      "university": "PRz",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/197835436",
+      "university": "PRz",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/197227711",
+      "university": "PRz",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/197835454",
+      "university": "PRz",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/795000534",
+      "university": "PRz",
+      "location_type": "building",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/273849182",
+      "university": "WSIiZ",
+      "location_type": "campus",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie."
+    },
+    {
+      "osm_id": "way/219517240",
+      "university": "WSPiA",
+      "location_type": "campus",
+      "selection_reason": "Wybrana lokalizacja z nazwą, adresem i współrzędnymi, przydatna jako miejsce zajęć w projekcie.",
+      "overrides": {
+        "address": "Cegielniana 14, Rzeszów"
+      },
+      "override_sources": {
+        "address": "https://portal.wspia.eu/pl/kontakt/"
+      }
+    }
+  ]
+}
