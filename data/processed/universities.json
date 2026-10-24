@@ -1,0 +1,487 @@
+{
+  "attribution": "© OpenStreetMap contributors",
+  "license": "ODbL-1.0",
+  "license_url": "https://www.openstreetmap.org/copyright",
+  "locations": [
+    {
+      "id": "relation/7329563",
+      "university": "UR",
+      "name": "Wydział Biologiczno-Rolniczy - Centrum Transferu Technologii i Badań Podstawowych wraz z Centrum Konferencyjno-Naukowym",
+      "address": "Aleksandra Zelwerowicza 4, Rzeszów",
+      "latitude": 50.0017837,
+      "longitude": 22.0284247,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/relation/7329563",
+      "source_name": "Wydział Biologiczno-Rolniczy - Centrum Transferu Technologii i Badań Podstawowych wraz z Centrum Konferencyjno-Naukowym",
+      "source_address": {
+        "street": "Aleksandra Zelwerowicza",
+        "housenumber": "4"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/197201421",
+      "university": "UR",
+      "name": "Budynek E4 — Cicha",
+      "address": "Cicha 2a, Rzeszów",
+      "latitude": 50.0163109,
+      "longitude": 22.0036136,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/197201421",
+      "source_name": null,
+      "source_address": {
+        "street": "Cicha",
+        "housenumber": "2a"
+      },
+      "supplement_sources": {
+        "name": "https://bip.ur.edu.pl/deklaracja-dostepnosci-cyfrowej"
+      }
+    },
+    {
+      "id": "way/197227711",
+      "university": "PRz",
+      "name": "Budynek P",
+      "address": "Poznańska 2, Rzeszów",
+      "latitude": 50.0192653,
+      "longitude": 21.9815667,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/197227711",
+      "source_name": "Budynek P",
+      "source_address": {
+        "street": "Poznańska",
+        "housenumber": "2"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/197835436",
+      "university": "PRz",
+      "name": "Wydział Matematyki i Fizyki Stosowanej - Katedra Fizyki",
+      "address": "aleja Powstańców Warszawy 6, Rzeszów",
+      "latitude": 50.0194704,
+      "longitude": 21.9856177,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/197835436",
+      "source_name": "Wydział Matematyki i Fizyki Stosowanej - Katedra Fizyki",
+      "source_address": {
+        "street": "aleja Powstańców Warszawy",
+        "housenumber": "6"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/197835454",
+      "university": "PRz",
+      "name": "Regionalne Centrum Dydaktyczno-Konferencyjne i Biblioteczno-Administracyjne",
+      "address": "Aleja Powstańców Warszawy 12, Rzeszów",
+      "latitude": 50.0190453,
+      "longitude": 21.989023,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/197835454",
+      "source_name": "Regionalne Centrum Dydaktyczno-Konferencyjne i Biblioteczno-Administracyjne",
+      "source_address": {
+        "street": "Aleja Powstańców Warszawy",
+        "housenumber": "12"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/198079894",
+      "university": "UR",
+      "name": "A1",
+      "address": "Aleja Tadeusza Rejtana 16c, Rzeszów",
+      "latitude": 50.0301719,
+      "longitude": 22.0155708,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/198079894",
+      "source_name": "A1",
+      "source_address": {
+        "street": "Aleja Tadeusza Rejtana",
+        "housenumber": "16c"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/200288271",
+      "university": "UR",
+      "name": "Wydział Prawa i Administracji",
+      "address": "Grunwaldzka 13, Rzeszów",
+      "latitude": 50.0394953,
+      "longitude": 22.0023945,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/200288271",
+      "source_name": "Wydział Prawa i Administracji",
+      "source_address": {
+        "street": "Grunwaldzka",
+        "housenumber": "13"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/200325702",
+      "university": "UR",
+      "name": "Instytut Archeologii Uniwersytetu Rzeszowskiego",
+      "address": "Stanisława Moniuszki 10, Rzeszów",
+      "latitude": 50.0384122,
+      "longitude": 21.9986219,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/200325702",
+      "source_name": "Instytut Archeologii Uniwersytetu Rzeszowskiego",
+      "source_address": {
+        "street": "Stanisława Moniuszki",
+        "housenumber": "10"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/205861151",
+      "university": "UR",
+      "name": "Instytut Pedagogiki",
+      "address": "Księdza Józefa Jałowego 24, Rzeszów",
+      "latitude": 50.0414351,
+      "longitude": 21.9931158,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/205861151",
+      "source_name": "Instytut Pedagogiki",
+      "source_address": {
+        "street": "Księdza Józefa Jałowego",
+        "housenumber": "24"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/207298602",
+      "university": "PRz",
+      "name": "Wydział Elektrotechniki i Informatyki",
+      "address": "Wincentego Pola 2, Rzeszów",
+      "latitude": 50.0268468,
+      "longitude": 21.9852888,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/207298602",
+      "source_name": "Wydział Elektrotechniki i Informatyki",
+      "source_address": {
+        "street": "Wincentego Pola",
+        "housenumber": "2"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/208515697",
+      "university": "UR",
+      "name": "A2",
+      "address": "Aleja Tadeusza Rejtana 16a, Rzeszów",
+      "latitude": 50.0292164,
+      "longitude": 22.0154479,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/208515697",
+      "source_name": "A2",
+      "source_address": {
+        "street": "Aleja Tadeusza Rejtana",
+        "housenumber": "16a"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/208515698",
+      "university": "UR",
+      "name": "A3",
+      "address": "Aleja Tadeusza Rejtana 16b, Rzeszów",
+      "latitude": 50.0291325,
+      "longitude": 22.0136913,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/208515698",
+      "source_name": "A3",
+      "source_address": {
+        "street": "Aleja Tadeusza Rejtana",
+        "housenumber": "16b"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/208515700",
+      "university": "UR",
+      "name": "A0",
+      "address": "Profesora Stanisława Pigonia 1, Rzeszów",
+      "latitude": 50.0301285,
+      "longitude": 22.0140556,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/208515700",
+      "source_name": "A0",
+      "source_address": {
+        "street": "Profesora Stanisława Pigonia",
+        "housenumber": "1"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/209613248",
+      "university": "PRz",
+      "name": "Budynek C",
+      "address": "Marii Skłodowskiej-Curie 8/2, Rzeszów",
+      "latitude": 50.0263614,
+      "longitude": 21.9838121,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/209613248",
+      "source_name": "Budynek C",
+      "source_address": {
+        "street": "Marii Skłodowskiej-Curie",
+        "housenumber": "8/2"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/209613249",
+      "university": "PRz",
+      "name": "Budynek D",
+      "address": "Marii Skłodowskiej-Curie 8/1, Rzeszów",
+      "latitude": 50.0258903,
+      "longitude": 21.9835969,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/209613249",
+      "source_name": "Budynek D",
+      "source_address": {
+        "street": "Marii Skłodowskiej-Curie",
+        "housenumber": "8/1"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/209613250",
+      "university": "PRz",
+      "name": "Budynek E",
+      "address": "Franciszka Żwirki i Stanisława Wigury 2, Rzeszów",
+      "latitude": 50.0263571,
+      "longitude": 21.9846177,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/209613250",
+      "source_name": "Budynek E",
+      "source_address": {
+        "street": "Franciszka Żwirki i Stanisława Wigury",
+        "housenumber": "2"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/209613251",
+      "university": "PRz",
+      "name": "Budynek F",
+      "address": "Marii Skłodowskiej-Curie 8/2, Rzeszów",
+      "latitude": 50.0259983,
+      "longitude": 21.9833734,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/209613251",
+      "source_name": "Budynek F",
+      "source_address": {
+        "street": "Marii Skłodowskiej-Curie",
+        "housenumber": "8/2"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/219517240",
+      "university": "WSPiA",
+      "name": "WSPiA",
+      "address": "Cegielniana 14, Rzeszów",
+      "latitude": 50.0314082,
+      "longitude": 22.0122267,
+      "location_type": "campus",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/219517240",
+      "source_name": "WSPiA",
+      "source_address": {
+        "street": null,
+        "housenumber": null
+      },
+      "supplement_sources": {
+        "address": "https://portal.wspia.eu/pl/kontakt/"
+      }
+    },
+    {
+      "id": "way/234902872",
+      "university": "UR",
+      "name": "Uniwersytet Rzeszowski – Wydział Wychowania Fizycznego",
+      "address": "Klementyny Hoffmanowej 25, Rzeszów",
+      "latitude": 50.0371798,
+      "longitude": 21.9900282,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/234902872",
+      "source_name": "Uniwersytet Rzeszowski – Wydział Wychowania Fizycznego",
+      "source_address": {
+        "street": "Klementyny Hoffmanowej",
+        "housenumber": "25"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/273849182",
+      "university": "WSIiZ",
+      "name": "Wyższa Szkoła Informatyki i Zarządzania",
+      "address": "Majora Henryka Sucharskiego 2, Rzeszów",
+      "latitude": 50.0490181,
+      "longitude": 21.9812269,
+      "location_type": "campus",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/273849182",
+      "source_name": "Wyższa Szkoła Informatyki i Zarządzania",
+      "source_address": {
+        "street": "Majora Henryka Sucharskiego",
+        "housenumber": "2"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/302517608",
+      "university": "UR",
+      "name": "Kolegium Nauk Medycznych",
+      "address": "Warzywna 1a, Rzeszów",
+      "latitude": 50.0319267,
+      "longitude": 22.014379,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/302517608",
+      "source_name": "Kolegium Nauk Medycznych",
+      "source_address": {
+        "street": "Warzywna",
+        "housenumber": "1a"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/329873151",
+      "university": "UR",
+      "name": "Zakład Nauk o Człowieku",
+      "address": "Leszka Czarnego 4, Rzeszów",
+      "latitude": 50.036504,
+      "longitude": 22.0391094,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/329873151",
+      "source_name": "Zakład Nauk o Człowieku",
+      "source_address": {
+        "street": "Leszka Czarnego",
+        "housenumber": "4"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/330287137",
+      "university": "UR",
+      "name": "Kolegium Nauk Medycznych",
+      "address": "Litawora 2, Rzeszów",
+      "latitude": 50.0322185,
+      "longitude": 22.0134092,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/330287137",
+      "source_name": "Kolegium Nauk Medycznych",
+      "source_address": {
+        "street": "Litawora",
+        "housenumber": "2"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/348754766",
+      "university": "UR",
+      "name": "Centrum Symulacji Medycznej Uniwersytetu Rzeszowskiego",
+      "address": "Warszawska 26a, Rzeszów",
+      "latitude": 50.0564539,
+      "longitude": 21.998102,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/348754766",
+      "source_name": "Centrum Symulacji Medycznej Uniwersytetu Rzeszowskiego",
+      "source_address": {
+        "street": "Warszawska",
+        "housenumber": "26a"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/499982432",
+      "university": "UR",
+      "name": "Wydział Biologiczno-Rolniczy - Podkarpackie Centrum Innowacyjno-Badawcze Środowiska",
+      "address": "Aleksandra Zelwerowicza 8b, Rzeszów",
+      "latitude": 49.9997822,
+      "longitude": 22.0293675,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/499982432",
+      "source_name": "Wydział Biologiczno-Rolniczy - Podkarpackie Centrum Innowacyjno-Badawcze Środowiska",
+      "source_address": {
+        "street": "Aleksandra Zelwerowicza",
+        "housenumber": "8b"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/500135711",
+      "university": "UR",
+      "name": "Wydział Ekonomii",
+      "address": "Mieczysławy Ćwiklińskiej 2, Rzeszów",
+      "latitude": 50.0013673,
+      "longitude": 22.0303058,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/500135711",
+      "source_name": "Wydział Ekonomii",
+      "source_address": {
+        "street": "Mieczysławy Ćwiklińskiej",
+        "housenumber": "2"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/795000534",
+      "university": "PRz",
+      "name": "Budynek W",
+      "address": "Poznańska 2e, Rzeszów",
+      "latitude": 50.0170936,
+      "longitude": 21.9821182,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/795000534",
+      "source_name": "Budynek W",
+      "source_address": {
+        "street": "Poznańska",
+        "housenumber": "2e"
+      },
+      "supplement_sources": {}
+    },
+    {
+      "id": "way/858320232",
+      "university": "PRz",
+      "name": "Wydział Chemiczny",
+      "address": "Aleja Powstańców Warszawy 6, Rzeszów",
+      "latitude": 50.0198017,
+      "longitude": 21.9858098,
+      "location_type": "building",
+      "coordinate_type": "osm_bounding_box_center",
+      "osm_url": "https://www.openstreetmap.org/way/858320232",
+      "source_name": "Wydział Chemiczny",
+      "source_address": {
+        "street": "Aleja Powstańców Warszawy",
+        "housenumber": "6"
+      },
+      "supplement_sources": {}
+    }
+  ]
+}

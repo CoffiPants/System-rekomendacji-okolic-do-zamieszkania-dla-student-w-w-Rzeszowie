@@ -1,0 +1,15 @@
+{
+  "datasets": {
+    "services": {
+      "records": 500,
+      "violations": [],
+      "success": true
+    },
+    "universities": {
+      "records": 28,
+      "violations": [],
+      "success": true
+    }
+  },
+  "success": true
+}
