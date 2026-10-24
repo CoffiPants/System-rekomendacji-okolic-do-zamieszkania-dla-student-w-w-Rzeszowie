@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "source_hashes": {
+    "data/raw/sample.json": "fc68dbaf0c31c0e46088ca49f1e0bf1d5fb9445fedda55127c727521f0a788d2",
+    "data/raw/universities.json": "50769178d08fada3752cfd11fbcd807e1986aeed423a6c70cc685211d527ff63",
+    "config/university-selection.json": "940610ec3a4e2f63a47a6fc25aa2574455cfe058c3515dde7c1a5edaec03297f"
+  },
+  "inputs_unchanged": true,
+  "same_quality_results": true,
+  "comparisons": [
+    {
+      "file": "services.json",
+      "first_records": 500,
+      "second_records": 500,
+      "same_fields": true,
+      "same_values": true,
+      "same_bytes": true
+    },
+    {
+      "file": "universities.json",
+      "first_records": 28,
+      "second_records": 28,
+      "same_fields": true,
+      "same_values": true,
+      "same_bytes": true
+    }
+  ]
+}
