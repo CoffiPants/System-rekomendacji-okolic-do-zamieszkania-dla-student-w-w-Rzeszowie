@@ -290,6 +290,27 @@ Wyniki kontroli i audytu są zapisywane w katalogu `data/test/`.
 - [Słownik danych](docs/data-dictionary.md)
 - [Przetwarzanie, kontrole i powtarzalność](docs/processing.md)
 
+## Lab 4 — porównanie metod rekomendacji
+
+Eksperyment porównuje ranking bazowy (odległość wyłącznie od wybranej
+uczelni) z rankingiem ważonym, który uwzględnia także sklepy, przystanki i
+parki. Opis założeń znajduje się w [docs/experiment.md](docs/experiment.md).
+
+Uruchomienie z katalogu głównego:
+
+```shell
+python scripts/compare_methods.py
+```
+
+Wyniki trafiają do `results/lab4/`. Identyfikator wybranej lokalizacji zajęć
+można zmienić opcją `--university-id`; próbę wrażliwości zapisuje się do
+osobnego katalogu:
+
+```shell
+python scripts/compare_methods.py --shop-limit 1500 \
+  --output results/lab4/sensitivity
+```
+
 ### Sprawdzenie powtarzalności
 
 Python 3.10+, bez dodatkowych pakietów. Z katalogu głównego projektu:

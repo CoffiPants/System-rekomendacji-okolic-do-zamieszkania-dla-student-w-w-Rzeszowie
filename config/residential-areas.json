@@ -1,0 +1,30 @@
+{
+  "radius_m": 500,
+  "areas": [
+    {"id": "baranowka-1", "name": "Baranówka 1", "district": "Baranówka", "latitude": 50.0447, "longitude": 21.9578},
+    {"id": "anders-1", "name": "Gen. Władysława Andersa", "district": "Generała Władysława Andersa", "latitude": 50.0572, "longitude": 21.9686},
+    {"id": "milocin-1", "name": "Miłocin", "district": "Miłocin", "latitude": 50.0598, "longitude": 21.9974},
+    {"id": "staromiescie-1", "name": "Staromieście", "district": "Staromieście", "latitude": 50.0611, "longitude": 22.0065},
+    {"id": "tysiaclecia-1", "name": "1000-lecia", "district": "1000-lecia", "latitude": 50.0498, "longitude": 22.0112},
+    {"id": "srodmiescie-1", "name": "Śródmieście", "district": "Śródmieście", "latitude": 50.0386, "longitude": 22.0047},
+    {"id": "pulaskiego-1", "name": "Pułaskiego", "district": "Pułaskiego", "latitude": 50.0351, "longitude": 21.9881},
+    {"id": "grota-1", "name": "Gen. Roweckiego-Grota", "district": "Generała Roweckiego-Grota", "latitude": 50.0326, "longitude": 21.9731},
+    {"id": "kmity-1", "name": "Kmity", "district": "Kmity", "latitude": 50.0287, "longitude": 21.9682},
+    {"id": "kotuli-1", "name": "Franciszka Kotuli", "district": "Franciszka Kotuli", "latitude": 50.0258, "longitude": 21.9498},
+    {"id": "przybyszowka-1", "name": "Przybyszówka", "district": "Przybyszówka", "latitude": 50.0356, "longitude": 21.9347},
+    {"id": "krakowska-poludnie-1", "name": "Krakowska-Południe", "district": "Krakowska-Południe", "latitude": 50.0264, "longitude": 21.9811},
+    {"id": "krola-1", "name": "Króla Stanisława Augusta", "district": "Króla Stanisława Augusta", "latitude": 50.0251, "longitude": 21.9937},
+    {"id": "paderewskiego-1", "name": "Paderewskiego", "district": "Paderewskiego", "latitude": 50.0471, "longitude": 22.0375},
+    {"id": "mieszka-1", "name": "Mieszka I", "district": "Mieszka I", "latitude": 50.0413, "longitude": 22.0269},
+    {"id": "nowe-miasto-1", "name": "Nowe Miasto 1", "district": "Nowe Miasto", "latitude": 50.0188, "longitude": 22.0077},
+    {"id": "nowe-miasto-2", "name": "Nowe Miasto 2", "district": "Nowe Miasto", "latitude": 50.0108, "longitude": 22.0198},
+    {"id": "drabinianka-1", "name": "Drabinianka 1", "district": "Drabinianka", "latitude": 50.0067, "longitude": 22.0062},
+    {"id": "drabinianka-2", "name": "Drabinianka 2", "district": "Drabinianka", "latitude": 49.9997, "longitude": 22.0169},
+    {"id": "zalesie-1", "name": "Zalesie 1", "district": "Zalesie", "latitude": 50.0019, "longitude": 22.0442},
+    {"id": "zalesie-2", "name": "Zalesie 2", "district": "Zalesie", "latitude": 50.0117, "longitude": 22.0469},
+    {"id": "dabrowskiego-1", "name": "Dąbrowskiego 1", "district": "Dąbrowskiego", "latitude": 50.0208, "longitude": 21.9994},
+    {"id": "dabrowskiego-2", "name": "Dąbrowskiego 2", "district": "Dąbrowskiego", "latitude": 50.0272, "longitude": 22.0119},
+    {"id": "piastow-1", "name": "Piastów 1", "district": "Piastów", "latitude": 50.0321, "longitude": 22.0261},
+    {"id": "piastow-2", "name": "Piastów 2", "district": "Piastów", "latitude": 50.0382, "longitude": 22.0344}
+  ]
+}

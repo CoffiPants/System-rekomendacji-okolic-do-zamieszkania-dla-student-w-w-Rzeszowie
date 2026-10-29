@@ -1,0 +1,26 @@
+area_id,area_name,district,university_distance_m,shop_distance_m,bus_stop_distance_m,park_distance_m,university_score,shop_score,bus_stop_score,park_score,baseline_score,proposed_score
+baranowka-1,Baranówka 1,Baranówka,3298.57,79.58,641.45,289.09,0.0,94.6945,0.0,80.7274,0.0,38.9827
+anders-1,Gen. Władysława Andersa,Generała Władysława Andersa,4318.6,461.49,398.67,190.31,0.0,69.2343,33.5553,87.3125,0.0,42.2449
+milocin-1,Miłocin,Miłocin,4646.93,90.91,618.32,261.77,0.0,93.9395,0.0,82.5487,0.0,39.2196
+staromiescie-1,Staromieście,Staromieście,4980.95,237.73,774.64,521.67,0.0,84.1516,0.0,65.2219,0.0,33.1941
+tysiaclecia-1,1000-lecia,1000-lecia,4000.96,146.47,106.16,629.03,0.0,90.2356,82.3072,58.0648,0.0,51.2461
+srodmiescie-1,Śródmieście,Śródmieście,2711.6,29.03,298.86,133.81,9.6135,98.0644,50.1904,91.0793,9.6135,56.3898
+pulaskiego-1,Pułaskiego,Pułaskiego,1821.54,259.97,448.84,545.82,39.282,82.6686,25.1932,63.6123,39.282,51.1994
+grota-1,Gen. Roweckiego-Grota,Generała Roweckiego-Grota,1601.36,266.23,290.02,577.42,46.6212,82.2511,51.6626,61.5051,46.6212,58.9668
+kmity-1,Kmity,Kmity,1418.6,589.74,286.8,967.27,52.7132,60.6842,52.1996,35.5154,52.7132,50.5487
+kotuli-1,Franciszka Kotuli,Franciszka Kotuli,2382.94,440.49,1123.02,1835.18,20.5687,70.6343,0.0,0.0,20.5687,22.5527
+przybyszowka-1,Przybyszówka,Przybyszówka,3808.85,1320.61,192.84,1646.34,0.0,11.9592,67.8598,0.0,0.0,17.7375
+krakowska-poludnie-1,Krakowska-Południe,Krakowska-Południe,794.04,188.51,305.21,464.33,73.5319,87.4325,49.1311,69.0445,73.5319,70.2013
+krola-1,Króla Stanisława Augusta,Króla Stanisława Augusta,1082.73,168.53,503.56,458.67,63.9089,88.7647,16.0733,69.4217,63.9089,60.0273
+paderewskiego-1,Paderewskiego,Paderewskiego,5053.71,658.55,519.54,859.23,0.0,56.0968,13.4108,42.7177,0.0,24.939
+mieszka-1,Mieszka I,Mieszka I,4060.64,426.82,329.68,223.89,0.0,71.5457,45.0533,85.0741,0.0,44.8162
+nowe-miasto-1,Nowe Miasto 1,Nowe Miasto,1867.85,113.46,932.71,784.51,37.7384,92.4361,0.0,47.6994,37.7384,43.7207
+nowe-miasto-2,Nowe Miasto 2,Nowe Miasto,2889.48,219.89,1044.68,476.13,3.684,85.3409,0.0,68.2579,3.684,35.361
+drabinianka-1,Drabinianka 1,Drabinianka,2247.31,230.65,57.25,397.7,25.0897,84.6236,90.4578,73.4865,25.0897,63.6005
+drabinianka-2,Drabinianka 2,Drabinianka,3332.93,249.38,1053.62,1088.2,0.0,83.3747,0.0,27.4534,0.0,24.6285
+zalesie-1,Zalesie 1,Zalesie,4874.47,472.94,86.89,969.53,0.0,68.4704,85.5182,35.3646,0.0,42.0785
+zalesie-2,Zalesie 2,Zalesie,4743.37,54.35,506.64,1458.53,0.0,96.3766,15.5597,2.7648,0.0,25.4891
+dabrowskiego-1,Dąbrowskiego 1,Dąbrowskiego,1285.48,301.79,1093.05,317.68,57.1508,79.8809,0.0,78.8212,57.1508,54.3174
+dabrowskiego-2,Dąbrowskiego 2,Dąbrowskiego,2339.75,224.09,634.83,151.66,22.0085,85.0609,0.0,89.8892,22.0085,46.214
+piastow-1,Piastów 1,Piastów,3486.76,513.62,739.64,801.65,0.0,65.7587,0.0,46.5564,0.0,24.9589
+piastow-2,Piastów 2,Piastów,4321.56,255.3,536.1,190.29,0.0,82.9799,10.6499,87.3137,0.0,40.2097

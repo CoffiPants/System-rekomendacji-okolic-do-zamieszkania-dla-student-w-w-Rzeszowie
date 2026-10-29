@@ -1,0 +1,3 @@
+metric,baseline,proposed,unit,direction
+mean_full_utility_top3,59.8886,63.1586,points (0-100),higher_is_better
+top3_overlap,2,3,areas,descriptive
