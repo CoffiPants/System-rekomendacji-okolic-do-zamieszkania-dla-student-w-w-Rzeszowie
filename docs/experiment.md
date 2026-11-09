@@ -1,4 +1,4 @@
-# Laboratorium 4 — Porównanie dwóch metod wyszukiwania usług
+# Laboratorium 4 — Porównanie metod wyszukiwania usług i rekomendacji okolic
 
 ## 1. Problem i pytanie badawcze
 
@@ -425,3 +425,207 @@ Eksperyment można odtworzyć za pomocą poleceń podanych w sekcji 5.
 Niezależna weryfikacja przez drugiego członka zespołu pozostaje do wykonania.
 
 Wyniki czasowe mogą różnić się pomiędzy komputerami, natomiast liczba znalezionych obiektów i zgodność wyników powinny pozostać takie same przy wykorzystaniu identycznych danych i parametrów.
+
+## 12. Porównanie dwóch technik rekomendacji okolic mieszkalnych
+
+### 12.1. Cel eksperymentu
+
+Celem eksperymentu było porównanie dwóch różnych technik rozwiązywania problemu rekomendacji okolic do zamieszkania dla studentów w Rzeszowie.
+
+Porównano:
+
+1. **Weighted Scoring** — metodę punktową opartą na ważonej sumie ocen poszczególnych kryteriów.
+2. **KNN (k-Nearest Neighbors)** — metodę opartą na podobieństwie charakterystyk okolic do profilu preferencji studenta.
+
+Eksperyment miał umożliwić wybór techniki do dalszej implementacji systemu.
+
+### 12.2. Dane wejściowe
+
+Wykorzystano dane przygotowane w poprzednich etapach projektu:
+
+- 25 lokalizacji mieszkalnych w Rzeszowie;
+- 500 obiektów usługowych;
+- 28 lokalizacji uczelni.
+
+Dla każdej okolicy wyznaczono oceny w skali 0–100 dotyczące czterech kryteriów:
+
+- bliskości uczelni;
+- dostępności sklepów;
+- dostępności przystanków autobusowych;
+- dostępności parków.
+
+Oceny obliczono na podstawie odległości geograficznych między lokalizacjami.
+
+### 12.3. Technika 1 — Weighted Scoring
+
+Weighted Scoring polega na obliczeniu łącznej oceny okolicy na podstawie ocen poszczególnych kryteriów oraz przypisanych im wag.
+
+Wzór:
+
+**S = (w₁x₁ + w₂x₂ + w₃x₃ + w₄x₄) / (w₁ + w₂ + w₃ + w₄)**
+
+gdzie:
+
+- S — końcowa ocena okolicy;
+- x₁, x₂, x₃, x₄ — oceny czterech kryteriów;
+- w₁, w₂, w₃, w₄ — wagi określające znaczenie kryteriów.
+
+Okolice są sortowane malejąco według końcowej oceny. Najwyższy wynik oznacza najlepszą rekomendację według przyjętych wag.
+
+**Zalety:** prostota, przejrzystość wyników, możliwość personalizacji wag.
+
+**Ograniczenia:** wynik zależy od przyjętych wag i sposobu punktowania kryteriów.
+
+### 12.4. Technika 2 — KNN
+
+W projekcie zastosowano podejście oparte na wyszukiwaniu najbliższych sąsiadów w przestrzeni cech.
+
+Każda okolica jest reprezentowana przez cztery oceny, a profil studenta określa pożądane wartości tych ocen.
+
+Dla każdej okolicy obliczana jest ważona odległość euklidesowa od profilu studenta:
+
+**d = √[Σ wᵢ((xᵢ − pᵢ)/100)²]**
+
+gdzie:
+
+- d — odległość między okolicą a profilem studenta;
+- xᵢ — ocena danego kryterium dla okolicy;
+- pᵢ — oczekiwana ocena kryterium;
+- wᵢ — waga kryterium.
+
+Następnie wybierane są trzy okolice o najmniejszej odległości.
+
+W tym wariancie KNN nie wymaga trenowania klasyfikatora. Jest wykorzystywany do wyszukiwania lokalizacji najbardziej podobnych do określonego profilu preferencji.
+
+**Zalety:** możliwość wyszukiwania okolic podobnych do indywidualnego profilu studenta.
+
+**Ograniczenia:** wyniki zależą od sposobu określenia profilu, skalowania cech i przyjętej miary odległości.
+
+### 12.5. Scenariusze eksperymentalne
+
+Przeprowadzono porównanie dla trzech profili preferencji:
+
+| Profil | Charakterystyka |
+|---|---|
+| Balanced | Zrównoważone uwzględnienie różnych potrzeb studenta |
+| University priority | Większy nacisk na bliskość uczelni |
+| Services priority | Większy nacisk na dostępność usług |
+
+Dla każdego profilu porównano trzy najwyżej ocenione okolice uzyskane obiema metodami.
+
+### 12.6. Wyniki porównania
+
+| Profil | TOP 1 Weighted Scoring | TOP 1 KNN | Zgodność TOP 3 |
+|---|---|---|---|
+| Balanced | Krakowska-Południe | Krakowska-Południe | 2/3 |
+| University priority | Krakowska-Południe | Krakowska-Południe | 2/3 |
+| Services priority | Drabinianka 1 | Drabinianka 1 | 2/3 |
+
+W każdym scenariuszu obie techniki wskazały tę samą okolicę na pierwszym miejscu.
+
+Jednocześnie wśród trzech najlepszych rekomendacji występowały różnice. Dla każdego profilu dwie z trzech rekomendowanych okolic były wspólne.
+
+Wyniki potwierdzają, że obie techniki mogą generować podobne rekomendacje, ale wykorzystują odmienne zasady wyznaczania rankingu.
+
+### 12.7. Porównanie wydajności
+
+Przeprowadzono dodatkowy eksperyment mierzący czas wykonania obu metod.
+
+**Parametry:**
+
+- liczba analizowanych okolic: 25;
+- liczba powtórzeń: 1000;
+- miara czasu: mediana;
+- jednostka: milisekundy.
+
+| Metoda | Mediana czasu |
+|---|---:|
+| Weighted Scoring | 0,017700 ms |
+| KNN | 0,037400 ms |
+
+Stosunek czasów wykonania:
+
+0,037400 / 0,017700 ≈ **2,11**
+
+Weighted Scoring był około 2,11 razy szybszy od KNN w przeprowadzonym pomiarze.
+
+Pomiar obejmował wyłącznie obliczanie rankingów na przygotowanych danych. Nie uwzględniał czasu pobierania danych ani wyznaczania odległości geograficznych.
+
+Ze względu na niewielki zbiór danych i bardzo krótkie czasy wykonania wynik ten należy interpretować jako porównanie wydajności w konkretnym środowisku testowym, a nie uniwersalną przewagę jednej metody.
+
+### 12.8. Kontrola poprawności
+
+Przygotowano trzy automatyczne testy dla implementacji KNN.
+
+Wynik uruchomienia:
+
+**Ran 3 tests — OK**
+
+Wszystkie trzy testy zakończyły się pomyślnie.
+
+Dodatkowo porównano wyniki obu technik dla trzech profili preferencji studentów.
+
+Zgodność pierwszej rekomendacji wyniosła 3/3, natomiast zgodność zbiorów TOP 3 wyniosła 2/3 dla każdego profilu.
+
+Zgodność rankingów nie stanowi jednak niezależnego potwierdzenia jakości rekomendacji. Do takiej oceny potrzebne byłyby dodatkowe dane, np. opinie studentów.
+
+### 12.9. Wybór techniki do dalszej implementacji
+
+Na podstawie przeprowadzonego porównania wybrano **Weighted Scoring** jako technikę do dalszej implementacji systemu rekomendacji.
+
+Uzasadnienie:
+
+1. Krótszy czas obliczania rankingu w przeprowadzonym eksperymencie.
+2. Przejrzysty sposób obliczania końcowej oceny.
+3. Możliwość łatwego wyjaśnienia użytkownikowi, dlaczego dana okolica otrzymała określoną liczbę punktów.
+4. Możliwość personalizacji rekomendacji poprzez zmianę wag kryteriów.
+5. Brak konieczności przygotowania danych treningowych.
+
+KNN pozostaje alternatywną techniką, którą można rozwijać w przyszłości.
+
+### 12.10. Ograniczenia
+
+- Eksperyment przeprowadzono dla 25 lokalizacji mieszkalnych.
+- Wykorzystano trzy przykładowe profile preferencji.
+- Wyniki zależą od przyjętych ocen, wag i profili.
+- Nie przeprowadzono badania satysfakcji użytkowników.
+- Nie wykorzystano danych o rzeczywistych wyborach mieszkaniowych studentów.
+- Porównanie czasu obejmowało tylko etap obliczania rankingów.
+
+### 12.11. Implementacja i odtwarzalność
+
+Implementacja została przygotowana w języku Python.
+
+Wykorzystane skrypty:
+
+- `scripts/compare_methods.py` — przygotowanie ocen okolic i wcześniejsze porównanie rankingów;
+- `scripts/knn_recommender.py` — implementacja KNN;
+- `scripts/compare_knn_weighted.py` — porównanie Weighted Scoring i KNN;
+- `scripts/test_knn.py` — automatyczne testy KNN;
+- `scripts/benchmark_knn_weighted.py` — pomiar czasu wykonania obu technik.
+
+Polecenia uruchomienia:
+
+`py scripts/compare_methods.py`
+
+`py scripts/compare_knn_weighted.py`
+
+`py scripts/test_knn.py`
+
+`py scripts/benchmark_knn_weighted.py`
+
+Wyniki porównania rankingów zapisano w katalogu:
+
+`results/lab4/knn/`
+
+Znajdują się tam pliki `comparison.csv` i `rankings.csv`.
+
+### 12.12. Wniosek końcowy
+
+Przeprowadzony eksperyment pozwolił porównać dwie różne techniki rekomendacji okolic mieszkalnych dla studentów.
+
+Obie techniki wskazały identyczne najlepsze okolice dla trzech badanych profili, jednak różniły się pozostałymi pozycjami w rankingach.
+
+Weighted Scoring uzyskał krótszy czas wykonania i zapewnia prostszą interpretację wyników.
+
+Dlatego został wybrany jako podstawowa technika do dalszego rozwoju systemu rekomendacji okolic do zamieszkania dla studentów w Rzeszowie.
