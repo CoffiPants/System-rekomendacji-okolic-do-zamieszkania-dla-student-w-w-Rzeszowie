@@ -1,0 +1,151 @@
+profile,method,rank,area_id,area_name,value
+balanced,weighted,1,krakowska-poludnie-1,Krakowska-Południe,68.804944
+balanced,weighted,2,drabinianka-1,Drabinianka 1,61.892056
+balanced,weighted,3,krola-1,Króla Stanisława Augusta,58.778989
+balanced,weighted,4,grota-1,Gen. Roweckiego-Grota,56.994711
+balanced,weighted,5,srodmiescie-1,Śródmieście,56.174789
+balanced,weighted,6,dabrowskiego-1,Dąbrowskiego 1,52.081956
+balanced,weighted,7,tysiaclecia-1,1000-lecia,50.161178
+balanced,weighted,8,pulaskiego-1,Pułaskiego,49.273644
+balanced,weighted,9,kmity-1,Kmity,46.180244
+balanced,weighted,10,dabrowskiego-2,Dąbrowskiego 2,44.554056
+balanced,weighted,11,nowe-miasto-1,Nowe Miasto 1,42.880244
+balanced,weighted,12,mieszka-1,Mieszka I,41.654644
+balanced,weighted,13,anders-1,Gen. Władysława Andersa,38.826489
+balanced,weighted,14,zalesie-1,Zalesie 1,38.5752
+balanced,weighted,15,milocin-1,Miłocin,38.5462
+balanced,weighted,16,baranowka-1,Baranówka 1,38.393156
+balanced,weighted,17,piastow-2,Piastów 2,38.318556
+balanced,weighted,18,nowe-miasto-2,Nowe Miasto 2,33.732267
+balanced,weighted,19,staromiescie-1,Staromieście,31.433178
+balanced,weighted,20,zalesie-2,Zalesie 2,25.086533
+balanced,weighted,21,drabinianka-2,Drabinianka 2,22.781222
+balanced,weighted,22,piastow-1,Piastów 1,21.154311
+balanced,weighted,23,paderewskiego-1,Paderewskiego,20.060822
+balanced,weighted,24,kotuli-1,Franciszka Kotuli,19.289878
+balanced,weighted,25,przybyszowka-1,Przybyszówka,15.079956
+balanced,knn,1,krakowska-poludnie-1,Krakowska-Południe,0.995198
+balanced,knn,2,grota-1,Gen. Roweckiego-Grota,1.326733
+balanced,knn,3,drabinianka-1,Drabinianka 1,1.395946
+balanced,knn,4,krola-1,Króla Stanisława Augusta,1.429447
+balanced,knn,5,pulaskiego-1,Pułaskiego,1.620246
+balanced,knn,6,kmity-1,Kmity,1.629423
+balanced,knn,7,dabrowskiego-1,Dąbrowskiego 1,1.680082
+balanced,knn,8,srodmiescie-1,Śródmieście,1.721835
+balanced,knn,9,tysiaclecia-1,1000-lecia,1.859361
+balanced,knn,10,nowe-miasto-1,Nowe Miasto 1,1.932814
+balanced,knn,11,dabrowskiego-2,Dąbrowskiego 2,1.986373
+balanced,knn,12,mieszka-1,Mieszka I,2.003179
+balanced,knn,13,zalesie-1,Zalesie 1,2.079626
+balanced,knn,14,anders-1,Gen. Władysława Andersa,2.083534
+balanced,knn,15,piastow-2,Piastów 2,2.181567
+balanced,knn,16,milocin-1,Miłocin,2.253317
+balanced,knn,17,nowe-miasto-2,Nowe Miasto 2,2.254162
+balanced,knn,18,baranowka-1,Baranówka 1,2.255428
+balanced,knn,19,staromiescie-1,Staromieście,2.314072
+balanced,knn,20,paderewskiego-1,Paderewskiego,2.454213
+balanced,knn,21,piastow-1,Piastów 1,2.469586
+balanced,knn,22,drabinianka-2,Drabinianka 2,2.485353
+balanced,knn,23,kotuli-1,Franciszka Kotuli,2.506163
+balanced,knn,24,zalesie-2,Zalesie 2,2.514533
+balanced,knn,25,przybyszowka-1,Przybyszówka,2.684511
+university_priority,weighted,1,krakowska-poludnie-1,Krakowska-Południe,79.830144
+university_priority,weighted,2,kmity-1,Kmity,78.535978
+university_priority,weighted,3,grota-1,Gen. Roweckiego-Grota,74.086089
+university_priority,weighted,4,krola-1,Króla Stanisława Augusta,68.748411
+university_priority,weighted,5,pulaskiego-1,Pułaskiego,65.889111
+university_priority,weighted,6,dabrowskiego-1,Dąbrowskiego 1,63.796356
+university_priority,weighted,7,nowe-miasto-1,Nowe Miasto 1,59.033978
+university_priority,weighted,8,mieszka-1,Mieszka I,56.146822
+university_priority,weighted,9,zalesie-1,Zalesie 1,54.920178
+university_priority,weighted,10,drabinianka-1,Drabinianka 1,54.834411
+university_priority,weighted,11,piastow-1,Piastów 1,54.487644
+university_priority,weighted,12,anders-1,Gen. Władysława Andersa,53.864756
+university_priority,weighted,13,paderewskiego-1,Paderewskiego,53.394156
+university_priority,weighted,14,srodmiescie-1,Śródmieście,50.234211
+university_priority,weighted,15,kotuli-1,Franciszka Kotuli,49.978144
+university_priority,weighted,16,tysiaclecia-1,1000-lecia,49.838822
+university_priority,weighted,17,dabrowskiego-2,Dąbrowskiego 2,47.896056
+university_priority,weighted,18,nowe-miasto-2,Nowe Miasto 2,46.501511
+university_priority,weighted,19,staromiescie-1,Staromieście,46.3446
+university_priority,weighted,20,drabinianka-2,Drabinianka 2,44.975844
+university_priority,weighted,21,piastow-2,Piastów 2,44.192511
+university_priority,weighted,22,przybyszowka-1,Przybyszówka,40.4756
+university_priority,weighted,23,baranowka-1,Baranówka 1,39.384622
+university_priority,weighted,24,milocin-1,Miłocin,39.231578
+university_priority,weighted,25,zalesie-2,Zalesie 2,38.613244
+university_priority,knn,1,krakowska-poludnie-1,Krakowska-Południe,0.690585
+university_priority,knn,2,kmity-1,Kmity,0.85431
+university_priority,knn,3,krola-1,Króla Stanisława Augusta,0.957163
+university_priority,knn,4,grota-1,Gen. Roweckiego-Grota,0.995545
+university_priority,knn,5,dabrowskiego-1,Dąbrowskiego 1,1.138212
+university_priority,knn,6,pulaskiego-1,Pułaskiego,1.175315
+university_priority,knn,7,nowe-miasto-1,Nowe Miasto 1,1.401013
+university_priority,knn,8,drabinianka-1,Drabinianka 1,1.50541
+university_priority,knn,9,dabrowskiego-2,Dąbrowskiego 2,1.671911
+university_priority,knn,10,kotuli-1,Franciszka Kotuli,1.702904
+university_priority,knn,11,srodmiescie-1,Śródmieście,1.797788
+university_priority,knn,12,mieszka-1,Mieszka I,1.806002
+university_priority,knn,13,zalesie-1,Zalesie 1,1.815657
+university_priority,knn,14,paderewskiego-1,Paderewskiego,1.824455
+university_priority,knn,15,anders-1,Gen. Władysława Andersa,1.826334
+university_priority,knn,16,tysiaclecia-1,1000-lecia,1.863258
+university_priority,knn,17,piastow-1,Piastów 1,1.871562
+university_priority,knn,18,nowe-miasto-2,Nowe Miasto 2,1.872599
+university_priority,knn,19,staromiescie-1,Staromieście,1.919353
+university_priority,knn,20,piastow-2,Piastów 2,1.925592
+university_priority,knn,21,drabinianka-2,Drabinianka 2,1.930619
+university_priority,knn,22,baranowka-1,Baranówka 1,2.010556
+university_priority,knn,23,milocin-1,Miłocin,2.011615
+university_priority,knn,24,przybyszowka-1,Przybyszówka,2.015886
+university_priority,knn,25,zalesie-2,Zalesie 2,2.020066
+services_priority,weighted,1,drabinianka-1,Drabinianka 1,78.558722
+services_priority,weighted,2,grota-1,Gen. Roweckiego-Grota,73.661378
+services_priority,weighted,3,srodmiescie-1,Śródmieście,72.841456
+services_priority,weighted,4,krakowska-poludnie-1,Krakowska-Południe,69.783678
+services_priority,weighted,5,tysiaclecia-1,1000-lecia,66.827844
+services_priority,weighted,6,krola-1,Króla Stanisława Augusta,66.173056
+services_priority,weighted,7,pulaskiego-1,Pułaskiego,65.940311
+services_priority,weighted,8,dabrowskiego-1,Dąbrowskiego 1,63.981422
+services_priority,weighted,9,dabrowskiego-2,Dąbrowskiego 2,61.220722
+services_priority,weighted,10,kmity-1,Kmity,61.038111
+services_priority,weighted,11,nowe-miasto-1,Nowe Miasto 1,59.546911
+services_priority,weighted,12,mieszka-1,Mieszka I,58.321311
+services_priority,weighted,13,anders-1,Gen. Władysława Andersa,55.493156
+services_priority,weighted,14,zalesie-1,Zalesie 1,55.241867
+services_priority,weighted,15,milocin-1,Miłocin,55.212867
+services_priority,weighted,16,baranowka-1,Baranówka 1,55.059822
+services_priority,weighted,17,piastow-2,Piastów 2,54.985222
+services_priority,weighted,18,nowe-miasto-2,Nowe Miasto 2,50.398933
+services_priority,weighted,19,staromiescie-1,Staromieście,48.099844
+services_priority,weighted,20,zalesie-2,Zalesie 2,41.7532
+services_priority,weighted,21,drabinianka-2,Drabinianka 2,39.447889
+services_priority,weighted,22,piastow-1,Piastów 1,37.820978
+services_priority,weighted,23,paderewskiego-1,Paderewskiego,36.727489
+services_priority,weighted,24,kotuli-1,Franciszka Kotuli,35.956544
+services_priority,weighted,25,przybyszowka-1,Przybyszówka,31.746622
+services_priority,knn,1,drabinianka-1,Drabinianka 1,0.67183
+services_priority,knn,2,grota-1,Gen. Roweckiego-Grota,0.95334
+services_priority,knn,3,krakowska-poludnie-1,Krakowska-Południe,0.972819
+services_priority,knn,4,srodmiescie-1,Śródmieście,1.00156
+services_priority,knn,5,tysiaclecia-1,1000-lecia,1.098738
+services_priority,knn,6,pulaskiego-1,Pułaskiego,1.246458
+services_priority,knn,7,krola-1,Króla Stanisława Augusta,1.307894
+services_priority,knn,8,mieszka-1,Mieszka I,1.327677
+services_priority,knn,9,kmity-1,Kmity,1.409403
+services_priority,knn,10,zalesie-1,Zalesie 1,1.440432
+services_priority,knn,11,anders-1,Gen. Władysława Andersa,1.446068
+services_priority,knn,12,dabrowskiego-1,Dąbrowskiego 1,1.512349
+services_priority,knn,13,dabrowskiego-2,Dąbrowskiego 2,1.534905
+services_priority,knn,14,piastow-2,Piastów 2,1.584056
+services_priority,knn,15,nowe-miasto-1,Nowe Miasto 1,1.617999
+services_priority,knn,16,milocin-1,Miłocin,1.681499
+services_priority,knn,17,baranowka-1,Baranówka 1,1.684326
+services_priority,knn,18,nowe-miasto-2,Nowe Miasto 2,1.715157
+services_priority,knn,19,staromiescie-1,Staromieście,1.762081
+services_priority,knn,20,paderewskiego-1,Paderewskiego,1.942463
+services_priority,knn,21,piastow-1,Piastów 1,1.96185
+services_priority,knn,22,drabinianka-2,Drabinianka 2,1.981661
+services_priority,knn,23,zalesie-2,Zalesie 2,2.018137
+services_priority,knn,24,kotuli-1,Franciszka Kotuli,2.155903
+services_priority,knn,25,przybyszowka-1,Przybyszówka,2.226342
