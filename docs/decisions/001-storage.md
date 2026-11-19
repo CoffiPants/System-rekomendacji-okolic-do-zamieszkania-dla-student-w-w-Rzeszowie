@@ -1,7 +1,7 @@
 # ADR 001: Wybór formatu plików JSON/CSV zamiast relacyjnej bazy danych SQLite
 
 * **Status:** Przyjęta (Accepted)
-* **Data:** 2026-11-10
+* **Data:** 2026-11-10 (Aktualizacja: 2026-11-19)
 * **Autor:** Paulina Michalska
 
 ## Kontekst i problem
@@ -11,7 +11,7 @@ System rekomendacji okolic mieszkalnych dla studentów w Rzeszowie wymaga przech
 - zdefiniowanych obszarach mieszkalnych (25 obszarów w 20 osiedlach),
 - wynikach porównań algorytmów (Weighted Scoring oraz KNN).
 
-Należy podjąć decyzję dotyczącą sposobu przechowywania danych wejściowych, pośrednich oraz wyników analitycznych w kontekście wymagań wydajnościowych, łatwości integracji z algorytmami w Pythonie oraz złożoności utrzymania projektu.
+Należy podjąć decyzję dotyczącą sposobu przechowywania danych wejściowych, pośrednich oraz wyników analitycznych w kontekście wymagań wydajnościowych, łatwości integracji z algorytmami w Pythonie, interfejsem webowym Streamlit oraz złożoności utrzymania projektu.
 
 ## Rozważane opcje
 1. **Relacyjna baza danych (np. SQLite)**
@@ -21,7 +21,7 @@ Należy podjąć decyzję dotyczącą sposobu przechowywania danych wejściowych
 
 ### Opcja 1: Relacyjna baza danych (SQLite)
 * **Zalety:**
-  * Wbudowane wsparcie dla zapytania SQL i relacji między tabelami.
+  * Wbudowane wsparcie dla zapytań SQL i relacji między tabelami.
   * ACID oraz transakcyjność.
 * **Wady:**
   * Konieczność tworzenia i zarządzania migracjami schematu bazy danych.
@@ -32,6 +32,7 @@ Należy podjąć decyzję dotyczącą sposobu przechowywania danych wejściowych
 * **Zalety:**
   * **Natywna zgodność z danymi źródłowymi:** Dane pozyskane z OpenStreetMap (Overpass API) docierają w formacie JSON.
   * **Bezpośrednia integracja z Pythonem:** Biblioteka standardowa (`json`, `csv`) umożliwia szybki odczyt i zapis bez zewnętrznych zależności.
+  * **Kompatybilność ze Streamlit:** Dane w formacie JSON/CSV można łatwo buforować w pamięci aplikacji webowej za pomocą dekoratora `@st.cache_data`, co eliminuje opóźnienia przy interakcji użytkownika z formularzem i mapą.
   * **Pełna kontrola wersji w Git:** Pliki tekstowe JSON/CSV pozwalają na precyzyjne śledzenie zmian (diffs), audytowanie jakości oraz weryfikację powtarzalności wyników.
   * **Wystarczająca skala:** Zbiór danych obejmuje 528 obiektów, co sprawia, że ładowanie całej struktury do pamięci RAM (in-memory processing) trwa ułamek sekundy.
 
@@ -43,7 +44,7 @@ Nie wdrażamy bazy SQL na obecnym etapie, ponieważ skomplikowałaby ona archite
 ## Konsekwencje
 * **Pozytywne:**
   * Prosta struktura projektu bez konieczności konfiguracji silnika bazy danych.
-  * Pełna powtarzalność i łatwość audytowania danych w repetytorium Git.
-  * Bezproblemowa integracja ze skryptami analitycznymi w Pythonie.
+  * Pełna powtarzalność i łatwość audytowania danych w repozytorium Git.
+  * Bezproblemowa integracja ze skryptami analitycznymi w Pythonie oraz aplikacją Streamlit.
 * **Negatywne / Ograniczenia:**
   * W przypadku wzrostu liczby obiektów do dziesiątek tysięcy konieczna będzie reewaluacja architektury pod kątem przejścia na bazę spacyjną (np. PostGIS / SQLite z SpatiaLite).
