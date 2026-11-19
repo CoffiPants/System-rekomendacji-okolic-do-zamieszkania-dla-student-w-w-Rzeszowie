@@ -311,6 +311,30 @@ python scripts/compare_methods.py --shop-limit 1500 \
   --output results/lab4/sensitivity
 ```
 
+## Silnik rekomendacji — Lab 6 i Lab 7
+
+Silnik znajduje się w `scripts/recommendation_engine.py`. Przyjmuje dane
+przetworzone oraz środki 25 obszarów z `config/residential-areas.json`.
+Ranking uwzględnia odległość od wybranej lokalizacji uczelni, sklepu,
+przystanku i parku. Wagi można przekazać z aplikacji, a limit czasu dojścia
+filtruje obszary przed utworzeniem rankingu.
+
+Odległości są liczone w linii prostej wzorem Haversine'a. Czas dojścia jest
+orientacyjny i przyjmuje prędkość 80 metrów na minutę. Wynik zawiera TOP 3,
+odległości, wyniki cząstkowe i uzasadnienie tekstowe.
+
+Testy silnika:
+
+```shell
+python -m unittest discover -s tests -v
+```
+
+Pomiar wydajności dla 100 powtórzeń:
+
+```shell
+python scripts/benchmark_recommendation.py
+```
+
 ### Sprawdzenie powtarzalności
 
 Python 3.10+, bez dodatkowych pakietów. Z katalogu głównego projektu:
