@@ -417,3 +417,99 @@ Weighted Scoring okazał się szybszy w przeprowadzonym eksperymencie i umożliw
 KNN stanowi alternatywną metodę opartą na podobieństwie okolic do zadanego profilu preferencji.
 
 **Do dalszego rozwoju systemu wybrano Weighted Scoring jako metodę podstawową.**
+
+
+---
+
+## Lab 6 — Implementacja MVP i interfejs użytkownika
+
+**Odpowiedzialna: Dana Stadnyk**
+
+W ramach laboratorium 6 przygotowano działający prototyp
+systemu StudentFinder Rzeszów z interfejsem graficznym
+zrealizowanym w technologii Streamlit.
+
+### Funkcjonalności aplikacji
+
+- Wybór uczelni oraz budynku lub wydziału.
+- Określenie maksymalnego czasu dojścia do uczelni.
+- Ustawienie wag kryteriów w zakresie 0–5:
+  - bliskość uczelni,
+  - dostępność sklepów,
+  - dostępność komunikacji miejskiej,
+  - dostępność parków.
+- Generowanie rankingu maksymalnie trzech rekomendowanych okolic.
+- Prezentacja wyników w formie kart z oceną punktową.
+- Wyświetlanie rekomendowanych lokalizacji na interaktywnej mapie.
+- Obsługa sytuacji, w której nie znaleziono odpowiednich okolic.
+- Walidacja przypadku, w którym wszystkie wagi wynoszą zero.
+
+### Architektura rozwiązania
+
+Aplikacja wykorzystuje dane przygotowane we wcześniejszych
+etapach projektu.
+
+Interfejs użytkownika znajduje się w pliku `app.py`.
+
+Logika rekomendacji jest realizowana przez moduł
+`scripts/recommendation_engine.py`.
+
+System wykorzystuje metodę Weighted Scoring do oceny
+okolic na podstawie preferencji użytkownika.
+
+### Uruchomienie aplikacji
+
+Wymagany jest Python 3.10 lub nowszy.
+
+Instalacja zależności:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Uruchomienie:
+
+```bash
+python -m streamlit run app.py
+```
+
+Po uruchomieniu aplikacja jest dostępna pod adresem
+lokalnym wskazanym w terminalu.
+
+### Testowanie
+
+Testy automatyczne:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+Kontrola składni:
+
+```bash
+python -m py_compile app.py scripts/recommendation_engine.py
+```
+
+Benchmark:
+
+```bash
+python scripts/benchmark_recommendation.py
+```
+
+### Ograniczenia MVP
+
+- Czas dojścia jest szacowany na podstawie odległości
+  w linii prostej.
+- System nie uwzględnia rzeczywistej sieci ulic,
+  przejść dla pieszych ani warunków ruchu.
+- Rekomendacje bazują na przygotowanym zbiorze danych,
+  a nie na aktualnych ofertach wynajmu mieszkań.
+- Wyniki dotyczą 25 zdefiniowanych obszarów mieszkalnych.
+
+### Pliki
+
+- `app.py` — interfejs użytkownika Streamlit.
+- `scripts/recommendation_engine.py` — logika rekomendacji.
+- `scripts/benchmark_recommendation.py` — pomiar wydajności.
+- `tests/test_recommendation_engine.py` — testy automatyczne.
+- `docs/implementation.md` — dokumentacja implementacji MVP.
