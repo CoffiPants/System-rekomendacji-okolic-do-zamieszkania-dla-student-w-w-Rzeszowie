@@ -346,3 +346,194 @@ python scripts/verify_repeatability.py
 Skrypt dwukrotnie przygotowuje i sprawdza dane z tej samej zapisanej próbki. Zachowuje kopie odniesienia w data/test/repeatability-reference/, usuwa wyłącznie dwa wygenerowane pliki z data/processed/ i je odtwarza. Porównuje liczbę rekordów, pola, wartości i wyniki kontroli. Nie zmienia data/raw/ ani konfiguracji.
 
 Raport: data/test/repeatability-report.json. Wynik jest również zapisywany w data/test/repeatability-result.md i sekcji 9 dokumentu docs/processing.md.
+
+
+## Lab 4 — porównanie Weighted Scoring i KNN
+
+W ramach drugiego eksperymentu porównano dwie techniki rekomendacji okolic mieszkalnych dla studentów w Rzeszowie:
+
+1. **Weighted Scoring** — metoda oceniająca okolice na podstawie ważonej sumy punktów za bliskość uczelni, sklepów, przystanków autobusowych i parków.
+2. **KNN (K-Nearest Neighbors)** — metoda wybierająca okolice najbardziej zbliżone do profilu preferencji studenta na podstawie ważonej odległości euklidesowej.
+
+### Dane i metodyka
+
+Wykorzystano 25 lokalizacji mieszkalnych zapisanych w `config/residential-areas.json` oraz dane o usługach i uczelniach z katalogu `data/processed/`.
+
+Przeanalizowano trzy profile preferencji:
+
+- `balanced` — zrównoważone preferencje,
+- `university_priority` — priorytet bliskości uczelni,
+- `services_priority` — priorytet dostępu do usług.
+
+Dla każdego profilu porównano trzy najwyżej ocenione okolice.
+
+### Wyniki porównania
+
+| Profil | Najlepsza okolica — Weighted Scoring | Najlepsza okolica — KNN | Zgodność TOP 3 |
+|---|---|---|---|
+| balanced | Krakowska-Południe | Krakowska-Południe | 2/3 |
+| university_priority | Krakowska-Południe | Krakowska-Południe | 2/3 |
+| services_priority | Drabinianka 1 | Drabinianka 1 | 2/3 |
+
+Obie metody wskazały tę samą najlepszą okolicę dla każdego z trzech profili, ale różniły się pozostałymi pozycjami w rankingach.
+
+### Porównanie czasu wykonania
+
+Przeprowadzono benchmark obejmujący 1000 powtórzeń dla 25 okolic.
+
+| Metoda | Czas wykonania |
+|---|---:|
+| Weighted Scoring | 0,017700 ms |
+| KNN | 0,037400 ms |
+
+W przeprowadzonym pomiarze **Weighted Scoring działał szybciej niż KNN**.
+
+### Testowanie
+
+Przeprowadzono trzy testy automatyczne algorytmu KNN.
+
+**Wynik: 3/3 testy zakończone pomyślnie.**
+
+### Uruchamianie
+
+Wszystkie polecenia należy wykonywać z głównego katalogu projektu.
+
+**Rekomendacje KNN:**
+
+```bash
+py scripts/knn_recommender.py
+```
+
+**Porównanie Weighted Scoring i KNN:**
+
+```bash
+py scripts/compare_knn_weighted.py
+```
+
+**Testy automatyczne:**
+
+```bash
+py scripts/test_knn.py
+```
+
+**Benchmark:**
+
+```bash
+py scripts/benchmark_knn_weighted.py
+```
+
+### Pliki projektu
+
+- `scripts/knn_recommender.py` — implementacja KNN.
+- `scripts/compare_knn_weighted.py` — porównanie rankingów.
+- `scripts/test_knn.py` — testy automatyczne.
+- `scripts/benchmark_knn_weighted.py` — porównanie czasu wykonania.
+- `results/lab4/knn/comparison.csv` — podsumowanie wyników.
+- `results/lab4/knn/rankings.csv` — rankingi dla wszystkich profili.
+- `docs/experiment.md` — szczegółowa dokumentacja eksperymentów.
+
+### Wnioski
+
+Obie techniki pozwalają rekomendować okolice zgodnie z preferencjami studentów.
+
+Weighted Scoring okazał się szybszy w przeprowadzonym eksperymencie i umożliwia łatwą interpretację punktacji poszczególnych kryteriów.
+
+KNN stanowi alternatywną metodę opartą na podobieństwie okolic do zadanego profilu preferencji.
+
+**Do dalszego rozwoju systemu wybrano Weighted Scoring jako metodę podstawową.**
+
+
+---
+
+## Lab 6 — Implementacja MVP i interfejs użytkownika
+
+**Odpowiedzialna: Dana Stadnyk**
+
+W ramach laboratorium 6 przygotowano działający prototyp
+systemu StudentFinder Rzeszów z interfejsem graficznym
+zrealizowanym w technologii Streamlit.
+
+### Funkcjonalności aplikacji
+
+- Wybór uczelni oraz budynku lub wydziału.
+- Określenie maksymalnego czasu dojścia do uczelni.
+- Ustawienie wag kryteriów w zakresie 0–5:
+  - bliskość uczelni,
+  - dostępność sklepów,
+  - dostępność komunikacji miejskiej,
+  - dostępność parków.
+- Generowanie rankingu maksymalnie trzech rekomendowanych okolic.
+- Prezentacja wyników w formie kart z oceną punktową.
+- Wyświetlanie rekomendowanych lokalizacji na interaktywnej mapie.
+- Obsługa sytuacji, w której nie znaleziono odpowiednich okolic.
+- Walidacja przypadku, w którym wszystkie wagi wynoszą zero.
+
+### Architektura rozwiązania
+
+Aplikacja wykorzystuje dane przygotowane we wcześniejszych
+etapach projektu.
+
+Interfejs użytkownika znajduje się w pliku `app.py`.
+
+Logika rekomendacji jest realizowana przez moduł
+`scripts/recommendation_engine.py`.
+
+System wykorzystuje metodę Weighted Scoring do oceny
+okolic na podstawie preferencji użytkownika.
+
+### Uruchomienie aplikacji
+
+Wymagany jest Python 3.10 lub nowszy.
+
+Instalacja zależności:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Uruchomienie:
+
+```bash
+python -m streamlit run app.py
+```
+
+Po uruchomieniu aplikacja jest dostępna pod adresem
+lokalnym wskazanym w terminalu.
+
+### Testowanie
+
+Testy automatyczne:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+Kontrola składni:
+
+```bash
+python -m py_compile app.py scripts/recommendation_engine.py
+```
+
+Benchmark:
+
+```bash
+python scripts/benchmark_recommendation.py
+```
+
+### Ograniczenia MVP
+
+- Czas dojścia jest szacowany na podstawie odległości
+  w linii prostej.
+- System nie uwzględnia rzeczywistej sieci ulic,
+  przejść dla pieszych ani warunków ruchu.
+- Rekomendacje bazują na przygotowanym zbiorze danych,
+  a nie na aktualnych ofertach wynajmu mieszkań.
+- Wyniki dotyczą 25 zdefiniowanych obszarów mieszkalnych.
+
+### Pliki
+
+- `app.py` — interfejs użytkownika Streamlit.
+- `scripts/recommendation_engine.py` — logika rekomendacji.
+- `scripts/benchmark_recommendation.py` — pomiar wydajności.
+- `tests/test_recommendation_engine.py` — testy automatyczne.
+- `docs/implementation.md` — dokumentacja implementacji MVP.
