@@ -58,25 +58,25 @@ sequenceDiagram
     autonumber
     actor Student
     participant UI as Interfejs Streamlit
-    participant Val as Moduł Walidacji
-    participant Engine as Silnik Rekomendacji
-    participant Data as Pliki JSON
+    participant Engine as generate_recommendations / Silnik
+    participant Data as Pliki JSON / config
 
     Student->>UI: Wybiera uczelnię, wagi (1-3) i limit czasu
-    UI->>Data: Wczytuje universities.json, services.json, residential-areas.json
-    Data-->>UI: Zwraca struktury danych
-    UI->>Val: generate_recommendations(request)
-    alt Błąd walidacji (złe wagi / brak uczelni)
-        Val-->>UI: Status: VALIDATION_ERROR + komunikat
+    UI->>Engine: generate_recommendations(request, engine=engine)
+    Engine->>Data: Wczytuje dane (gdy engine nieprzekazany lub przy inicjalizacji)
+    Data-->>Engine: Zwraca struktury danych
+    alt Błąd walidacji (złe wagi / brak uczelni / zły limit)
+        Engine-->>UI: Status: VALIDATION_ERROR + komunikat
         UI-->>Student: Wyświetla alert błędu w formularzu
+    else Brak danych lub błąd danych
+        Engine-->>UI: Status: DATA_ERROR + komunikat
+        UI-->>Student: Wyświetla alert błędu danych w UI
     else Dane poprawne
-        Val-->>UI: Status: SUCCESS
-        UI->>Engine: Uruchamia obliczenia rekomendacji
         Engine->>Engine: Liczy odległości (m) i czas marszu (min, 4.5 km/h)
         Engine->>Engine: Filtruje obszary wg limitu czasu (R3)
         alt Wszystkie obszary odrzucone
             Engine-->>UI: Status: NO_MATCHES
-            UI-->>Student: Wyświetla komunikat: "Brak okolic w zadanym czasie"
+            UI-->>Student: Wyświetla komunikat o braku okolic w zadanym czasie
         else Znaleziono >= 1 obszar
             Engine->>Engine: Liczy punkty (0-100), sortuje i wybiera TOP 3 (R4)
             Engine-->>UI: Status: SUCCESS + lista rekomendacji (R5)
@@ -146,7 +146,7 @@ Interfejs przekazuje wcześniej wczytany obiekt `RecommendationEngine` przez par
 1. `data/processed/universities.json` (28 rekordów): `id` (`string`, PK), `university` (`string`), `name` (`string`), `address` (`string`), `latitude` (`float64`), `longitude` (`float64`), `location_type` (`string`), `coordinate_type` (`string`), `osm_url` (`string`).
 2. `data/processed/services.json` (500 rekordów): `id` (`string`, PK), `category` (`string`: `shop|bus_stop|park`), `name` (`string`), `name_missing` (`bool`), `address` (`string | null`), `latitude` (`float64`), `longitude` (`float64`).
 3. `config/residential-areas.json`: pole dokumentu `radius_m` (`int`, wartość `500`) oraz 25 rekordów `areas[]` z polami `id` (`string`, PK), `name` (`string`), `district` (`string`), `latitude` (`float64`) i `longitude` (`float64`). W odpowiedzi API identyfikator rekordu jest udostępniany jako `area_id`.
-4. `results/lab4/*.csv` oraz `results/lab6/*.csv`: pliki tabelaryczne CSV z wynikami porównań algorytmów.
+4. `results/lab4/*.csv`: pliki tabelaryczne CSV z wynikami eksperymentów i porównań metod z etapu Lab 4.
 
 ---
 
