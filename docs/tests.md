@@ -1,0 +1,123 @@
+# Testy — Laboratorium 7
+
+Autorka: Valentyna Boksha (dane i testowanie). Stan na 23.11.2026.
+
+Statusy: **PASS** — sprawdzono, wynik zgodny z oczekiwanym; **FAIL** — sprawdzono, wynik niezgodny; **NOT RUN** — nie sprawdzano (z przyczyną).
+
+## 1. Zakres oraz wersja kodu i danych
+
+| Element | Wartość |
+|---|---|
+| Gałąź | `valentyna-data-validation` |
+| Commit kodu | `0df4f8b` (oparty na `serhii-recommendation-engine`, commit `1d9e312`) |
+| Dane | `data/processed/services.json` (500), `data/processed/universities.json` (28), `config/residential-areas.json` (25) — wersja z commita `1d9e312` |
+| Środowisko | Windows 11, Python 3.12.6, streamlit 1.67.0, folium 1.0.0, streamlit-folium 0.27.4 |
+
+Zakres: wczytywanie i walidacja plików danych, parametry żądania, przebieg dane → silnik → odpowiedź, ręczne sprawdzenie interfejsu.
+
+Poza zakresem tej wersji: gałąź `main` (ma starszą wersję silnika i formularza), eksport rankingu, instrukcja użytkownika.
+
+## 2. Plan przypadków testowych i dziennik uruchomień
+
+### 2.1. Testy automatyczne
+
+Polecenie (w katalogu głównym repozytorium):
+
+```shell
+python -m unittest discover -s tests -v
+```
+
+| ID | Rodzaj | Przypadek | Oczekiwany wynik | Podstawa oczekiwania | Test |
+|---|---|---|---|---|---|
+| T01 | poprawny | Pliki projektu | Wczytane 500 / 28 / 25 rekordów | `docs/data.md` | `test_project_files_are_loaded` |
+| T02 | błędny | Brak pliku | Błąd `OSError`, który aplikacja zamienia na komunikat | architektura 4.3 | `test_missing_file_is_reported` |
+| T03 | błędny | Uszkodzony JSON | Błąd `ValueError` | architektura 4.3 | `test_damaged_json_is_reported` |
+| T04 | błędny | `[]` zamiast obiektu JSON | Odrzucenie z komunikatem „musi być obiektem JSON” | struktura plików, architektura 5.2 | `test_top_level_list_is_rejected` |
+| T05 | pusty | Pusta lista rekordów | Odrzucenie „Lista … jest pusta” | silnik wymaga niepustych zbiorów | `test_empty_record_list_is_rejected` |
+| T06 | błędny | Powtórzony `id` | Odrzucenie „powtórzony identyfikator” | `id` jest kluczem (architektura 5.2) | `test_duplicate_id_is_rejected` |
+| T07 | błędny | Współrzędne 200, −91, 181, tekst, brak, NaN | Odrzucenie | zakres WGS84 | `test_invalid_coordinates_are_rejected`, `test_missing_coordinate_is_rejected`, `test_nan_coordinate_is_rejected` |
+| T08 | graniczny | Współrzędne 90 i −180 | Przyjęte | zakres WGS84 włącznie | `test_boundary_coordinates_are_accepted` |
+| T09 | błędny | Nieznana lub brakująca kategoria; kategoria bez usług | Odrzucenie | kategorie `shop`, `bus_stop`, `park` | `test_unknown_category_is_rejected`, `test_missing_category_is_rejected`, `test_category_without_any_service_is_rejected` |
+| T10 | błędny | Brak `university`, `name`, `address` miejsca zajęć; brak `name`, `district` obszaru | Odrzucenie „brak pola …” | pola używane przez `app.py` i odpowiedź silnika | `test_location_fields_used_by_interface_are_required`, `test_area_fields_used_in_results_are_required` |
+| T11 | błędny | Nieznane `location_id`, zły typ | `VALIDATION_ERROR` | architektura 4.3 | `test_unknown_location_is_rejected`, `test_invalid_location_type_is_rejected` |
+| T12 | graniczny | Wagi 1 i 3 | `SUCCESS` | wagi 1–3 | `test_boundary_weights_are_accepted` |
+| T13 | błędny | Wagi 0, 4, −1, 2.0, tekst, NaN, inf, niepełny zestaw | `VALIDATION_ERROR` | wagi całkowite 1–3 | `test_weights_outside_range_are_rejected`, `test_invalid_weight_type_is_rejected`, `test_incomplete_or_extended_weights_are_rejected` |
+| T14 | poprawny / błędny | Limit 15, 30, 45, brak; inne wartości | Dozwolone: `SUCCESS` lub `NO_MATCHES`; pozostałe: `VALIDATION_ERROR` | architektura 4.1 | `test_allowed_time_limits_are_accepted`, `test_other_time_limits_are_rejected` |
+| T15 | integracyjny | 28 miejsc zajęć × 4 limity na danych projektu | Do 3 wyników, malejąco według oceny, remis według `area_id`, czas ≤ limit, ocena 0–100, promień 500 m, niepuste uzasadnienie i zastrzeżenie | kryteria odbioru UC-01 | `test_every_location_and_limit_gives_a_consistent_response` |
+| T16 | integracyjny | To samo żądanie dwa razy | Identyczna odpowiedź | determinizm rankingu | `test_same_request_gives_same_response` |
+| T17 | integracyjny | Czas a odległość | czas = odległość / 75 m/min | prędkość 4,5 km/h | `test_walk_time_matches_distance_at_4_5_kmh` |
+
+Dziennik uruchomień:
+
+| Data | Wersja | Kto uruchomił | Wynik |
+|---|---|---|---|
+| 23.11.2026 | `1d9e312` + nowe testy, bez zmian w silniku | asystent AI, lokalnie | 44 testy: 29 niepowodzeń, 3 błędy. Część niepowodzeń wynika tylko z innej treści komunikatu; faktycznie niewykrywane były: powtórzone ID, `[]` zamiast obiektu (`AttributeError`), nieznana kategoria, brak `university`/`address`, waga NaN/inf w `recommend()`. |
+| 23.11.2026 | `0df4f8b` | Valentyna Boksha, lokalnie | **44/44 PASS** (`Ran 44 tests in 4.564s`, `OK`) |
+
+T01–T17: **PASS** w wersji `0df4f8b`.
+
+### 2.2. Ręczne sprawdzenie interfejsu
+
+Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2026, wersja `0df4f8b`.
+
+| ID | Przypadek | Oczekiwany wynik | Status |
+|---|---|---|---|
+| U01 | Wybór uczelni UR i budynku, „Generuj rekomendacje” | Karty z oceną, czasem i odległością | PASS |
+| U02 | Mapa po wygenerowaniu | Koła, numery 1–3, znacznik uczelni, podkład mapy | PASS |
+| U03 | Zmiana suwaka po wygenerowaniu | Stare wyniki znikają | PASS |
+| U04 | „Bez limitu” | Trzy wyniki | PASS |
+| U05 | Zastrzeżenie pod wynikami | Tekst o linii prostej i 4,5 km/h | PASS |
+| U06 | Limit 15 min, WSIiZ (Sucharskiego 2) | Komunikat o braku okolic zamiast kart | PASS |
+| U07 | Limit 15 min, część budynków | 1 lub 2 karty zamiast 3 | PASS — zgodne z R4 („maksymalnie trzy”); patrz punkt 4 |
+| U08 | Uszkodzony plik danych w uruchomionej aplikacji | Komunikat „Nie można wczytać danych projektu” | NOT RUN ręcznie; sprawdzone automatycznie przez asystenta AI (Streamlit AppTest, kopia z `services.json = []`): komunikat bez wyjątku |
+| U09 | Eksport rankingu | Plik z TOP 3 | NOT RUN — funkcja nie istnieje |
+| U10 | Inne przeglądarki i szerokości ekranu | Czytelny układ | NOT RUN |
+
+## 3. Pomiar niefunkcjonalny
+
+**NOT RUN.** Kryterium akceptacji czasu odpowiedzi nie zostało jeszcze uzgodnione w zespole. Istnieje skrypt `scripts/benchmark_recommendation.py`; pomiar i porównanie z metryką z Lab 4 należą do części Serhiia Popovycha.
+
+## 4. Ocena danych, wyników i kodu
+
+**Dane** (uruchomił asystent AI, 23.11.2026):
+
+- `python scripts/check_data.py --test-invalid` — 500 usług i 28 miejsc zajęć, 0 naruszeń, 3/3 próby na błędnych kopiach.
+- Znane braki w źródle OSM: 21 usług bez nazwy źródłowej, 387 usług bez pełnego adresu. Kontrole nie potwierdzają kompletności OSM ani zgodności obiektów ze stanem w terenie.
+
+**Wyniki:** przy limicie 15 minut i wagach 2/2/2/2: 13 miejsc zajęć ma 3 wyniki, 11 ma 2, 3 mają 1, a 1 (WSIiZ) nie ma żadnego. Przy 30 i 45 minutach oraz bez limitu każde miejsce ma 3 wyniki.
+
+**Kod:** przegląd `docs/architecture.md` względem kodu — wynik w Issue #8. Zmiany w tej wersji: nowy moduł `scripts/data_validation.py`; w `scripts/recommendation_engine.py` wywołanie walidacji w `from_files()` i odrzucanie wag NaN/inf w `recommend()`.
+
+`python scripts/test_knn.py` — 3/3 PASS (uruchomił asystent AI).
+
+## 5. Statusy wymagań
+
+| Wymaganie | Status | Dowód | Czego brakuje |
+|---|---|---|---|
+| R1 — wybór budynku | PASS | U01, U02, T11, T15 | — |
+| R2 — wagi kryteriów | częściowo | T12, T13, U03 | Test z ręcznym obliczeniem wpływu wagi na ocenę: NOT RUN |
+| R3 — limit czasu | PASS | T14, T15, U05, U06 | — |
+| R4 — maksymalnie trzy okolice | PASS | T15, U01, U02, U07 | Zgodność środków kół z danymi sprawdzono tylko wzrokowo |
+| R5 — uzasadnienie | częściowo | T15 (niepuste uzasadnienie), U05 | Zgodność treści uzasadnienia z punktacją: NOT RUN |
+| R6 — zakres projektu | PASS | T01, T15 — ranking powstaje bez danych o cenach i ofertach | — |
+
+Statusy dotyczą wersji `0df4f8b`, a nie gałęzi `main`.
+
+## 6. Sprawdzenie dokumentacji
+
+| Dokument | Status | Uwagi |
+|---|---|---|
+| `docs/architecture.md` | sprawdzony | 8 niezgodności opisanych w Issue #8 |
+| `README.md` — instrukcja uruchomienia | PASS | Instalacja z `requirements.txt` i uruchomienie aplikacji wykonane przez Valentynę Bokshę |
+| `docs/user-guide.md` | NOT RUN | Dokument nie istnieje |
+| `docs/problem.md` | do aktualizacji | Nieaktualny podział zadań |
+
+## 7. Znane błędy i ograniczenia
+
+1. Zmiany z gałęzi `serhii-recommendation-engine` i `valentyna-data-validation` nie są jeszcze w `main`.
+2. Konstruktor `RecommendationEngine(...)` wywołany bezpośrednio (bez plików) nie sprawdza powtórzonych ID; walidacja działa przy wczytywaniu przez `from_files()`.
+3. Brak eksportu rankingu.
+4. Nazwy obszarów mogą być niezgodne z polem `district`; przynależność administracyjna nie została niezależnie sprawdzona.
+5. Odległości są liczone w linii prostej od środka obszaru; czas nie uwzględnia rzeczywistych tras.
+6. Brak pomiaru niefunkcjonalnego (punkt 3).
+7. Testy interfejsu nie są zautomatyzowane w repozytorium.
