@@ -629,3 +629,36 @@ Obie techniki wskazały identyczne najlepsze okolice dla trzech badanych profili
 Weighted Scoring uzyskał krótszy czas wykonania i zapewnia prostszą interpretację wyników.
 
 Dlatego został wybrany jako podstawowa technika do dalszego rozwoju systemu rekomendacji okolic do zamieszkania dla studentów w Rzeszowie.
+
+### 12.13. Ponowna weryfikacja eksperymentu
+
+Przeprowadzono ponowną weryfikację porównania metod Weighted Scoring i KNN na aktualnej lokalnej wersji projektu.
+
+W eksperymencie uwzględniono 25 okolic mieszkalnych oraz trzy profile preferencji użytkownika: `balanced`, `university_priority` i `services_priority`.
+
+**Wyniki porównania rankingów:**
+
+- Dla wszystkich trzech profili obie metody wskazały tę samą okolicę na pierwszym miejscu.
+- Zgodność rankingów TOP 3 wyniosła 2 z 3 okolic dla każdego profilu.
+- Wszystkie trzy testy automatyczne KNN zakończyły się poprawnie.
+
+**Wyniki ponownego pomiaru czasu:**
+
+| Metoda | Czas wykonania |
+|---|---:|
+| Weighted Scoring | 0,020600 ms |
+| KNN | 0,041600 ms |
+
+Pomiar wykonano dla 25 okolic i 1000 powtórzeń.
+
+Weighted Scoring był około 2,02 razy szybszy od KNN. Wynik potwierdza wcześniejszy wniosek dotyczący wyboru Weighted Scoring jako podstawowej metody rekomendacji.
+
+**Polecenia umożliwiające odtworzenie eksperymentu:**
+
+```bash
+python scripts/compare_knn_weighted.py
+python scripts/test_knn.py
+python scripts/benchmark_knn_weighted.py
+```
+
+Wyniki porównania rankingów zapisywane są w katalogu `results/lab4/knn/`. Wyniki pomiarów czasu mogą nieznacznie różnić się w zależności od środowiska wykonania.
