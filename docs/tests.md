@@ -8,8 +8,8 @@ Statusy: **PASS** — sprawdzono, wynik zgodny z oczekiwanym; **FAIL** — spraw
 
 | Element | Wartość |
 |---|---|
-| Gałąź | `main`, commit `d3aa845` (po połączeniu PR #14, #15 i #16), z dodanym plikiem `tests/test_weight_scoring.py` |
-| Commit kodu | Kod aplikacji i silnika (`app.py`, `scripts/`) w `d3aa845` jest identyczny z commitem `0df4f8b`, na którym wykonano pierwsze uruchomienia |
+| Gałąź | `main`, commit `e6db774` (po połączeniu PR #14–#18) |
+| Commit kodu | Kod aplikacji i silnika (`app.py`, `scripts/`) w `e6db774` jest identyczny z commitem `0df4f8b`, na którym wykonano pierwsze uruchomienia |
 | Dane | `data/processed/services.json` (500), `data/processed/universities.json` (28), `config/residential-areas.json` (25) — bez zmian od commita `1d9e312` |
 | Środowisko | Windows 11, Python 3.12.6, streamlit 1.67.0, folium 1.0.0, streamlit-folium 0.27.4 |
 
@@ -59,12 +59,14 @@ Dziennik uruchomień:
 | 23.11.2026 | `27c0438` + `tests/test_weight_scoring.py` | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 4.856s`, `OK`) |
 | 23.11.2026 | `main` `d3aa845` (bez `test_weight_scoring.py`) | asystent AI, lokalnie | 44/44 PASS; `check_data.py --test-invalid`: 0 naruszeń, 3/3; `test_knn.py`: OK; Streamlit AppTest: brak wyjątków, 3 karty |
 | 23.11.2026 | `main` `d3aa845` + `tests/test_weight_scoring.py` (commit `de8b08a`) | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 2.348s`, `OK`) |
+| 23.11.2026 | `main` `e6db774` | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 2.380s`, `OK`) |
+| 23.11.2026 | `main` `e6db774` | asystent AI, lokalnie | `check_data.py --test-invalid`: 0 naruszeń, 3/3; `verify_repeatability.py`: PASS; `audit_data.py`: PASS; `test_knn.py`: OK; Streamlit AppTest: brak wyjątków, 3 karty |
 
-T01–T20: **PASS** na wspólnej wersji. Nowe testy T18–T20 nie wymagały zmian w kodzie silnika.
+T01–T20: **PASS** na `main` `e6db774`. Nowe testy T18–T20 nie wymagały zmian w kodzie silnika.
 
 ### 2.2. Ręczne sprawdzenie interfejsu
 
-Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2026, wersja `0df4f8b` (ten sam kod aplikacji co w `main` `d3aa845`; po połączeniu sprawdzenia w przeglądarce nie powtarzano).
+Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2026, wersja `0df4f8b` (ten sam kod aplikacji co w `main` `e6db774`; po połączeniu sprawdzenia w przeglądarce nie powtarzano).
 
 | ID | Przypadek | Oczekiwany wynik | Status |
 |---|---|---|---|
@@ -81,7 +83,7 @@ Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2
 
 ## 3. Pomiar niefunkcjonalny
 
-**NOT RUN.** Kryterium akceptacji czasu odpowiedzi nie zostało jeszcze uzgodnione w zespole. Istnieje skrypt `scripts/benchmark_recommendation.py`; pomiar i porównanie z metryką z Lab 4 należą do części Serhiia Popovycha.
+**NOT RUN.** Kryterium akceptacji czasu odpowiedzi nie zostało jeszcze uzgodnione w zespole, a katalog `results/lab7/` nie istnieje. Skrypt `scripts/benchmark_recommendation.py` uruchamia się poprawnie na `e6db774`, ale bez kryterium wynik nie jest oceniany. Pomiar należy do części Serhiia Popovycha.
 
 ## 4. Ocena danych, wyników i kodu
 
@@ -92,7 +94,20 @@ Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2
 
 **Wyniki:** przy limicie 15 minut i wagach 2/2/2/2: 13 miejsc zajęć ma 3 wyniki, 11 ma 2, 3 mają 1, a 1 (WSIiZ) nie ma żadnego. Przy 30 i 45 minutach oraz bez limitu każde miejsce ma 3 wyniki.
 
-**Kod:** przegląd `docs/architecture.md` względem kodu — wynik w Issue #8. Zmiany w tej wersji: nowy moduł `scripts/data_validation.py`; w `scripts/recommendation_engine.py` wywołanie walidacji w `from_files()` i odrzucanie wag NaN/inf w `recommend()`.
+**Miara z Lab 4:** porównanie wyniku obecnej wersji z miarą z `docs/experiment.md` — **NOT RUN** (należy do części Dany Stadnyk i Serhiia Popovycha).
+
+**Kod:** przegląd `docs/architecture.md` względem kodu — wynik w Issue #8. Zmiany wprowadzone po przeglądzie: nowy moduł `scripts/data_validation.py`; w `scripts/recommendation_engine.py` wywołanie walidacji w `from_files()` i odrzucanie wag NaN/inf w `recommend()`.
+
+Przegląd fragmentu kodu, którego nie jestem autorką — `generate_recommendations()` i `RecommendationEngine.from_files()` w `scripts/recommendation_engine.py` (autor: Serhii Popovych), wersja `e6db774`, wykonany z pomocą asystenta AI:
+
+| Kryterium | Wynik |
+|---|---|
+| Podział funkcji | Walidacja żądania, wczytanie danych i obliczenia są rozdzielone; funkcja publiczna zwraca statusy zamiast wyjątków — zgodnie z kontraktem. |
+| Nazwy | Pola żądania i odpowiedzi zgodne z `docs/architecture.md` (punkt 4). |
+| Obsługa wyjątków | Błędy żądania → `VALIDATION_ERROR`, błędy danych i obliczeń → `DATA_ERROR`; potwierdzone testami T11–T14. |
+| Zgodność z metodą | Wzór punktacji, limity i kolejność przy remisie zgodne z `docs/problem.md`; potwierdzone testami T18–T20. |
+| Uwaga 1 | `load_json()` czyta pliki jako `utf-8`, a `scripts/check_data.py` jako `utf-8-sig`. Plik ze znacznikiem BOM przejdzie kontrolę jakości, ale aplikacja go odrzuci (`JSONDecodeError`, komunikat o błędzie danych). Pliki projektu nie mają BOM. Nie poprawiano. |
+| Uwaga 2 | Konstruktor `RecommendationEngine(...)` nie sprawdza powtórzonych ID (punkt 7). Nie poprawiano. |
 
 `python scripts/test_knn.py` — 3/3 PASS (uruchomił asystent AI).
 
@@ -107,24 +122,27 @@ Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2
 | R5 — uzasadnienie | częściowo | T15 (niepuste uzasadnienie), U05 | Zgodność treści uzasadnienia z punktacją: NOT RUN |
 | R6 — zakres projektu | PASS | T01, T15 — ranking powstaje bez danych o cenach i ofertach | — |
 
-Statusy dotyczą wersji `main` `d3aa845`. `docs/report.md` oznacza wszystkie wymagania jako spełnione; powyższa tabela jest ostrożniejsza dla R5.
+Statusy dotyczą wersji `main` `e6db774`. `docs/report.md` podaje te same statusy.
 
 ## 6. Sprawdzenie dokumentacji
 
 | Dokument | Status | Uwagi |
 |---|---|---|
-| `docs/architecture.md` | sprawdzony | 8 niezgodności opisanych w Issue #8; trzy poprawione w commicie `0aeab7e` (pola `walk_distance_m` i `scores`, kryterium odbioru 4, opis `disclaimer`), pozostałe otwarte |
-| `docs/report.md`, `docs/presentation.md` | niezgodności | Prędkość 80 m/min (4,8 km/h) zamiast 75 m/min (4,5 km/h); pole `reason` zamiast `justification`; wymieniony eksport wyników, którego nie ma w `app.py` |
+| `docs/architecture.md` | sprawdzony | 8 niezgodności opisanych w Issue #8; sześć poprawionych. Otwarte: diagram sekwencji pokazuje osobne wywołania walidacji i silnika; punkt 5.2 wymienia nieistniejący katalog `results/lab6/` |
+| `docs/report.md` | sprawdzony | Prędkość, pole `justification`, brak eksportu i statusy wymagań poprawione w PR #18 i commicie `e6db774` |
+| `docs/presentation.md` | niezgodności | Scenariusz 2 podaje limit 5 min lub 1 min, którego nie ma w formularzu (dostępne: 15 / 30 / 45 min / bez limitu; brak okolic daje WSIiZ przy 15 min); prędkość 80 m/min (4,8 km/h) zamiast 75 m/min (4,5 km/h) |
 | `README.md` — instrukcja uruchomienia | PASS | Instalacja z `requirements.txt` i uruchomienie aplikacji wykonane przez Valentynę Bokshę |
-| `docs/user-guide.md` | NOT RUN | Dokument nie istnieje |
-| `docs/problem.md` | do aktualizacji | Nieaktualny podział zadań |
+| `docs/user-guide.md` | NOT RUN | Dokument nie istnieje; sprawdzenie instrukcji przez drugą osobę niewykonane |
+| `docs/problem.md` | sprawdzony | Podział zadań zaktualizowany w PR #18 |
 
 ## 7. Znane błędy i ograniczenia
 
-1. `docs/report.md` i `docs/presentation.md` zawierają nieaktualne informacje (punkt 6).
+1. `docs/presentation.md` zawiera scenariusz, którego nie da się wykonać w aplikacji, i nieaktualną prędkość (punkt 6).
 2. Konstruktor `RecommendationEngine(...)` wywołany bezpośrednio (bez plików) nie sprawdza powtórzonych ID; walidacja działa przy wczytywaniu przez `from_files()`.
 3. Brak eksportu rankingu.
 4. Nazwy obszarów mogą być niezgodne z polem `district`; przynależność administracyjna nie została niezależnie sprawdzona.
 5. Odległości są liczone w linii prostej od środka obszaru; czas nie uwzględnia rzeczywistych tras.
 6. Brak pomiaru niefunkcjonalnego (punkt 3).
 7. Testy interfejsu nie są zautomatyzowane w repozytorium.
+8. Plik danych ze znacznikiem BOM jest odrzucany przez aplikację, choć przechodzi `scripts/check_data.py` (punkt 4).
+9. Brak `docs/user-guide.md` i porównania z miarą z Lab 4.
