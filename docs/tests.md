@@ -83,7 +83,8 @@ Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2
 | U06 | Limit 15 min, WSIiZ (Sucharskiego 2) | Komunikat o braku okolic zamiast kart | PASS |
 | U07 | Limit 15 min, część budynków | 1 lub 2 karty zamiast 3 | PASS — zgodne z R4 („maksymalnie trzy”); patrz punkt 4 |
 | U08 | Uszkodzony plik danych w uruchomionej aplikacji | Komunikat „Nie można wczytać danych projektu” | NOT RUN ręcznie; sprawdzone automatycznie przez asystenta AI (Streamlit AppTest, kopia z `services.json = []`): komunikat bez wyjątku |
-| U09 | Eksport rankingu: przycisk „Pobierz ranking TOP 3 (CSV)” | Plik `studentfinder_top3.csv` z pozycją, uczelnią, budynkiem, okolicą, oceną, czasem i odległościami | NOT RUN ręcznie (pobranie i otwarcie pliku). Automatycznie (asystent AI, `653393e`): przycisk pojawia się tylko przy wynikach. Uwaga: czas ma przecinek dziesiętny (`22,4`), a ocena i odległości kropkę (`71.2`, `1680.0`) |
+| U09 | Eksport rankingu: przycisk „Pobierz ranking TOP 3 (CSV)” (WSIiZ, 3 wyniki) | Plik `studentfinder_top3.csv` otwiera się w programie Excel: 11 kolumn, 3 wiersze, poprawne polskie znaki | PASS — Valentyna Boksha, 23.11.2026, `653393e`, Excel: kolumny rozdzielone, nagłówki i polskie znaki poprawne. Automatycznie (asystent AI): przycisk pojawia się tylko przy wynikach |
+| U12 | Eksport rankingu: format liczb w programie Excel | Ocena, czas i odległości są odczytywane jako liczby | **FAIL** — Valentyna Boksha, 23.11.2026, `653393e`: czas (`27,2`) jest liczbą, ale ocena (`69.2`) i odległości (`2038.0`) mają kropkę dziesiętną i Excel w polskich ustawieniach wczytuje je jako tekst |
 | U10 | Inne przeglądarki i szerokości ekranu | Czytelny układ | NOT RUN |
 | U11 | Mniej niż 3 wyniki (limit 15 min) | Komunikat, że znaleziono mniej okolic | NOT RUN ręcznie. Automatycznie (asystent AI): komunikat jest wyświetlany. Uwaga: dla jednego wyniku tekst brzmi „tylko 1 okolice” |
 
@@ -154,7 +155,7 @@ Statusy dotyczą wersji `main` `653393e`. `docs/report.md` podaje te same status
 
 1. Tag `lab8-demo` wskazuje commit `2539038`; zmiany połączone później (eksport CSV, instrukcja użytkownika, aktualizacje tego dokumentu) nie są nim objęte, dopóki tag nie zostanie przeniesiony.
 2. Konstruktor `RecommendationEngine(...)` wywołany bezpośrednio (bez plików) nie sprawdza powtórzonych ID; walidacja działa przy wczytywaniu przez `from_files()`.
-3. Eksport CSV: mieszane separatory dziesiętne (przecinek w czasie, kropka w ocenie i odległościach); brak testu automatycznego w repozytorium; plik nie był otwierany ręcznie.
+3. Eksport CSV (U12, FAIL): ocena i odległości mają kropkę dziesiętną i w programie Excel z polskimi ustawieniami są tekstem, nie liczbą; czas ma przecinek i jest liczbą. Obejście: zamienić kropki na przecinki w kolumnach F oraz H–K. Brak testu automatycznego eksportu w repozytorium.
 4. Nazwy obszarów mogą być niezgodne z polem `district`; przynależność administracyjna nie została niezależnie sprawdzona.
 5. Odległości są liczone w linii prostej od środka obszaru; czas nie uwzględnia rzeczywistych tras.
 6. Brak pomiaru niefunkcjonalnego (punkt 3).
