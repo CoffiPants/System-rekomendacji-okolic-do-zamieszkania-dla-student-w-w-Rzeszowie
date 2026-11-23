@@ -9,7 +9,7 @@ Statusy: **PASS** — sprawdzono, wynik zgodny z oczekiwanym; **FAIL** — spraw
 | Element | Wartość |
 |---|---|
 | Gałąź | `valentyna-data-validation` |
-| Commit kodu | `0df4f8b` (oparty na `serhii-recommendation-engine`, commit `1d9e312`) |
+| Commit kodu | `0df4f8b` (oparty na `serhii-recommendation-engine`, commit `1d9e312`); późniejsze commity tej gałęzi dodają tylko testy i dokumentację |
 | Dane | `data/processed/services.json` (500), `data/processed/universities.json` (28), `config/residential-areas.json` (25) — wersja z commita `1d9e312` |
 | Środowisko | Windows 11, Python 3.12.6, streamlit 1.67.0, folium 1.0.0, streamlit-folium 0.27.4 |
 
@@ -46,6 +46,9 @@ python -m unittest discover -s tests -v
 | T15 | integracyjny | 28 miejsc zajęć × 4 limity na danych projektu | Do 3 wyników, malejąco według oceny, remis według `area_id`, czas ≤ limit, ocena 0–100, promień 500 m, niepuste uzasadnienie i zastrzeżenie | kryteria odbioru UC-01 | `test_every_location_and_limit_gives_a_consistent_response` |
 | T16 | integracyjny | To samo żądanie dwa razy | Identyczna odpowiedź | determinizm rankingu | `test_same_request_gives_same_response` |
 | T17 | integracyjny | Czas a odległość | czas = odległość / 75 m/min | prędkość 4,5 km/h | `test_walk_time_matches_distance_at_4_5_kmh` |
+| T18 | poprawny | R2: jeden obszar o znanych odległościach (1500 / 250 / 300 / 1200 m), siedem ustawień wag | Oceny kryteriów 50 / 75 / 50 / 20; ocena końcowa równa obliczeniu ręcznemu, np. wagi 1/1/1/1 → 48,75, sklep 3 → 57,50, park 3 → 39,17 | wzór punktacji z `docs/problem.md`; obliczenia zapisane w teście | `tests/test_weight_scoring.py`: `test_distances_and_criterion_scores`, `test_final_score_for_each_weight_setting`, `test_higher_weight_moves_score_towards_that_criterion` |
+| T19 | graniczny | Usługa dalej niż limit punktacji (park 2000 m) | Ocena kryterium 0, obszar pozostaje w rankingu (43,75) | limit punktacji nie wyklucza obszaru | `test_service_beyond_scoring_limit_gives_zero_but_keeps_area` |
+| T20 | poprawny | R2 i R4: dwa obszary, zmiana wagi zmienia kolejność | Równe wagi: remis 50 / 50, pierwszy `a` (według ID); uczelnia 3 → `a` 60, `b` 40; sklep 3 → `b` 60, `a` 40 | wzór punktacji, kryterium odbioru 3 UC-01 | `test_equal_weights_give_a_tie_resolved_by_area_id`, `test_university_weight_puts_area_near_university_first`, `test_shop_weight_puts_area_near_shop_first` |
 
 Dziennik uruchomień:
 
@@ -53,8 +56,9 @@ Dziennik uruchomień:
 |---|---|---|---|
 | 23.11.2026 | `1d9e312` + nowe testy, bez zmian w silniku | asystent AI, lokalnie | 44 testy: 29 niepowodzeń, 3 błędy. Część niepowodzeń wynika tylko z innej treści komunikatu; faktycznie niewykrywane były: powtórzone ID, `[]` zamiast obiektu (`AttributeError`), nieznana kategoria, brak `university`/`address`, waga NaN/inf w `recommend()`. |
 | 23.11.2026 | `0df4f8b` | Valentyna Boksha, lokalnie | **44/44 PASS** (`Ran 44 tests in 4.564s`, `OK`) |
+| 23.11.2026 | `27c0438` + `tests/test_weight_scoring.py` | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 4.856s`, `OK`) |
 
-T01–T17: **PASS** w wersji `0df4f8b`.
+T01–T20: **PASS**. Nowe testy T18–T20 nie wymagały zmian w kodzie silnika.
 
 ### 2.2. Ręczne sprawdzenie interfejsu
 
@@ -95,7 +99,7 @@ Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2
 | Wymaganie | Status | Dowód | Czego brakuje |
 |---|---|---|---|
 | R1 — wybór budynku | PASS | U01, U02, T11, T15 | — |
-| R2 — wagi kryteriów | częściowo | T12, T13, U03 | Test z ręcznym obliczeniem wpływu wagi na ocenę: NOT RUN |
+| R2 — wagi kryteriów | PASS | T12, T13, T18, T20, U03 | — |
 | R3 — limit czasu | PASS | T14, T15, U05, U06 | — |
 | R4 — maksymalnie trzy okolice | PASS | T15, U01, U02, U07 | Zgodność środków kół z danymi sprawdzono tylko wzrokowo |
 | R5 — uzasadnienie | częściowo | T15 (niepuste uzasadnienie), U05 | Zgodność treści uzasadnienia z punktacją: NOT RUN |
