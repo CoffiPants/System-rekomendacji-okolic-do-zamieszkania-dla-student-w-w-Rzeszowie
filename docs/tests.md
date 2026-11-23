@@ -8,14 +8,14 @@ Statusy: **PASS** — sprawdzono, wynik zgodny z oczekiwanym; **FAIL** — spraw
 
 | Element | Wartość |
 |---|---|
-| Gałąź | `valentyna-data-validation` |
-| Commit kodu | `0df4f8b` (oparty na `serhii-recommendation-engine`, commit `1d9e312`); późniejsze commity tej gałęzi dodają tylko testy i dokumentację |
-| Dane | `data/processed/services.json` (500), `data/processed/universities.json` (28), `config/residential-areas.json` (25) — wersja z commita `1d9e312` |
+| Gałąź | `main`, commit `d3aa845` (po połączeniu PR #14, #15 i #16), z dodanym plikiem `tests/test_weight_scoring.py` |
+| Commit kodu | Kod aplikacji i silnika (`app.py`, `scripts/`) w `d3aa845` jest identyczny z commitem `0df4f8b`, na którym wykonano pierwsze uruchomienia |
+| Dane | `data/processed/services.json` (500), `data/processed/universities.json` (28), `config/residential-areas.json` (25) — bez zmian od commita `1d9e312` |
 | Środowisko | Windows 11, Python 3.12.6, streamlit 1.67.0, folium 1.0.0, streamlit-folium 0.27.4 |
 
 Zakres: wczytywanie i walidacja plików danych, parametry żądania, przebieg dane → silnik → odpowiedź, ręczne sprawdzenie interfejsu.
 
-Poza zakresem tej wersji: gałąź `main` (ma starszą wersję silnika i formularza), eksport rankingu, instrukcja użytkownika.
+Poza zakresem: eksport rankingu i instrukcja użytkownika (jeszcze nie istnieją).
 
 ## 2. Plan przypadków testowych i dziennik uruchomień
 
@@ -57,12 +57,14 @@ Dziennik uruchomień:
 | 23.11.2026 | `1d9e312` + nowe testy, bez zmian w silniku | asystent AI, lokalnie | 44 testy: 29 niepowodzeń, 3 błędy. Część niepowodzeń wynika tylko z innej treści komunikatu; faktycznie niewykrywane były: powtórzone ID, `[]` zamiast obiektu (`AttributeError`), nieznana kategoria, brak `university`/`address`, waga NaN/inf w `recommend()`. |
 | 23.11.2026 | `0df4f8b` | Valentyna Boksha, lokalnie | **44/44 PASS** (`Ran 44 tests in 4.564s`, `OK`) |
 | 23.11.2026 | `27c0438` + `tests/test_weight_scoring.py` | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 4.856s`, `OK`) |
+| 23.11.2026 | `main` `d3aa845` (bez `test_weight_scoring.py`) | asystent AI, lokalnie | 44/44 PASS; `check_data.py --test-invalid`: 0 naruszeń, 3/3; `test_knn.py`: OK; Streamlit AppTest: brak wyjątków, 3 karty |
+| 23.11.2026 | `main` `d3aa845` + `tests/test_weight_scoring.py` (commit `de8b08a`) | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 2.348s`, `OK`) |
 
-T01–T20: **PASS**. Nowe testy T18–T20 nie wymagały zmian w kodzie silnika.
+T01–T20: **PASS** na wspólnej wersji. Nowe testy T18–T20 nie wymagały zmian w kodzie silnika.
 
 ### 2.2. Ręczne sprawdzenie interfejsu
 
-Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2026, wersja `0df4f8b`.
+Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2026, wersja `0df4f8b` (ten sam kod aplikacji co w `main` `d3aa845`; po połączeniu sprawdzenia w przeglądarce nie powtarzano).
 
 | ID | Przypadek | Oczekiwany wynik | Status |
 |---|---|---|---|
@@ -105,20 +107,21 @@ Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2
 | R5 — uzasadnienie | częściowo | T15 (niepuste uzasadnienie), U05 | Zgodność treści uzasadnienia z punktacją: NOT RUN |
 | R6 — zakres projektu | PASS | T01, T15 — ranking powstaje bez danych o cenach i ofertach | — |
 
-Statusy dotyczą wersji `0df4f8b`, a nie gałęzi `main`.
+Statusy dotyczą wersji `main` `d3aa845`. `docs/report.md` oznacza wszystkie wymagania jako spełnione; powyższa tabela jest ostrożniejsza dla R5.
 
 ## 6. Sprawdzenie dokumentacji
 
 | Dokument | Status | Uwagi |
 |---|---|---|
-| `docs/architecture.md` | sprawdzony | 8 niezgodności opisanych w Issue #8 |
+| `docs/architecture.md` | sprawdzony | 8 niezgodności opisanych w Issue #8; trzy poprawione w commicie `0aeab7e` (pola `walk_distance_m` i `scores`, kryterium odbioru 4, opis `disclaimer`), pozostałe otwarte |
+| `docs/report.md`, `docs/presentation.md` | niezgodności | Prędkość 80 m/min (4,8 km/h) zamiast 75 m/min (4,5 km/h); pole `reason` zamiast `justification`; wymieniony eksport wyników, którego nie ma w `app.py` |
 | `README.md` — instrukcja uruchomienia | PASS | Instalacja z `requirements.txt` i uruchomienie aplikacji wykonane przez Valentynę Bokshę |
 | `docs/user-guide.md` | NOT RUN | Dokument nie istnieje |
 | `docs/problem.md` | do aktualizacji | Nieaktualny podział zadań |
 
 ## 7. Znane błędy i ograniczenia
 
-1. Zmiany z gałęzi `serhii-recommendation-engine` i `valentyna-data-validation` nie są jeszcze w `main`.
+1. `docs/report.md` i `docs/presentation.md` zawierają nieaktualne informacje (punkt 6).
 2. Konstruktor `RecommendationEngine(...)` wywołany bezpośrednio (bez plików) nie sprawdza powtórzonych ID; walidacja działa przy wczytywaniu przez `from_files()`.
 3. Brak eksportu rankingu.
 4. Nazwy obszarów mogą być niezgodne z polem `district`; przynależność administracyjna nie została niezależnie sprawdzona.
