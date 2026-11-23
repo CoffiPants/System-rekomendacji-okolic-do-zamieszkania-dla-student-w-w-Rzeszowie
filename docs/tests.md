@@ -8,8 +8,8 @@ Statusy: **PASS** — sprawdzono, wynik zgodny z oczekiwanym; **FAIL** — spraw
 
 | Element | Wartość |
 |---|---|
-| Gałąź | `main`, commit `e6db774` (po połączeniu PR #14–#18) |
-| Commit kodu | Kod aplikacji i silnika (`app.py`, `scripts/`) w `e6db774` jest identyczny z commitem `0df4f8b`, na którym wykonano pierwsze uruchomienia |
+| Gałąź | `main`, commit `2539038` (tag `lab8-demo`; po połączeniu PR #14–#18) |
+| Commit kodu | Kod aplikacji i silnika (`app.py`, `scripts/`) w `2539038` jest identyczny z commitem `0df4f8b`, na którym wykonano pierwsze uruchomienia |
 | Dane | `data/processed/services.json` (500), `data/processed/universities.json` (28), `config/residential-areas.json` (25) — bez zmian od commita `1d9e312` |
 | Środowisko | Windows 11, Python 3.12.6, streamlit 1.67.0, folium 1.0.0, streamlit-folium 0.27.4 |
 
@@ -62,11 +62,14 @@ Dziennik uruchomień:
 | 23.11.2026 | `main` `e6db774` | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 2.380s`, `OK`) |
 | 23.11.2026 | `main` `e6db774` | asystent AI, lokalnie | `check_data.py --test-invalid`: 0 naruszeń, 3/3; `verify_repeatability.py`: PASS; `audit_data.py`: PASS; `test_knn.py`: OK; Streamlit AppTest: brak wyjątków, 3 karty |
 
-T01–T20: **PASS** na `main` `e6db774`. Nowe testy T18–T20 nie wymagały zmian w kodzie silnika.
+| 23.11.2026 | `main` `2539038` (tag `lab8-demo`) | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 2.437s`, `OK`) |
+| 23.11.2026 | `main` `2539038` (tag `lab8-demo`) | asystent AI, lokalnie | `check_data.py --test-invalid`: 0 naruszeń, 3/3; `verify_repeatability.py`: PASS; `audit_data.py`: PASS; `test_knn.py`: OK; Streamlit AppTest: scenariusz 1 — 3 karty, scenariusz 2 (WSIiZ, 15 min) — komunikat o braku okolic, brak wyjątków |
+
+T01–T20: **PASS** na `main` `2539038`. Nowe testy T18–T20 nie wymagały zmian w kodzie silnika.
 
 ### 2.2. Ręczne sprawdzenie interfejsu
 
-Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2026, wersja `0df4f8b` (ten sam kod aplikacji co w `main` `e6db774`; po połączeniu sprawdzenia w przeglądarce nie powtarzano).
+Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2026, wersja `0df4f8b` (ten sam kod aplikacji co w `main` `2539038`; po połączeniu sprawdzenia w przeglądarce nie powtarzano).
 
 | ID | Przypadek | Oczekiwany wynik | Status |
 |---|---|---|---|
@@ -83,7 +86,7 @@ Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2
 
 ## 3. Pomiar niefunkcjonalny
 
-**NOT RUN.** Kryterium akceptacji czasu odpowiedzi nie zostało jeszcze uzgodnione w zespole, a katalog `results/lab7/` nie istnieje. Skrypt `scripts/benchmark_recommendation.py` uruchamia się poprawnie na `e6db774`, ale bez kryterium wynik nie jest oceniany. Pomiar należy do części Serhiia Popovycha.
+**NOT RUN.** Kryterium akceptacji czasu odpowiedzi nie zostało jeszcze uzgodnione w zespole, a katalog `results/lab7/` nie istnieje. Skrypt `scripts/benchmark_recommendation.py` uruchamia się poprawnie, ale bez kryterium wynik nie jest oceniany. Pomiar należy do części Serhiia Popovycha.
 
 ## 4. Ocena danych, wyników i kodu
 
@@ -98,7 +101,7 @@ Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2
 
 **Kod:** przegląd `docs/architecture.md` względem kodu — wynik w Issue #8. Zmiany wprowadzone po przeglądzie: nowy moduł `scripts/data_validation.py`; w `scripts/recommendation_engine.py` wywołanie walidacji w `from_files()` i odrzucanie wag NaN/inf w `recommend()`.
 
-Przegląd fragmentu kodu, którego nie jestem autorką — `generate_recommendations()` i `RecommendationEngine.from_files()` w `scripts/recommendation_engine.py` (autor: Serhii Popovych), wersja `e6db774`, wykonany z pomocą asystenta AI:
+Przegląd fragmentu kodu, którego nie jestem autorką — `generate_recommendations()` i `RecommendationEngine.from_files()` w `scripts/recommendation_engine.py` (autor: Serhii Popovych), wersja `e6db774` (kod bez zmian w `2539038`), wykonany z pomocą asystenta AI:
 
 | Kryterium | Wynik |
 |---|---|
@@ -122,22 +125,22 @@ Przegląd fragmentu kodu, którego nie jestem autorką — `generate_recommendat
 | R5 — uzasadnienie | częściowo | T15 (niepuste uzasadnienie), U05 | Zgodność treści uzasadnienia z punktacją: NOT RUN |
 | R6 — zakres projektu | PASS | T01, T15 — ranking powstaje bez danych o cenach i ofertach | — |
 
-Statusy dotyczą wersji `main` `e6db774`. `docs/report.md` podaje te same statusy.
+Statusy dotyczą wersji `main` `2539038`. `docs/report.md` podaje te same statusy.
 
 ## 6. Sprawdzenie dokumentacji
 
 | Dokument | Status | Uwagi |
 |---|---|---|
-| `docs/architecture.md` | sprawdzony | 8 niezgodności opisanych w Issue #8; sześć poprawionych. Otwarte: diagram sekwencji pokazuje osobne wywołania walidacji i silnika; punkt 5.2 wymienia nieistniejący katalog `results/lab6/` |
-| `docs/report.md` | sprawdzony | Prędkość, pole `justification`, brak eksportu i statusy wymagań poprawione w PR #18 i commicie `e6db774` |
-| `docs/presentation.md` | niezgodności | Scenariusz 2 podaje limit 5 min lub 1 min, którego nie ma w formularzu (dostępne: 15 / 30 / 45 min / bez limitu; brak okolic daje WSIiZ przy 15 min); prędkość 80 m/min (4,8 km/h) zamiast 75 m/min (4,5 km/h) |
+| `docs/architecture.md` | sprawdzony | 8 niezgodności opisanych w Issue #8; wszystkie poprawione (commity `0aeab7e`, PR #18, `2539038`) |
+| `docs/report.md` | sprawdzony | Układ zgodny z Lab 8; prędkość, pole `justification`, brak eksportu i statusy wymagań zgodne z kodem i z tym dokumentem. Otwarte: odnośnik do nieistniejącego `docs/user-guide.md`; nie podano nazwy taga ani commita prezentowanej wersji |
+| `docs/presentation.md` | sprawdzony | Oba scenariusze demonstracji są wykonalne w aplikacji (scenariusz 2: WSIiZ, limit 15 min); prędkość 4,5 km/h |
 | `README.md` — instrukcja uruchomienia | PASS | Instalacja z `requirements.txt` i uruchomienie aplikacji wykonane przez Valentynę Bokshę |
 | `docs/user-guide.md` | NOT RUN | Dokument nie istnieje; sprawdzenie instrukcji przez drugą osobę niewykonane |
 | `docs/problem.md` | sprawdzony | Podział zadań zaktualizowany w PR #18 |
 
 ## 7. Znane błędy i ograniczenia
 
-1. `docs/presentation.md` zawiera scenariusz, którego nie da się wykonać w aplikacji, i nieaktualną prędkość (punkt 6).
+1. Tag `lab8-demo` wskazuje commit `2539038`; zmiany połączone później (w tym aktualizacja tego dokumentu) nie są nim objęte, dopóki tag nie zostanie przeniesiony.
 2. Konstruktor `RecommendationEngine(...)` wywołany bezpośrednio (bez plików) nie sprawdza powtórzonych ID; walidacja działa przy wczytywaniu przez `from_files()`.
 3. Brak eksportu rankingu.
 4. Nazwy obszarów mogą być niezgodne z polem `district`; przynależność administracyjna nie została niezależnie sprawdzona.
