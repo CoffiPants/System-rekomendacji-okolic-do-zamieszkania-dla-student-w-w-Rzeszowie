@@ -566,3 +566,12 @@ python scripts/benchmark_recommendation.py
 - Plan i wyniki testów (51/51 testów `PASS` na `main`): [`docs/tests.md`](docs/tests.md)
 
 Uwaga: po scaleniu wszystkich gałęzi roboczych do `main` pełen zestaw **51/51 testów automatycznych** (`docs/tests.md`) przechodzi bezpośrednio na gałęzi głównej. Pomiar niefunkcjonalny ma status `NOT RUN`, a funkcja eksportu rankingu do pliku nie istnieje.
+
+## Instrukcja użytkownika
+
+Szczegółowa instrukcja obsługi aplikacji StudentFinder Rzeszów
+znajduje się w pliku [docs/user-guide.md](docs/user-guide.md).
+
+Instrukcja obejmuje wybór uczelni, ustawianie preferencji,
+generowanie rekomendacji, korzystanie z mapy oraz eksport
+rankingu TOP 3 do pliku CSV.
