@@ -563,6 +563,6 @@ python scripts/benchmark_recommendation.py
 
 - Raport końcowy projektu: [`docs/report.md`](docs/report.md)
 - Scenariusz prezentacji i próby: [`docs/presentation.md`](docs/presentation.md)
-- Plan i wyniki testów (gałąź `valentyna-data-validation`, 51/51 testów): [`docs/tests.md`](docs/tests.md)
+- Plan i wyniki testów (51/51 testów `PASS` na `main`): [`docs/tests.md`](docs/tests.md)
 
-Uwaga: wyniki testów opisane w `docs/tests.md` (**51/51 PASS**) dotyczą gałęzi `valentyna-data-validation` (opartej na zmianach z `serhii-recommendation-engine`), a nie jeszcze gałęzi `main` przed scaleniem wszystkich gałęzi roboczych. Pomiar niefunkcjonalny ma status `NOT RUN`, a funkcja eksportu rankingu do pliku nie istnieje.
+Uwaga: po scaleniu wszystkich gałęzi roboczych do `main` pełen zestaw **51/51 testów automatycznych** (`docs/tests.md`) przechodzi bezpośrednio na gałęzi głównej. Pomiar niefunkcjonalny ma status `NOT RUN`, a funkcja eksportu rankingu do pliku nie istnieje.

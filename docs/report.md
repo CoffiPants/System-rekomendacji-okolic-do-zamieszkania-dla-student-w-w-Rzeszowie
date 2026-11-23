@@ -27,7 +27,7 @@ Prace podzielono na spójne etapy inżynierskie realizowane w repozytorium GitHu
 
 ## 3. Weryfikacja spełnienia wymagań funkcjonalnych (R1–R6)
 
-Statusy na podstawie wyników z `docs/tests.md` (dotyczą gałęzi `valentyna-data-validation` opartej na zmianach z `serhii-recommendation-engine`, nie jeszcze gałęzi `main`):
+Statusy na podstawie wyników z `docs/tests.md` po scaleniu wszystkich gałęzi roboczych do `main` (`8923c80`):
 
 | Wymaganie | Opis wymagania | Sposób realizacji w systemie | Status |
 |---|---|---|---|
@@ -43,7 +43,7 @@ Statusy na podstawie wyników z `docs/tests.md` (dotyczą gałęzi `valentyna-da
 ## 4. Wyniki testów, wydajności i jakości
 
 - **Jakość i powtarzalność danych:** Skrypty `check_data.py` (w tym `--test-invalid`: `3/3` próby na błędnych kopiach) oraz `verify_repeatability.py` potwierdziły zgodność schematu oraz identyczność wygenerowanych plików z zestawem referencyjnym w `data/test/repeatability-reference/` (`500` usług i `28` lokalizacji uczelni).
-- **Testy automatyczne logiki i walidacji (`docs/tests.md`):** Na gałęzi `valentyna-data-validation` (wersja bazująca na `serhii-recommendation-engine`) uruchomiono **51 testów automatycznych (`51/51 PASS`, `Ran 51 tests in 4.856s`)**, obejmujących wczytywanie i walidację plików JSON, odrzucanie niepoprawnych współrzędnych, zduplikowanych `id`, błędnych wag spoza zakresu `1–3` i nieobsługiwanych limitów czasu, determinizm rankingu, czas marszu dla `4,5 km/h` (`75 m/min`) oraz zgodność wzoru punktacji z obliczeniami ręcznymi (`tests/test_weight_scoring.py`). Wyniki te dotyczą gałęzi roboczych — gałąź `main` przed scaleniem zawiera wcześniejszą wersję kodu.
+- **Testy automatyczne logiki i walidacji (`docs/tests.md`):** Po scaleniu wszystkich gałęzi roboczych do `main` uruchomiono pełen zestaw **51 testów automatycznych (`51/51 PASS`)**, obejmujących wczytywanie i walidację plików JSON, odrzucanie niepoprawnych współrzędnych, zduplikowanych `id`, błędnych wag spoza zakresu `1–3` i nieobsługiwanych limitów czasu, determinizm rankingu, czas marszu dla `4,5 km/h` (`75 m/min`) oraz zgodność wzoru punktacji z obliczeniami ręcznymi (`tests/test_weight_scoring.py`).
 - **Ręczne sprawdzenie interfejsu Streamlit:** Weryfikacja działania `app.py` potwierdziła poprawne generowanie kart rankingu TOP 3, wyświetlanie mapy z kołami o promieniu `500 m`, czyszczenie wyników przy zmianie parametrów, wyświetlanie zastrzeżenia o linii prostej oraz komunikat o braku dopasowań (np. dla WSIiZ przy limicie `15` minut). Funkcja eksportu rankingu do pliku nie istnieje (`U09: NOT RUN`).
 - **Pomiar niefunkcjonalny:** **NOT RUN** — w zespole nie uzgodniono jeszcze docelowego kryterium akceptacji czasu odpowiedzi dla całego przepływu; w repozytorium znajduje się skrypt `scripts/benchmark_recommendation.py` przeznaczony do pomiaru wydajności silnika.
 

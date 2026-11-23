@@ -160,5 +160,5 @@ Interfejs przekazuje wcześniej wczytany obiekt `RecommendationEngine` przez par
 
 ## 7. Kontrola spójności i przegląd dokumentacji
 - Dokumentacja jest odniesiona do `docs/data-dictionary.md`, `docs/processing.md`, `docs/area-name-audit.md` oraz zaktualizowanego `docs/problem.md`, a wymagania R1–R6 są odwzorowane w kontrakcie interfejsu i kryteriach odbioru UC-01.
-- Część uwag zgłoszonych podczas przeglądu architektury (Issue #8) została uwzględniona w kodzie i opisie (m.in. pola `walk_distance_m` i `scores` w odpowiedzi oraz rozróżnienie limitów 15 min i 1 min), natomiast pełna spójność wszystkich gałęzi roboczych (`serhii-recommendation-engine`, `valentyna-data-validation`, `dana-lab6-interface`, `paula-lab8-report`) następuje po ich scaleniu do `main` i ponownym uruchomieniu testów.
+- Uwagi zgłoszone podczas przeglądu architektury (Issue #8) zostały uwzględnione w kodzie i opisie (m.in. pola `walk_distance_m` i `scores` w odpowiedzi oraz rozróżnienie limitów 15 min i 1 min), a wszystkie gałęzie robocze (`serhii-recommendation-engine`, `valentyna-data-validation`, `dana-lab6-interface`, `paula-lab8-report`) zostały scalone do `main` z wynikiem 51/51 testów `PASS`.
 - Etykiety nazw obszarów w `config/residential-areas.json` mają charakter orientacyjny (patrz `docs/area-name-audit.md`) i mogą różnić się od przypisanego pola `district`.
