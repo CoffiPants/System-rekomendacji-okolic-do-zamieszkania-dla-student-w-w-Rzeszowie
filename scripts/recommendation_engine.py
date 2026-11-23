@@ -10,6 +10,11 @@ import json
 import math
 from pathlib import Path
 
+try:  # moduł jest importowany jako scripts.recommendation_engine albo bezpośrednio
+    from .data_validation import validate_documents
+except ImportError:
+    from data_validation import validate_documents
+
 
 CATEGORIES = ("shop", "bus_stop", "park")
 DEFAULT_WEIGHTS = {"university": 3.0, "shop": 2.0, "bus_stop": 2.0, "park": 2.0}
@@ -81,6 +86,7 @@ class RecommendationEngine:
         services_document = load_json(services_path)
         locations_document = load_json(locations_path)
         areas_document = load_json(areas_path)
+        validate_documents(services_document, locations_document, areas_document)
         return cls(
             services_document.get("services", []),
             locations_document.get("locations", []),
@@ -128,8 +134,9 @@ class RecommendationEngine:
             if unknown:
                 raise ValueError("Nieznane wagi: " + ", ".join(sorted(unknown)))
             for key, value in weights.items():
-                if isinstance(value, bool) or not isinstance(value, (int, float)) or value < 0:
-                    raise ValueError(f"Waga {key} musi być nieujemną liczbą.")
+                if (isinstance(value, bool) or not isinstance(value, (int, float))
+                        or not math.isfinite(value) or value < 0):
+                    raise ValueError(f"Waga {key} musi być nieujemną, skończoną liczbą.")
                 selected_weights[key] = float(value)
         if sum(selected_weights.values()) <= 0:
             raise ValueError("Co najmniej jedna waga musi być dodatnia.")
