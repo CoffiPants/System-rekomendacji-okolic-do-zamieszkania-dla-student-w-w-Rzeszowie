@@ -311,6 +311,31 @@ python scripts/compare_methods.py --shop-limit 1500 \
   --output results/lab4/sensitivity
 ```
 
+## Silnik rekomendacji — Lab 6 i Lab 7
+
+Silnik znajduje się w `scripts/recommendation_engine.py`. Przyjmuje dane
+przetworzone oraz środki 25 obszarów z `config/residential-areas.json`.
+Ranking uwzględnia odległość od wybranej lokalizacji uczelni, sklepu,
+przystanku i parku. Wagi można przekazać z aplikacji, a limit czasu dojścia
+filtruje obszary przed utworzeniem rankingu.
+
+Odległości są liczone w linii prostej wzorem Haversine'a. Czas dojścia jest
+orientacyjny i przyjmuje prędkość 4,5 km/h (75 metrów na minutę). Aplikacja
+wywołuje publiczne `generate_recommendations(request, engine=None)`, które
+zwraca status, komunikat, zastrzeżenie oraz ranking TOP 3.
+
+Testy silnika:
+
+```shell
+python -m unittest discover -s tests -v
+```
+
+Pomiar wydajności dla 100 powtórzeń:
+
+```shell
+python scripts/benchmark_recommendation.py
+```
+
 ### Sprawdzenie powtarzalności
 
 Python 3.10+, bez dodatkowych pakietów. Z katalogu głównego projektu:
@@ -423,7 +448,7 @@ KNN stanowi alternatywną metodę opartą na podobieństwie okolic do zadanego p
 
 ## Lab 6 — Implementacja MVP i interfejs użytkownika
 
-**Odpowiedzialna: Dana Stadnyk**
+**Interfejs: Dana Stadnyk. Integracja API silnika: Serhii Popovych.**
 
 W ramach laboratorium 6 przygotowano działający prototyp
 systemu StudentFinder Rzeszów z interfejsem graficznym
@@ -433,7 +458,7 @@ zrealizowanym w technologii Streamlit.
 
 - Wybór uczelni oraz budynku lub wydziału.
 - Określenie maksymalnego czasu dojścia do uczelni.
-- Ustawienie wag kryteriów w zakresie 0–5:
+- Ustawienie wag kryteriów w zakresie 1–3:
   - bliskość uczelni,
   - dostępność sklepów,
   - dostępność komunikacji miejskiej,
@@ -442,7 +467,7 @@ zrealizowanym w technologii Streamlit.
 - Prezentacja wyników w formie kart z oceną punktową.
 - Wyświetlanie rekomendowanych lokalizacji na interaktywnej mapie.
 - Obsługa sytuacji, w której nie znaleziono odpowiednich okolic.
-- Walidacja przypadku, w którym wszystkie wagi wynoszą zero.
+- Obsługa statusów `SUCCESS`, `NO_MATCHES`, `VALIDATION_ERROR` i `DATA_ERROR`.
 
 ### Architektura rozwiązania
 
@@ -513,3 +538,4 @@ python scripts/benchmark_recommendation.py
 - `scripts/benchmark_recommendation.py` — pomiar wydajności.
 - `tests/test_recommendation_engine.py` — testy automatyczne.
 - `docs/implementation.md` — dokumentacja implementacji MVP.
+- `docs/area-name-audit.md` — etykiety 25 obszarów i linki do sprawdzonych współrzędnych na mapie OSM.

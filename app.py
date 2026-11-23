@@ -8,7 +8,10 @@ import folium
 import streamlit as st
 from streamlit_folium import st_folium
 
-from scripts.recommendation_engine import RecommendationEngine
+from scripts.recommendation_engine import (
+    RecommendationEngine,
+    generate_recommendations,
+)
 
 
 # ==========================================
@@ -311,11 +314,6 @@ locations_by_id = {
     for item in engine.locations
 }
 
-areas_by_id = {
-    item["id"]: item
-    for item in engine.areas
-}
-
 available_universities = [
     code
     for code in UNIVERSITY_NAMES
@@ -381,12 +379,11 @@ with st.sidebar:
 
     # MAKSYMALNY CZAS DOJŚCIA
 
-    max_walk_time = st.slider(
-        "Maksymalny czas dojścia do uczelni (min)",
-        5,
-        60,
-        30,
-        5
+    max_walk_time = st.selectbox(
+        "Maksymalny czas dojścia do uczelni",
+        [15, 30, 45, None],
+        index=1,
+        format_func=lambda value: "Bez limitu" if value is None else f"{value} min",
     )
 
     st.divider()
@@ -395,36 +392,34 @@ with st.sidebar:
 
     st.subheader("Ważność kryteriów")
 
-    st.caption(
-        "0 — bez znaczenia · 5 — bardzo ważne"
-    )
+    st.caption("1 — mniej ważne · 3 — bardzo ważne")
 
     university_weight = st.slider(
         "Bliskość uczelni",
-        0,
-        5,
-        3
+        1,
+        3,
+        2
     )
 
     shop_weight = st.slider(
         "Dostępność sklepów",
-        0,
-        5,
-        3
+        1,
+        3,
+        2
     )
 
     bus_weight = st.slider(
         "Dostępność komunikacji miejskiej",
-        0,
-        5,
-        3
+        1,
+        3,
+        2
     )
 
     park_weight = st.slider(
         "Dostępność parków",
-        0,
-        5,
-        3
+        1,
+        3,
+        2
     )
 
     generate = st.button(
@@ -459,15 +454,15 @@ preferences = (
 if "result_preferences" not in st.session_state:
     st.session_state.result_preferences = None
 
-if "recommendations" not in st.session_state:
-    st.session_state.recommendations = None
+if "recommendation_response" not in st.session_state:
+    st.session_state.recommendation_response = None
 
 
 # Usuwanie nieaktualnych wyników
 
 if st.session_state.result_preferences != preferences:
 
-    st.session_state.recommendations = None
+    st.session_state.recommendation_response = None
     st.session_state.result_preferences = None
 
 
@@ -476,38 +471,25 @@ if st.session_state.result_preferences != preferences:
 # ==========================================
 
 if generate:
-
-    if not any(weights.values()):
-
-        st.session_state.recommendations = None
-
-        st.error(
-            "Ustaw przynajmniej jedną wagę większą od zera."
-        )
-
-    else:
-
-        try:
-
-            st.session_state.recommendations = engine.recommend(
-                location_id=selected_location_id,
-                weights=weights,
-                max_walk_minutes=max_walk_time,
-                top_n=3
-            )
-
-            st.session_state.result_preferences = preferences
-
-        except (ValueError, KeyError) as error:
-
-            st.session_state.recommendations = None
-
-            st.error(
-                f"Nie udało się obliczyć rekomendacji: {error}"
-            )
+    st.session_state.recommendation_response = generate_recommendations(
+        {
+            "location_id": selected_location_id,
+            "max_walk_time_minutes": max_walk_time,
+            "weights": weights,
+        },
+        engine=engine,
+    )
+    st.session_state.result_preferences = preferences
 
 
-recommendations = st.session_state.recommendations
+recommendation_response = st.session_state.recommendation_response
+recommendations = (
+    recommendation_response["recommendations"]
+    if recommendation_response and recommendation_response["status"] == "SUCCESS"
+    else []
+    if recommendation_response and recommendation_response["status"] == "NO_MATCHES"
+    else None
+)
 
 
 # ==========================================
@@ -556,19 +538,23 @@ st.write("")
 
 st.header("🏆 Twoje rekomendacje")
 
-if recommendations is None:
+if recommendation_response and recommendation_response["status"] in {
+    "VALIDATION_ERROR",
+    "DATA_ERROR",
+}:
+
+    st.error(recommendation_response["message"])
+
+elif recommendations is None:
 
     st.info(
         "Wybierz uczelnię i budynek, ustaw preferencje, "
         "a następnie kliknij **Generuj rekomendacje**."
     )
 
-elif not recommendations:
+elif recommendation_response["status"] == "NO_MATCHES":
 
-    st.warning(
-        "Nie znaleziono okolic spełniających limit czasu dojścia. "
-        "Zwiększ limit i spróbuj ponownie."
-    )
+    st.warning(recommendation_response["message"])
 
 else:
 
@@ -595,8 +581,8 @@ else:
             str(result["area_name"])
         )
 
-        reason = escape(
-            str(result.get("reason", ""))
+        justification = escape(
+            str(result.get("justification", ""))
         )
 
         card = f"""
@@ -617,7 +603,7 @@ else:
 
             <div class="detail">
                 🚶 Czas dojścia:
-                <b>{float(result['walk_time_minutes']):.1f} min</b>
+                <b>{float(result['walk_time_to_univ_min']):.1f} min</b>
             </div>
 
             <div class="detail">
@@ -626,7 +612,7 @@ else:
             </div>
 
             <div class="reason">
-                {reason}
+                {justification}
             </div>
 
         </div>
@@ -642,6 +628,8 @@ else:
                 ),
                 unsafe_allow_html=True
             )
+
+    st.caption(recommendation_response["disclaimer"])
 
 # ==========================================
 # MAPA
@@ -708,19 +696,26 @@ if recommendations:
 
     for idx, result in enumerate(recommendations):
 
-        area = areas_by_id[
-            result["area_id"]
-        ]
-
         coords = (
-            float(area["latitude"]),
-            float(area["longitude"])
+            float(result["center_lat"]),
+            float(result["center_lon"])
         )
 
         points.append(coords)
 
         color = colors[idx]
         number = idx + 1
+
+        folium.Circle(
+            location=coords,
+            radius=float(result["radius_m"]),
+            color=color,
+            weight=2,
+            fill=True,
+            fill_color=color,
+            fill_opacity=0.12,
+            tooltip=f"Promień obszaru: {int(result['radius_m'])} m",
+        ).add_to(mapa)
 
         marker_html = (
             f'<div style="'
@@ -745,7 +740,7 @@ if recommendations:
             f"<b>#{number} {escape(str(result['area_name']))}</b><br>"
             f"Ocena: {float(result['score']):.1f}/100<br>"
             f"Czas dojścia: "
-            f"{float(result['walk_time_minutes']):.1f} min<br>"
+            f"{float(result['walk_time_to_univ_min']):.1f} min<br>"
             f"Odległość: "
             f"{float(result['walk_distance_m']):.0f} m"
         )
@@ -800,7 +795,7 @@ with st.expander("ℹ️ Jak działa StudentFinder?"):
         "System porównuje okolice mieszkalne według odległości "
         "od wybranej lokalizacji uczelni oraz dostępności "
         "sklepów, przystanków i parków. "
-        "Wagi 0–5 określają znaczenie kryteriów dla użytkownika. "
+        "Wagi 1–3 określają znaczenie kryteriów dla użytkownika. "
         "Silnik oblicza ocenę i zwraca maksymalnie trzy "
         "najwyżej ocenione okolice spełniające limit czasu dojścia."
     )
