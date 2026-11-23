@@ -8,14 +8,14 @@ Statusy: **PASS** — sprawdzono, wynik zgodny z oczekiwanym; **FAIL** — spraw
 
 | Element | Wartość |
 |---|---|
-| Gałąź | `main`, commit `2539038` (tag `lab8-demo`; po połączeniu PR #14–#18) |
-| Commit kodu | Kod aplikacji i silnika (`app.py`, `scripts/`) w `2539038` jest identyczny z commitem `0df4f8b`, na którym wykonano pierwsze uruchomienia |
+| Gałąź | `main`, commit `653393e` (po połączeniu PR #14–#20) |
+| Commit kodu | Silnik i walidacja (`scripts/`) bez zmian od commita `0df4f8b`. `app.py` zmieniony w PR #20: eksport CSV i komunikat przy mniej niż trzech wynikach |
 | Dane | `data/processed/services.json` (500), `data/processed/universities.json` (28), `config/residential-areas.json` (25) — bez zmian od commita `1d9e312` |
 | Środowisko | Windows 11, Python 3.12.6, streamlit 1.67.0, folium 1.0.0, streamlit-folium 0.27.4 |
 
 Zakres: wczytywanie i walidacja plików danych, parametry żądania, przebieg dane → silnik → odpowiedź, ręczne sprawdzenie interfejsu.
 
-Poza zakresem: eksport rankingu i instrukcja użytkownika (jeszcze nie istnieją).
+Eksport rankingu i instrukcja użytkownika zostały dodane w PR #20; ich sprawdzenie opisują punkty 2.2 i 6.
 
 ## 2. Plan przypadków testowych i dziennik uruchomień
 
@@ -64,12 +64,14 @@ Dziennik uruchomień:
 
 | 23.11.2026 | `main` `2539038` (tag `lab8-demo`) | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 2.437s`, `OK`) |
 | 23.11.2026 | `main` `2539038` (tag `lab8-demo`) | asystent AI, lokalnie | `check_data.py --test-invalid`: 0 naruszeń, 3/3; `verify_repeatability.py`: PASS; `audit_data.py`: PASS; `test_knn.py`: OK; Streamlit AppTest: scenariusz 1 — 3 karty, scenariusz 2 (WSIiZ, 15 min) — komunikat o braku okolic, brak wyjątków |
+| 23.11.2026 | `main` `653393e` | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 2.362s`, `OK`) |
+| 23.11.2026 | `main` `653393e` | asystent AI, lokalnie | `check_data.py --test-invalid`: 0 naruszeń, 3/3; `test_knn.py`: OK; Streamlit AppTest: 3 karty i przycisk eksportu; przy 2 wynikach komunikat informacyjny i przycisk eksportu; WSIiZ / 15 min — komunikat o braku okolic, bez przycisku eksportu; brak wyjątków |
 
-T01–T20: **PASS** na `main` `2539038`. Nowe testy T18–T20 nie wymagały zmian w kodzie silnika.
+T01–T20: **PASS** na `main` `653393e`. Nowe testy T18–T20 nie wymagały zmian w kodzie silnika.
 
 ### 2.2. Ręczne sprawdzenie interfejsu
 
-Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2026, wersja `0df4f8b` (ten sam kod aplikacji co w `main` `2539038`; po połączeniu sprawdzenia w przeglądarce nie powtarzano).
+Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2026, wersja `0df4f8b` Po zmianie `app.py` w PR #20 sprawdzenia w przeglądarce nie powtarzano; wersję `653393e` sprawdzono tylko automatycznie (Streamlit AppTest, asystent AI).
 
 | ID | Przypadek | Oczekiwany wynik | Status |
 |---|---|---|---|
@@ -81,8 +83,9 @@ Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2
 | U06 | Limit 15 min, WSIiZ (Sucharskiego 2) | Komunikat o braku okolic zamiast kart | PASS |
 | U07 | Limit 15 min, część budynków | 1 lub 2 karty zamiast 3 | PASS — zgodne z R4 („maksymalnie trzy”); patrz punkt 4 |
 | U08 | Uszkodzony plik danych w uruchomionej aplikacji | Komunikat „Nie można wczytać danych projektu” | NOT RUN ręcznie; sprawdzone automatycznie przez asystenta AI (Streamlit AppTest, kopia z `services.json = []`): komunikat bez wyjątku |
-| U09 | Eksport rankingu | Plik z TOP 3 | NOT RUN — funkcja nie istnieje |
+| U09 | Eksport rankingu: przycisk „Pobierz ranking TOP 3 (CSV)” | Plik `studentfinder_top3.csv` z pozycją, uczelnią, budynkiem, okolicą, oceną, czasem i odległościami | NOT RUN ręcznie (pobranie i otwarcie pliku). Automatycznie (asystent AI, `653393e`): przycisk pojawia się tylko przy wynikach. Uwaga: czas ma przecinek dziesiętny (`22,4`), a ocena i odległości kropkę (`71.2`, `1680.0`) |
 | U10 | Inne przeglądarki i szerokości ekranu | Czytelny układ | NOT RUN |
+| U11 | Mniej niż 3 wyniki (limit 15 min) | Komunikat, że znaleziono mniej okolic | NOT RUN ręcznie. Automatycznie (asystent AI): komunikat jest wyświetlany. Uwaga: dla jednego wyniku tekst brzmi „tylko 1 okolice” |
 
 ## 3. Pomiar niefunkcjonalny
 
@@ -97,7 +100,16 @@ Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2
 
 **Wyniki:** przy limicie 15 minut i wagach 2/2/2/2: 13 miejsc zajęć ma 3 wyniki, 11 ma 2, 3 mają 1, a 1 (WSIiZ) nie ma żadnego. Przy 30 i 45 minutach oraz bez limitu każde miejsce ma 3 wyniki.
 
-**Miara z Lab 4:** porównanie wyniku obecnej wersji z miarą z `docs/experiment.md` — **NOT RUN** (należy do części Dany Stadnyk i Serhiia Popovycha).
+**Miara z Lab 4** (uruchomił asystent AI, `653393e`):
+
+| Miara | Lab 4 (zapisane w `results/lab4/`) | Obecna wersja | Warunki |
+|---|---|---|---|
+| Ranking Weighted Scoring | `ranking_proposed.csv`: TOP 3 = `krakowska-poludnie-1` 68,8049; `drabinianka-1` 61,8920; `krola-1` 58,7790 | `RecommendationEngine.recommend()`: ta sama kolejność wszystkich 25 obszarów, największa różnica oceny 0,0 | PRz, Budynek P (`way/197227711`), wagi 3/2/2/2, bez limitu czasu |
+| Zgodność TOP 3 Weighted Scoring / KNN | 2 z 3 dla każdego z 3 profili; to samo pierwsze miejsce | 2 z 3; to samo pierwsze miejsce (`python scripts/compare_knn_weighted.py`) | 25 obszarów, profile `balanced`, `university_priority`, `services_priority` |
+
+Różnica: zapisane pliki `results/lab4/*.csv` zawierają nazwy obszarów sprzed zmiany etykiet (np. „Krakowska-Południe”); identyfikatory i oceny są takie same. Ponowne uruchomienie `python scripts/compare_methods.py` zmienia w tych plikach tylko nazwy.
+
+Nie sprawdzano: rozdziały 1–11 `docs/experiment.md` opisują porównanie Brute force / Bounding box, którego nie wykonuje żaden skrypt; polecenie `compare_methods.py --radius 1000 --repetitions 100` kończy się błędem `unrecognized arguments`.
 
 **Kod:** przegląd `docs/architecture.md` względem kodu — wynik w Issue #8. Zmiany wprowadzone po przeglądzie: nowy moduł `scripts/data_validation.py`; w `scripts/recommendation_engine.py` wywołanie walidacji w `from_files()` i odrzucanie wag NaN/inf w `recommend()`.
 
@@ -125,27 +137,28 @@ Przegląd fragmentu kodu, którego nie jestem autorką — `generate_recommendat
 | R5 — uzasadnienie | częściowo | T15 (niepuste uzasadnienie), U05 | Zgodność treści uzasadnienia z punktacją: NOT RUN |
 | R6 — zakres projektu | PASS | T01, T15 — ranking powstaje bez danych o cenach i ofertach | — |
 
-Statusy dotyczą wersji `main` `2539038`. `docs/report.md` podaje te same statusy.
+Statusy dotyczą wersji `main` `653393e`. `docs/report.md` podaje te same statusy.
 
 ## 6. Sprawdzenie dokumentacji
 
 | Dokument | Status | Uwagi |
 |---|---|---|
 | `docs/architecture.md` | sprawdzony | 8 niezgodności opisanych w Issue #8; wszystkie poprawione (commity `0aeab7e`, PR #18, `2539038`) |
-| `docs/report.md` | sprawdzony | Układ zgodny z Lab 8; prędkość, pole `justification`, brak eksportu i statusy wymagań zgodne z kodem i z tym dokumentem. Otwarte: odnośnik do nieistniejącego `docs/user-guide.md`; nie podano nazwy taga ani commita prezentowanej wersji |
-| `docs/presentation.md` | sprawdzony | Oba scenariusze demonstracji są wykonalne w aplikacji (scenariusz 2: WSIiZ, limit 15 min); prędkość 4,5 km/h |
+| `docs/report.md` | niezgodności | Układ zgodny z Lab 8. Po PR #20 nieaktualne: „funkcja eksportu rankingu nie istnieje” (rozdziały 1 i 5). Nie podano nazwy taga ani commita prezentowanej wersji |
+| `docs/presentation.md` | niezgodności | Oba scenariusze demonstracji są wykonalne. Po PR #20 nieaktualne: „brak eksportu rankingu” (część 4, pytanie 3, wynik próby) |
 | `README.md` — instrukcja uruchomienia | PASS | Instalacja z `requirements.txt` i uruchomienie aplikacji wykonane przez Valentynę Bokshę |
-| `docs/user-guide.md` | NOT RUN | Dokument nie istnieje; sprawdzenie instrukcji przez drugą osobę niewykonane |
+| `docs/user-guide.md` | częściowo | Dokument dodany w PR #20. Przejście instrukcji przez drugą osobę w nowym katalogu: NOT RUN. Porównanie treści z aplikacją (asystent AI): kroki, nazwy pól i przycisków zgodne z `app.py`. Braki względem układu z Lab 7: nie ma rozdziału o komunikatach błędów („Nie znaleziono okolic…”, „Nie można wczytać danych projektu…”) ani listy dozwolonych limitów czasu (15 / 30 / 45 min) |
 | `docs/problem.md` | sprawdzony | Podział zadań zaktualizowany w PR #18 |
 
 ## 7. Znane błędy i ograniczenia
 
-1. Tag `lab8-demo` wskazuje commit `2539038`; zmiany połączone później (w tym aktualizacja tego dokumentu) nie są nim objęte, dopóki tag nie zostanie przeniesiony.
+1. Tag `lab8-demo` wskazuje commit `2539038`; zmiany połączone później (eksport CSV, instrukcja użytkownika, aktualizacje tego dokumentu) nie są nim objęte, dopóki tag nie zostanie przeniesiony.
 2. Konstruktor `RecommendationEngine(...)` wywołany bezpośrednio (bez plików) nie sprawdza powtórzonych ID; walidacja działa przy wczytywaniu przez `from_files()`.
-3. Brak eksportu rankingu.
+3. Eksport CSV: mieszane separatory dziesiętne (przecinek w czasie, kropka w ocenie i odległościach); brak testu automatycznego w repozytorium; plik nie był otwierany ręcznie.
 4. Nazwy obszarów mogą być niezgodne z polem `district`; przynależność administracyjna nie została niezależnie sprawdzona.
 5. Odległości są liczone w linii prostej od środka obszaru; czas nie uwzględnia rzeczywistych tras.
 6. Brak pomiaru niefunkcjonalnego (punkt 3).
 7. Testy interfejsu nie są zautomatyzowane w repozytorium.
 8. Plik danych ze znacznikiem BOM jest odrzucany przez aplikację, choć przechodzi `scripts/check_data.py` (punkt 4).
-9. Brak `docs/user-guide.md` i porównania z miarą z Lab 4.
+9. `docs/user-guide.md` nie opisuje komunikatów błędów; `docs/report.md` i `docs/presentation.md` nadal podają, że eksportu nie ma.
+10. `docs/experiment.md` (rozdziały 1–11) opisuje eksperyment niezgodny ze skryptami; zapisane `results/lab4/*.csv` mają nieaktualne nazwy obszarów.
