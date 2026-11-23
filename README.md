@@ -565,7 +565,7 @@ python scripts/benchmark_recommendation.py
 - Scenariusz prezentacji i próby: [`docs/presentation.md`](docs/presentation.md)
 - Plan i wyniki testów (51/51 testów `PASS` na `main`): [`docs/tests.md`](docs/tests.md)
 
-Uwaga: po scaleniu wszystkich gałęzi roboczych do `main` pełen zestaw **51/51 testów automatycznych** (`docs/tests.md`) przechodzi bezpośrednio na gałęzi głównej. Pomiar niefunkcjonalny ma status `NOT RUN`, a funkcja eksportu rankingu do pliku nie istnieje.
+Uwaga: po scaleniu wszystkich gałęzi roboczych do `main` pełen zestaw **51/51 testów automatycznych** (`docs/tests.md`) przechodzi bezpośrednio na gałęzi głównej. Pomiar niefunkcjonalny ma status `NOT RUN`. Funkcja eksportu rankingu TOP 3 do pliku CSV została zaimplementowana i sprawdzona ręcznie w aplikacji.
 
 ## Instrukcja użytkownika
 
