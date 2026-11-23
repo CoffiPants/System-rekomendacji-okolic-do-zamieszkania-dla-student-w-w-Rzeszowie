@@ -1,5 +1,8 @@
 """StudentFinder Rzeszów — interfejs rekomendacji okolic dla studentów."""
 
+import csv
+import io
+
 from html import escape
 from pathlib import Path
 from textwrap import dedent
@@ -629,7 +632,64 @@ else:
                 unsafe_allow_html=True
             )
 
+    if 0 < len(recommendations) < 3:
+        st.info(
+            f"W wybranym limicie czasu znaleziono tylko "
+            f"{len(recommendations)} okolice spełniające kryteria. "
+            "Aby zobaczyć więcej wyników, zwiększ limit czasu dojścia "
+            "lub wybierz opcję „Bez limitu”."
+        )
+
     st.caption(recommendation_response["disclaimer"])
+
+    # ==========================================
+    # EKSPORT RANKINGU TOP 3 DO CSV
+    # ==========================================
+
+    csv_buffer = io.StringIO(newline="")
+
+    csv_writer = csv.writer(csv_buffer, delimiter=";")
+
+    csv_writer.writerow([
+        "Pozycja",
+        "Uczelnia",
+        "Budynek",
+        "Okolica",
+        "Osiedle",
+        "Ocena (0-100)",
+        "Czas dojscia (min)",
+        "Odleglosc do uczelni (m)",
+        "Odleglosc do sklepu (m)",
+        "Odleglosc do przystanku (m)",
+        "Odleglosc do parku (m)"
+    ])
+
+    for result in recommendations:
+        distances = result["distances_m"]
+
+        csv_writer.writerow([
+            result["rank"],
+            UNIVERSITY_NAMES[selected_university],
+            get_location_label(selected_location),
+            result["area_name"],
+            result["district"],
+            round(float(result["score"]), 1),
+            f'{float(result["walk_time_to_univ_min"]):.1f}'.replace(".", ","),
+            round(float(result["walk_distance_m"]), 0),
+            round(float(distances["shop"]), 0),
+            round(float(distances["bus_stop"]), 0),
+            round(float(distances["park"]), 0)
+        ])
+
+    csv_data = "\ufeff" + csv_buffer.getvalue()
+
+    st.download_button(
+        label="📥 Pobierz ranking TOP 3 (CSV)",
+        data=csv_data.encode("utf-8"),
+        file_name="studentfinder_top3.csv",
+        mime="text/csv",
+        use_container_width=True
+    )
 
 # ==========================================
 # MAPA
