@@ -12,7 +12,8 @@ System realizuje warstwę analityczną i walidacyjną w języku **Python** w opa
 
 Projekt zachowuje wyraźny podział na warstwę danych, warstwę przetwarzania i audytu oraz warstwę silnika rekomendacji i testów:
 
-- `config/residential-areas.json` – konfiguracja 25 obszarów mieszkalnych o promieniu 500 m w 20 osiedlach Rzeszowa.
+- `config/residential-areas.json` – konfiguracja 25 środków obszarów o promieniu 500 m; etykiety `name` wskazują ulicę lub nazwane miejsce najbliższe zapisanym współrzędnym.
+- `docs/area-name-audit.md` – lista etykiet i mapy do kontroli każdego z 25 środków.
 - `config/university-selection.json` – definicja i kryteria wyboru budynków oraz kampusów uczelni.
 - `data/raw/` – surowe zbiory pobrane z Overpass API (`universities.json`, `sample.json`).
 - `data/processed/` – oczyszczone zbiory wejściowe (`universities.json` – 28 lokalizacji, `services.json` – 500 punktów usługowych).
@@ -21,7 +22,7 @@ Projekt zachowuje wyraźny podział na warstwę danych, warstwę przetwarzania i
 - `scripts/check_data.py` oraz `scripts/audit_data.py` – walidacja spójności schematu, współrzędnych WGS84 i pokrycia przestrzennego.
 - `scripts/verify_repeatability.py` – weryfikacja determinizmu przetwarzania względem wzorca w `data/test/repeatability-reference/`.
 - `scripts/compare_methods.py` – eksperyment porównawczy metod oceny obszarów z Laboratorium 4 (`results/lab4/`).
-- `scripts/recommendation_engine.py` – główny silnik rekomendacji (klasa `RecommendationEngine`, obliczenia odległości Haversine, filtrowanie czasu dojścia, normalizacja punktacji i generowanie uzasadnień).
+- `scripts/recommendation_engine.py` – silnik rekomendacji (`RecommendationEngine`) oraz publiczne API `generate_recommendations(request, engine=None)` używane przez aplikację.
 - `scripts/benchmark_recommendation.py` – skrypt pomiaru wydajności i czasu wykonania silnika rekomendacji.
 - `tests/test_recommendation_engine.py` – zestaw testów jednostkowych i brzegowych weryfikujących silnik rekomendacji.
 - `docs/` – dokumentacja projektowa.
@@ -30,28 +31,28 @@ Projekt zachowuje wyraźny podział na warstwę danych, warstwę przetwarzania i
 
 ## 3. Realizacja wymagań funkcjonalnych (R1–R6) w kodzie
 
-Każde z wymagań specyfikacji problemu (`docs/problem.md`) zostało zaimplementowane w module `scripts/recommendation_engine.py`.
+Każde z wymagań specyfikacji problemu (`docs/problem.md`) jest realizowane przez `scripts/recommendation_engine.py`. Aplikacja wywołuje publiczną funkcję `generate_recommendations`; metoda `RecommendationEngine.recommend` pozostaje warstwą obliczeniową.
 
 ### R1 — Wybór budynku lub kampusu uczelni
 
 Metoda `RecommendationEngine._location(location_id)` wyszukuje wybraną lokalizację po kluczu `id` w zbiorze `data/processed/universities.json` (28 lokalizacji w Rzeszowie).
 
-W przypadku podania nieistniejącego identyfikatora zgłaszany jest wyjątek `ValueError` z czytelnym komunikatem.
+Warstwa obliczeniowa zgłasza `ValueError` dla nieznanego identyfikatora, a publiczne API zamienia go na odpowiedź `VALIDATION_ERROR` z czytelnym komunikatem.
 
 ### R2 — Wagi preferencji otoczenia
 
-Metoda `recommend(..., weights=...)` przyjmuje słownik wag dla czterech kryteriów:
+Publiczne API `generate_recommendations(request, engine=None)` przyjmuje żądanie ze słownikiem wag dla czterech kryteriów:
 
 - `university`
 - `shop`
 - `bus_stop`
 - `park`
 
-Domyślne wartości:
+Domyślne wartości dla bezpośredniego wywołania metody obliczeniowej `recommend()`:
 
 `DEFAULT_WEIGHTS = {"university": 3.0, "shop": 2.0, "bus_stop": 2.0, "park": 2.0}`
 
-Walidacja odrzuca nieznane klucze, wartości ujemne, typy logiczne oraz sytuację, gdy suma wszystkich wag wynosi `0`.
+Interfejs i publiczne API przyjmują wartości całkowite od `1` do `3`. Niższy poziom `RecommendationEngine.recommend` sprawdza typ i nieujemność wag.
 
 ### R3 — Obliczanie czasu dojścia i filtr maksymalnego czasu
 
@@ -59,17 +60,17 @@ Funkcja `distance_m(a_lat, a_lon, b_lat, b_lon)` oblicza odległość w linii pr
 
 Szacowany czas marszu do uczelni wyliczany jest przy stałej prędkości pieszego:
 
-`WALKING_SPEED_M_PER_MINUTE = 80.0`
+`WALKING_SPEED_M_PER_MINUTE = 75.0`
 
-Odpowiada to prędkości `4,8 km/h`.
+Odpowiada to prędkości `4,5 km/h`.
 
 Obliczenie:
 
-`walk_minutes = distances["university"] / 80.0`
+`walk_minutes = distances["university"] / 75.0`
 
 Parametr `max_walk_minutes` odrzuca każdy obszar, dla którego `walk_minutes > max_walk_minutes`.
 
-Gdy żaden obszar nie spełnia limitu czasu, metoda `recommend()` zwraca pustą listę `[]` bez przerywania działania programu.
+Gdy żaden obszar nie spełnia limitu czasu, metoda `recommend()` zwraca pustą listę. Publiczne API zamienia ten wynik na odpowiedź ze statusem `NO_MATCHES` i komunikatem dla interfejsu.
 
 ### R4 — Ranking do 3 najlepszych okolic
 
@@ -83,7 +84,7 @@ Następnie zwracanych jest maksymalnie `top_n = 3` najlepszych obszarów z przyp
 
 ### R5 — Uzasadnienie ocen i ograniczeń
 
-Każdy element rankingu zawiera pole `reason` generowane na podstawie 2 najwyżej ocenionych kryteriów o dodatniej wadze wraz z konkretnymi odległościami w metrach.
+Każdy element rankingu zawiera pole `justification` generowane na podstawie 2 najwyżej ocenionych kryteriów o dodatniej wadze wraz z konkretnymi odległościami w metrach.
 
 Przykład:
 
@@ -144,18 +145,22 @@ Wynik końcowy `total_score` jest średnią ważoną ocen cząstkowych zaokrągl
 
 ### 4.3. Struktura pojedynczego rekordu wyjściowego
 
-Metoda `recommend()` zwraca listę słowników, gdzie każdy rekord zawiera:
+Metoda obliczeniowa `recommend()` zwraca listę słowników, którą publiczne API umieszcza w polu `recommendations` odpowiedzi. Każdy rekord zawiera:
 
 - `rank` (`int`) – pozycja w rankingu (`1`, `2` lub `3`);
 - `area_id` (`str`) – identyfikator obszaru;
 - `area_name` (`str`) – nazwa obszaru;
 - `district` (`str`) – nazwa osiedla;
+- `center_lat` i `center_lon` (`float`) – środek obszaru w stopniach WGS84;
+- `radius_m` (`int`) – promień obszaru przekazany z konfiguracji (500 m);
 - `score` (`float`) – końcowy wynik punktowy (`0.0–100.0`);
 - `walk_distance_m` (`float`) – odległość w linii prostej do uczelni w metrach;
-- `walk_time_minutes` (`float`) – szacowany czas dojścia w minutach;
+- `walk_time_to_univ_min` (`float`) – szacowany czas dojścia w minutach;
 - `distances_m` (`dict[str, float]`) – odległości dla kryteriów `university`, `shop`, `bus_stop`, `park`;
 - `scores` (`dict[str, float]`) – oceny cząstkowe (`0–100`) dla każdego kryterium;
-- `reason` (`str`) – tekstowe uzasadnienie wskazujące 2 najmocniejsze kryteria lokalizacji.
+- `justification` (`str`) – tekstowe uzasadnienie wskazujące 2 najmocniejsze kryteria lokalizacji.
+
+Publiczna odpowiedź zawiera `status` (`SUCCESS`, `NO_MATCHES`, `VALIDATION_ERROR` lub `DATA_ERROR`), `message`, `disclaimer` oraz `recommendations` (maksymalnie 3 rekordy). Konfiguracja obszarów zachowuje klucz `id`; API udostępnia go w wyniku jako `area_id`.
 
 ---
 
@@ -199,10 +204,10 @@ Instalacja:
 
 `python -m streamlit run app.py`
 
-**6. Przykładowe wywołanie silnika w kodzie Pythona:**
+**6. Przykładowe wywołanie publicznego API w kodzie Pythona:**
 
 ```python
-from scripts.recommendation_engine import RecommendationEngine
+from scripts.recommendation_engine import RecommendationEngine, generate_recommendations
 
 engine = RecommendationEngine.from_files(
     "data/processed/services.json",
@@ -210,16 +215,20 @@ engine = RecommendationEngine.from_files(
     "config/residential-areas.json",
 )
 
-top3 = engine.recommend(
-    location_id="way/208515700",
-    weights={
-        "university": 3,
-        "shop": 2,
-        "bus_stop": 3,
-        "park": 1
+response = generate_recommendations(
+    {
+        "location_id": "way/208515700",
+        "weights": {
+            "university": 3,
+            "shop": 2,
+            "bus_stop": 3,
+            "park": 1,
+        },
+        "max_walk_time_minutes": 30,
     },
-    max_walk_minutes=30,
+    engine=engine,
 )
+top3 = response["recommendations"] if response["status"] == "SUCCESS" else []
 ```
 
 ---
@@ -230,13 +239,13 @@ top3 = engine.recommend(
 
 Plik: `tests/test_recommendation_engine.py`
 
-Uruchomiono **4 testy**, wszystkie zakończyły się wynikiem `OK`.
+Uruchomiono **7 testów**, wszystkie zakończyły się wynikiem `OK`.
 
 Testy obejmują m.in. sprawdzenie filtrowania obszarów według limitu czasu dojścia.
 
 Szczegółowy zakres testów określa plik testowy.
 
-**Wynik: 4/4 PASS.**
+**Wynik: 7/7 PASS.**
 
 ### Testy wydajności
 
@@ -255,7 +264,7 @@ Wyniki dotyczą zmierzonej operacji w skrypcie i zależą od środowiska uruchom
 
 ### Status integracji
 
-Silnik rekomendacji jest połączony z interfejsem Streamlit (`app.py`).
+Silnik rekomendacji jest połączony z interfejsem Streamlit (`app.py`) przez `generate_recommendations`. Formularz przyjmuje wagi 1–3 oraz limit 15, 30, 45 minut lub brak limitu. UI odczytuje status odpowiedzi i renderuje pola `justification`, `walk_time_to_univ_min`, środek i promień obszaru.
 
 Użytkownik może ustawić preferencje, wygenerować ranking TOP 3 oraz zobaczyć rekomendowane lokalizacje na interaktywnej mapie.
 
@@ -317,7 +326,7 @@ System obsługuje sytuacje wyjątkowe bez konieczności przerywania działania a
 
 Przeprowadzono testy automatyczne silnika rekomendacji:
 
-**4 testy, 4 zaliczone (`OK`).**
+**7 testów, 7 zaliczonych (`OK`).**
 
 Wykonano również benchmark:
 
@@ -357,6 +366,6 @@ Zrealizowano działający prototyp MVP łączący dane przestrzenne, silnik reko
 
 Rozwiązanie można rozwijać o dokładniejsze dane dotyczące tras pieszych i ofert mieszkaniowych.
 
-**Implementacja interfejsu i integracja MVP: Dana Stadnyk.**
+**Interfejs: Dana Stadnyk. Integracja publicznego API silnika z interfejsem: Serhii Popovych.**
 
 **Dokumentacja:** połączono opisy techniczne i interfejsu przygotowane w dwóch gałęziach projektu.
