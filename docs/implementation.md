@@ -315,7 +315,6 @@ Jeżeli odpowiednich okolic jest mniej niż trzy, aplikacja prezentuje dostępne
 W interfejsie przewidziano komunikaty dla sytuacji, w których:
 
 - żadna okolica nie spełnia limitu czasu dojścia;
-- wszystkie wagi kryteriów są ustawione na zero;
 - liczba pasujących okolic jest mniejsza niż trzy.
 
 System obsługuje sytuacje wyjątkowe bez konieczności przerywania działania aplikacji.
@@ -347,8 +346,7 @@ W ramach ręcznej weryfikacji aplikacji należy sprawdzić:
 1. Generowanie rekomendacji.
 2. Reakcję na zmianę preferencji.
 3. Obsługę braku wyników.
-4. Obsługę zerowych wag.
-5. Wyświetlanie mapy.
+4. Wyświetlanie mapy.
 
 ---
 

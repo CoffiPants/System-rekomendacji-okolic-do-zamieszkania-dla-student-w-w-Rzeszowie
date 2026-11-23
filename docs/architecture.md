@@ -100,7 +100,6 @@ graph TD
     J -->|Nie| K[Komunikat NO_MATCHES w UI]
     J -->|Tak| L[4. Punktacja 0-100 i wybór TOP 3]
     L --> M[Streamlit UI: Tabela + Mapa]
-    L -->|Eksport badawczy| N[results/*.csv]
 ```
 
 ---
@@ -130,7 +129,7 @@ Interfejs przekazuje wcześniej wczytany obiekt `RecommendationEngine` przez par
 
 ### 4.3. Kody i obsługa błędów
 * `VALIDATION_ERROR`: nieistniejące `location_id`, waga spoza zbioru `{1, 2, 3}` lub limit spoza `{15, 30, 45, None}` → zatrzymanie obliczeń i wyświetlenie `st.error` w UI.
-* `DATA_ERROR`: brak plików w `data/processed/`, uszkodzony JSON, brak współrzędnych lub błąd obliczeń → komunikat o sprawdzeniu danych i uruchomieniu `scripts/prepare_data.py`.
+* `DATA_ERROR`: Brak plików w `data/processed/`, uszkodzony JSON lub brak wymaganych pól przy starcie aplikacji: zatrzymanie uruchomienia i wyświetlenie komunikatu błędu w interfejsie (`st.error`) z informacją o sprawdzeniu danych i uruchomieniu `scripts/prepare_data.py`.
 * `NO_MATCHES`: poprawne dane wejściowe, ale wszystkie 25 obszarów przekracza `max_walk_time_minutes` → zwrócenie pustej listy `recommendations: []` i wyświetlenie `st.warning` w UI.
 
 ---
@@ -160,4 +159,6 @@ Interfejs przekazuje wcześniej wczytany obiekt `RecommendationEngine` przez par
 ---
 
 ## 7. Kontrola spójności i przegląd dokumentacji
-* Dokumentacja jest spójna z `docs/data-dictionary.md`, `docs/problem.md` oraz `docs/processing.md`, a wymagania R1–R6 są odwzorowane w kontrakcie interfejsu i kryteriach odbioru UC-01.
+- Dokumentacja jest odniesiona do `docs/data-dictionary.md`, `docs/processing.md`, `docs/area-name-audit.md` oraz zaktualizowanego `docs/problem.md`, a wymagania R1–R6 są odwzorowane w kontrakcie interfejsu i kryteriach odbioru UC-01.
+- Część uwag zgłoszonych podczas przeglądu architektury (Issue #8) została uwzględniona w kodzie i opisie (m.in. pola `walk_distance_m` i `scores` w odpowiedzi oraz rozróżnienie limitów 15 min i 1 min), natomiast pełna spójność wszystkich gałęzi roboczych (`serhii-recommendation-engine`, `valentyna-data-validation`, `dana-lab6-interface`, `paula-lab8-report`) następuje po ich scaleniu do `main` i ponownym uruchomieniu testów.
+- Etykiety nazw obszarów w `config/residential-areas.json` mają charakter orientacyjny (patrz `docs/area-name-audit.md`) i mogą różnić się od przypisanego pola `district`.
