@@ -71,7 +71,7 @@ T01–T20: **PASS** na `main` `ed0366c`. Dowód: wynik polecenia z punktu 2.1; r
 
 ### 2.2. Ręczne sprawdzenie interfejsu
 
-Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2026, wersja `0df4f8b` Po zmianie `app.py` w PR #20 sprawdzenia w przeglądarce nie powtarzano; wersję `653393e` sprawdzono tylko automatycznie (Streamlit AppTest, asystent AI).
+Polecenie: `python -m streamlit run app.py`. U01–U07 wykonała Valentyna Boksha 23.11.2026 na wersji `0df4f8b`. Po zmianie `app.py` w PR #20 te same kroki (wybór uczelni i budynku, limit, wagi, generowanie, mapa, eksport, brak okolic dla WSIiZ przy 15 min) powtórzyła 24.11.2026 na wersji `ed0366c` w ramach sprawdzenia instrukcji użytkownika (punkt 6) — bez niezgodności.
 
 | ID | Przypadek | Oczekiwany wynik | Status |
 |---|---|---|---|
@@ -146,8 +146,8 @@ Statusy: spełnione / niespełnione / niesprawdzone. Dotyczą wersji `main` `ed0
 | `docs/architecture.md` | sprawdzony | 8 niezgodności opisanych w Issue #8; wszystkie poprawione (commity `0aeab7e`, PR #18, `2539038`) |
 | `docs/report.md` | niezgodności | Układ zgodny z Lab 8. Po PR #20 nieaktualne: „funkcja eksportu rankingu nie istnieje” (rozdziały 1 i 5). Nie podano nazwy taga ani commita prezentowanej wersji |
 | `docs/presentation.md` | niezgodności | Oba scenariusze demonstracji są wykonalne. Po PR #20 nieaktualne: „brak eksportu rankingu” (część 4, pytanie 3, wynik próby) |
-| `README.md` — instrukcja uruchomienia | PASS (osoba: Valentyna Boksha; wersja `0df4f8b`; kroki: instalacja, uruchomienie aplikacji, testy) | Instalacja z `requirements.txt` i uruchomienie aplikacji wykonane przez Valentynę Bokshę |
-| `docs/user-guide.md` | częściowo | Dokument dodany w PR #20. Przejście instrukcji przez drugą osobę w nowym katalogu: NOT RUN. Porównanie treści z aplikacją (asystent AI): kroki, nazwy pól i przycisków zgodne z `app.py`. Braki względem układu z Lab 7: nie ma rozdziału o komunikatach błędów („Nie znaleziono okolic…”, „Nie można wczytać danych projektu…”) ani listy dozwolonych limitów czasu (15 / 30 / 45 min) |
+| `README.md` — instrukcja uruchomienia | PASS | 23.11.2026, Valentyna Boksha, wersja `0df4f8b`: instalacja z `requirements.txt`, uruchomienie aplikacji, testy. 24.11.2026, asystent AI, wersja `ed0366c`: `git clone` do nowego pustego katalogu, nowe środowisko `.venv`, `python -m pip install -r requirements.txt` bez błędów, 51/51 testów PASS, aplikacja uruchomiona. Uwaga: w bardzo głęboko zagnieżdżonym katalogu instalacja nie powiodła się przez limit długości ścieżki w systemie Windows (pakiet `streamlit`); w katalogu o krótszej ścieżce przebiegła poprawnie |
+| `docs/user-guide.md` | PASS z uwagą | 24.11.2026, Valentyna Boksha (nie jest autorką instrukcji), wersja `ed0366c`, aplikacja uruchomiona z nowego katalogu i nowego środowiska. Wykonane kroki z rozdziałów 3–8: wybór uczelni i budynku, limit czasu, wagi, „Generuj rekomendacje”, mapa, pobranie CSV; przypadek błędny: WSIiZ i limit 15 min — komunikat o braku okolic. Wynik: wszystkie kroki wykonalne, opisy zgodne z ekranem. Uwaga (porównanie z układem z Lab 7, asystent AI): instrukcja nie ma osobnego rozdziału o komunikatach błędów ani listy dozwolonych limitów czasu (15 / 30 / 45 min) — zgłoszone autorce |
 | `docs/problem.md` | niezgodności | Podział zadań zaktualizowany w PR #18. Nieaktualne: wiersz 51 („`docs/tests.md` na gałęzi `valentyna-data-validation`” — plik jest w `main`) i wiersz 35 („Lista w bazie” — projekt nie ma bazy danych) |
 | `docs/implementation.md` | niezgodności | Podaje „7 testów, 7/7 PASS” — polecenie uruchamia 51 testów; nie wymienia `scripts/data_validation.py`, trzech plików testów ani eksportu CSV; pomiar „mediana 20,060 ms” bez sprzętu, commita i parametrów. Brak wymaganych w Lab 6 pozycji: sprawdzona wersja i osoba weryfikująca, ocena usprawnienia implementacji |
 
@@ -161,7 +161,7 @@ Statusy: spełnione / niespełnione / niesprawdzone. Dotyczą wersji `main` `ed0
 6. Brak pomiaru niefunkcjonalnego (punkt 3) — Issue #9.
 7. Testy interfejsu nie są zautomatyzowane w repozytorium.
 8. Plik danych ze znacznikiem BOM jest odrzucany przez aplikację, choć przechodzi `scripts/check_data.py` (punkt 4).
-9. `docs/user-guide.md` nie opisuje komunikatów błędów (Issue #7); `docs/report.md` i `docs/presentation.md` nadal podają, że eksportu nie ma.
+9. `docs/user-guide.md` nie ma osobnego rozdziału o komunikatach błędów (Issue #7); `docs/report.md` i `docs/presentation.md` nadal podają, że eksportu nie ma.
 10. `docs/experiment.md` (rozdziały 1–11) opisuje eksperyment niezgodny ze skryptami; zapisane `results/lab4/*.csv` mają nieaktualne nazwy obszarów.
 11. `docs/implementation.md` podaje nieaktualną liczbę testów i nie opisuje modułu walidacji (punkt 6) — Issue #10.
 12. Żaden Pull Request nie ma zapisanego przeglądu (review) innej osoby; przegląd kodu z punktu 4 jest zapisany w opisie PR #19.
