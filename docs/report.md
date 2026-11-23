@@ -1,68 +1,103 @@
 # Raport końcowy projektu — Laboratorium 8
 
-## 1. Podsumowanie celu i zakresu systemu
-Celem projektu było zaprojektowanie, zaimplementowanie i przetestowanie **systemu rekomendacji okolic zamieszkania dla studentów w Rzeszowie**. Aplikacja wspiera studentów w wyborze lokalizacji mieszkania dopasowanej do miejsca odbywania zajęć oraz indywidualnych preferencji dotyczących infrastruktury miejskiej (sklepów, przystanków autobusowych oraz terenów zielonych), przy jednoczesnym uwzględnieniu maksymalnego akceptowalnego czasu dojścia pieszo na uczelnię.
+## 1. Problem i użytkownik
+Studenci podejmujący naukę w Rzeszowie potrzebują narzędzia wspierającego wybór okolicy zamieszkania dopasowanej do miejsca zajęć (budynku lub kampusu uczelni), maksymalnego akceptowalnego czasu dojścia pieszo oraz indywidualnych wag preferencji dotyczących infrastruktury miejskiej: sklepów (`shop`), przystanków autobusowych (`bus_stop`) i terenów zielonych (`park`).
 
-System zrealizowano w języku **Python** jako modułową aplikację analityczną połączoną z interaktywnym interfejsem użytkownika w bibliotece **Streamlit**, pracującą bezpośrednio na ustrukturyzowanych plikach **JSON** i **CSV** (zgodnie z decyzją architektoniczną `docs/decisions/001-storage.md`).
+System został zaprojektowany jako lekka aplikacja analityczna w języku **Python** z interfejsem **Streamlit**, pracująca in-memory na plikach **JSON** i **CSV** (zgodnie z decyzją `./decisions/001-storage.md`). Szczegółowy opis wymagań funkcjonalnych (**R1–R6**) znajduje się w [Opisie problemu](./problem.md).
 
----
-
-## 2. Przebieg prac projektowych i podział ról w zespole
-
-Prace podzielono na spójne etapy inżynierskie realizowane w repozytorium GitHub z wykorzystaniem gałęzi tematycznych i przeglądów kodu (*Pull Requests*):
-
-1. **Analiza problemu i danych (Lab 1–3):**
-  - Zdefiniowano wymagania funkcjonalne (**R1–R6**) i kryteria jakości w `docs/problem.md`.
-  - Pobrano dane przestrzenne z Overpass API (OpenStreetMap) oraz przygotowano potok przetwarzania (`scripts/prepare_data.py`), uzyskując oczyszczone zbiory: **28 lokalizacji uczelni** (`data/processed/universities.json`), **500 punktów usługowych** (`data/processed/services.json`) oraz **25 obszarów mieszkalnych** o promieniu 500 m w 20 osiedlach Rzeszowa (`config/residential-areas.json`).
-  - Potwierdzono jakość, kompletność i determinizm przetwarzania (`scripts/check_data.py`, `scripts/audit_data.py`, `scripts/verify_repeatability.py`).
-2. **Eksperymenty badawcze (Lab 4):**
-  - Porównano metody oceny obszarów (Weighted Scoring oraz podejścia sąsiedztwa) pod kątem stabilności rankingów i wrażliwości na zmianę wag preferencji (`scripts/compare_methods.py`, `results/lab4/`).
-3. **Projekt architektury, implementacja i testy (Lab 5–8):**
-  - **Paulina Michalska:** Opracowanie dokumentacji architektury (`docs/architecture.md`), kontraktu interfejsu, modelu logicznego/fizycznego danych, dokumentacji wdrożeniowej (`docs/implementation.md`), raportu końcowego (`docs/report.md`), scenariusza prezentacji (`docs/presentation.md`) oraz aktualizacja `docs/problem.md` i `README.md`.
-  - **Serhii Popovych:** Implementacja silnika rekomendacji (`scripts/recommendation_engine.py`), testów jednostkowych (`tests/test_recommendation_engine.py`), skryptu pomiaru wydajności (`scripts/benchmark_recommendation.py`) oraz weryfikacji etykiet obszarów (`docs/area-name-audit.md`).
-  - **Dana Stadnyk:** Budowa interaktywnego interfejsu użytkownika w Streamlit (`app.py`, `.streamlit/config.toml`), wizualizacja mapy Rzeszowa oraz skrypty kontroli i audytu danych (`scripts/check_data.py`, `scripts/audit_data.py`).
-  - **Valentyna Boksha:** Walidacja danych wejściowych (`scripts/data_validation.py`), testy automatyczne i punktacji (`tests/test_weight_scoring.py`), przegląd architektury (`Issue #8`) oraz dokumentacja testów (`docs/tests.md` na gałęzi `valentyna-data-validation`).
+### Trzy najważniejsze stwierdzenia o projekcie
+1. **System realizuje deterministyczne rekomendacje TOP 3 dla 25 obszarów w Rzeszowie:**  
+   - *Dowód:* Zaimplementowana funkcja `generate_recommendations()` w `scripts/recommendation_engine.py`, interfejs `app.py` oraz przejście `51/51` testów automatycznych (`./tests.md`), w tym testów punktacji (`tests/test_weight_scoring.py`) i walidacji żądań (`tests/test_request_validation.py`).  
+   - *Granica wnioskowania:* Wyniki dotyczą wyłącznie 25 zdefiniowanych obszarów (promień `500 m`), odległości w linii prostej przy prędkości `4,5 km/h` (`75 m/min`) oraz statycznego zbioru danych bez aktualnych ofert czy cen najmu.
+2. **Walidacja danych i żądań chroni aplikację przed błędnymi wejściami i brakami w plikach:**  
+   - *Dowód:* Moduł `scripts/data_validation.py`, skrypty `scripts/check_data.py` i `scripts/audit_data.py` oraz testy w `tests/test_data_validation.py` i `tests/test_request_validation.py` (`51/51 PASS`).  
+   - *Granica wnioskowania:* Kontrole weryfikują schemat, współrzędne WGS84, unikalność `id`, wagi (`1–3`) i limity czasu (`15`, `30`, `45` lub brak limitu), ale nie gwarantują pełności opcjonalnych pól źródłowych OSM (np. braków adresów czy nazw źródłowych).
+3. **Część obszarów weryfikacji jakości wymaga dalszych prac w zespole:**  
+   - *Dowód:* Zapisy w [Planie i wynikach testów](./tests.md) oraz w [Audycie nazw obszarów](./area-name-audit.md) (pomiar niefunkcjonalny ma status `NOT RUN`, zgodność treści `justification` z punktacją w `R5` ma status `NOT RUN`, funkcja eksportu rankingu nie istnieje, a etykiety nazw obszarów mają charakter orientacyjny).  
+   - *Granica wnioskowania:* Brak pomiaru niefunkcjonalnego dla całego przepływu oznacza, że nie oceniono jeszcze czasu odpowiedzi pod obciążeniem ani na innych środowiskach niż testowane lokalnie.
 
 ---
 
-## 3. Weryfikacja spełnienia wymagań funkcjonalnych (R1–R6)
+## 2. Zakres wykonany
+Prace zrealizowano w repozytorium GitHub z użyciem gałęzi tematycznych i przeglądów kodu (*Pull Requests*) w następujących etapach:
+- **Lab 1–3 (Problem i dane):** Pozyskanie danych przestrzennych z Overpass API (OpenStreetMap), budowa potoku przetwarzania (`scripts/prepare_data.py`), skryptów kontroli i audytu (`scripts/check_data.py`, `scripts/audit_data.py`) oraz sprawdzenia powtarzalności (`scripts/verify_repeatability.py`).
+- **Lab 4 (Eksperymenty):** Porównanie metod oceny obszarów — m.in. Weighted Scoring względem podejść sąsiedztwa i KNN (`scripts/compare_methods.py`, `scripts/knn_recommender.py`, `scripts/compare_knn_weighted.py`, `scripts/benchmark_knn_weighted.py`, `../results/lab4/`).
+- **Lab 5–8 (Architektura, MVP, testy i finalizacja):** Projekt architektury (`./architecture.md`), implementacja silnika rekomendacji (`scripts/recommendation_engine.py`), walidacji i testów automatycznych (`scripts/data_validation.py`, `tests/`), interfejsu Streamlit (`app.py`, `.streamlit/config.toml`), audytu nazw obszarów (`./area-name-audit.md`), scenariusza prezentacji (`./presentation.md`) oraz niniejszego raportu końcowego.
 
-Statusy na podstawie wyników z `docs/tests.md` po scaleniu wszystkich gałęzi roboczych do `main` (`8923c80`):
+Weryfikacja wymagań funkcjonalnych (**R1–R6**) na podstawie wyników z [Planu i wyników testów](./tests.md):
 
 | Wymaganie | Opis wymagania | Sposób realizacji w systemie | Status |
 |---|---|---|---|
-| **R1** | Wybór budynku lub kampusu uczelni | Lista 28 lokalizacji uczelni w Rzeszowie (`universities.json`), wyszukiwanie i walidacja `location_id` w `generate_recommendations()`. | Spełnione |
-| **R2** | Określenie wag preferencji otoczenia | Obsługa całkowitych wag z zakresu `1–3` dla 4 kryteriów (`university`, `shop`, `bus_stop`, `park`) z walidacją typów i zakresu (`VALIDATION_ERROR` dla błędnych wag). | Spełnione |
-| **R3** | Czas dojścia pieszo i filtr maksymalnego czasu | Obliczanie odległości wzorem Haversine, przeliczanie na czas marszu przy prędkości `4,5 km/h` (`75 m/min`), odrzucanie obszarów powyżej `max_walk_time_minutes` (`15`, `30`, `45` min lub brak limitu) oraz zwracanie statusu `NO_MATCHES` bez błędu aplikacji. | Spełnione |
-| **R4** | Ranking do 3 najlepszych okolic | Deterministyczne sortowanie kluczem `(-score, area_id)` i zwracanie maksymalnie `3` obszarów z punktacją `0–100` oraz prezentacja kół 500 m na mapie (zgodność środków kół z danymi sprawdzono wzrokowo). | Spełnione |
-| **R5** | Uzasadnienie ocen i ograniczeń | Generowanie pola `justification` oraz stałego zastrzeżenia `disclaimer` o liczeniu odległości w linii prostej od środka koła `500 m` przy `4,5 km/h` (zgodność samej treści uzasadnienia z punktacją ma w `docs/tests.md` status `NOT RUN`). | Częściowo |
-| **R6** | Zakres przestrzenny ograniczony do Rzeszowa | Walidacja współrzędnych WGS84 i ograniczenie zbiorów uczelni, usług oraz 25 obszarów wyłącznie do Rzeszowa, bez wymagania danych o ofertach i cenach najmu. | Spełnione |
+| **R1** | Wybór budynku lub kampusu uczelni | Lista 28 lokalizacji uczelni w Rzeszowie (`../data/processed/universities.json`), wyszukiwanie i walidacja `location_id` w `generate_recommendations()`. | Spełnione |
+| **R2** | Określenie wag preferencji otoczenia | Obsługa wag całkowitych z zakresu `1–3` dla 4 kryteriów (`university`, `shop`, `bus_stop`, `park`) z walidacją typów i zakresu. | Spełnione |
+| **R3** | Czas dojścia pieszo i filtr maksymalnego czasu | Obliczanie odległości wzorem Haversine, przeliczanie na czas marszu przy prędkości `4,5 km/h` (`75 m/min`), filtrowanie wg `max_walk_time_minutes` (`15`, `30`, `45` min lub brak limitu) oraz zwracanie statusu `NO_MATCHES` bez błędu aplikacji. | Spełnione |
+| **R4** | Ranking do 3 najlepszych okolic | Deterministyczne sortowanie kluczem `(-score, area_id)` i zwracanie maksymalnie `3` obszarów z punktacją `0–100` oraz prezentacja kół `500 m` na mapie. | Spełnione |
+| **R5** | Uzasadnienie ocen i ograniczeń | Generowanie pola `justification` oraz stałego zastrzeżenia `disclaimer` o liczeniu odległości w linii prostej od środka koła `500 m` przy `4,5 km/h` (zgodność treści uzasadnienia z punktacją ma w `./tests.md` status `NOT RUN`). | Częściowo |
+| **R6** | Zakres przestrzenny ograniczony do Rzeszowa | Walidacja współrzędnych WGS84 i ograniczenie zbiorów uczelni, usług oraz 25 obszarów wyłącznie do Rzeszowa, bez danych o ofertach czy cenach najmu. | Spełnione |
 
 ---
 
-## 4. Wyniki testów, wydajności i jakości
+## 3. Dane
+System korzysta z danych geograficznych dla Rzeszowa pobranych z OpenStreetMap (Overpass API) oraz zdefiniowanych obszarów mieszkalnych:
+- **Lokalizacje uczelni:** `28` rekordów w `../data/processed/universities.json` (m.in. Politechnika Rzeszowska, Uniwersytet Rzeszowski, WSIiZ, WSPiA; `26` budynków i `2` kampusy).
+- **Punkty usługowe:** `500` rekordów w `../data/processed/services.json` w kategoriach `shop` (`274`), `bus_stop` (`185`) oraz `park` (`41`).
+- **Obszary mieszkalne:** `25` obszarów o promieniu `500 m` w `20` osiedlach Rzeszowa zdefiniowanych w `../config/residential-areas.json`. Etykiety nazw obszarów mają charakter orientacyjny i mogą różnić się od pola `district` (szczegóły w [Audycie nazw obszarów](./area-name-audit.md)).
 
-- **Jakość i powtarzalność danych:** Skrypty `check_data.py` (w tym `--test-invalid`: `3/3` próby na błędnych kopiach) oraz `verify_repeatability.py` potwierdziły zgodność schematu oraz identyczność wygenerowanych plików z zestawem referencyjnym w `data/test/repeatability-reference/` (`500` usług i `28` lokalizacji uczelni).
-- **Testy automatyczne logiki i walidacji (`docs/tests.md`):** Po scaleniu wszystkich gałęzi roboczych do `main` uruchomiono pełen zestaw **51 testów automatycznych (`51/51 PASS`)**, obejmujących wczytywanie i walidację plików JSON, odrzucanie niepoprawnych współrzędnych, zduplikowanych `id`, błędnych wag spoza zakresu `1–3` i nieobsługiwanych limitów czasu, determinizm rankingu, czas marszu dla `4,5 km/h` (`75 m/min`) oraz zgodność wzoru punktacji z obliczeniami ręcznymi (`tests/test_weight_scoring.py`).
-- **Ręczne sprawdzenie interfejsu Streamlit:** Weryfikacja działania `app.py` potwierdziła poprawne generowanie kart rankingu TOP 3, wyświetlanie mapy z kołami o promieniu `500 m`, czyszczenie wyników przy zmianie parametrów, wyświetlanie zastrzeżenia o linii prostej oraz komunikat o braku dopasowań (np. dla WSIiZ przy limicie `15` minut). Funkcja eksportu rankingu do pliku nie istnieje (`U09: NOT RUN`).
-- **Pomiar niefunkcjonalny:** **NOT RUN** — w zespole nie uzgodniono jeszcze docelowego kryterium akceptacji czasu odpowiedzi dla całego przepływu; w repozytorium znajduje się skrypt `scripts/benchmark_recommendation.py` przeznaczony do pomiaru wydajności silnika.
-
----
-
-## 5. Ograniczenia obecnego rozwiązania i kierunki rozwoju
-
-### Zidentyfikowane ograniczenia
-1. **Odległość w linii prostej (Haversine):** System mierzy odległość w linii prostej od środka okręgu o promieniu `500 m` i szacuje czas marszu przy stałej prędkości `4,5 km/h` (`75 m/min`), bez uwzględniania rzeczywistej sieci chodników, przejść dla pieszych ani barier terenowych (np. Wisłok, tory kolejowe).
-2. **Nazwy obszarów a pole `district`:** Etykiety `name` w `config/residential-areas.json` zostały sprawdzone w OpenStreetMap przez odwrotne geokodowanie środków obszarów (`docs/area-name-audit.md`), natomiast `id`, `district` i współrzędne pozostały bez zmian. Etykiety mają charakter orientacyjny (nie wyznaczają granic osiedla ani koła `500 m`) i w części przypadków nie pokrywają się z nazwą w polu `district` (np. etykieta *Lubicz (Staromieście)* przy `district: Miłocin`).
-3. **Uproszczona agregacja usług i brak danych rynkowych:** Ocena każdego kryterium bazuje na odległości do **najbliższego** pojedynczego obiektu danej kategorii, bez uwzględniania zagęszczenia usług, rozkładów jazdy komunikacji miejskiej czy aktualnych ofert i cen najmu.
-4. **Statyczny zrzut danych OSM:** Dane pochodzą z pobrania z Overpass API (licencja ODbL), zawierają znane braki w polach opcjonalnych (`21` usług bez nazwy źródłowej, `387` usług bez pełnego adresu) i wymagają ręcznego uruchomienia `scripts/prepare_data.py` w celu aktualizacji.
-
-### Proponowane kierunki dalszego rozwoju
-- Integracja z silnikiem wyznaczania tras pieszych (np. OSRM / OpenRouteService) w celu liczenia rzeczywistego czasu przejścia chodnikami.
-- Rozstrzygnięcie w zespole ujednolicenia pola `district` względem etykiet z `docs/area-name-audit.md` oraz dodanie automatycznego testu zgodności treści `justification` z punktacją (`R5`).
-- Rozszerzenie modelu danych o średnie ceny najmu pokoi i kawalerek w poszczególnych osiedlach Rzeszowa oraz rozkład jazdy komunikacji miejskiej (ZTM Rzeszów).
+Szczegółowy opis zbiorów oraz procedur przetwarzania znajduje się w dokumentach:
+- [Opis danych](./data.md)
+- [Słownik danych](./data-dictionary.md)
+- [Przetwarzanie, kontrole i powtarzalność](./processing.md)
 
 ---
 
-## 6. Wnioski końcowe
-Zrealizowany system w pełni odpowiada na zdefiniowany problem decyzyjny studentów poszukujących mieszkania w Rzeszowie w zakresie analizy odległości w linii prostej i wielokryterialnej oceny otoczenia. Zastosowanie lekkiej architektury opartej na plikach JSON, bibliotece standardowej Pythona w silniku obliczeniowym oraz interfejsie Streamlit pozwoliło osiągnąć pełną powtarzalność wyników oraz przejrzystość prezentacji rekomendacji, przy jednoczesnym zachowaniu jawnie udokumentowanych uproszczeń i ograniczeń.
+## 4. Metoda i architektura
+Aplikacja opiera się na metodzie **Weighted Scoring**, oceniającej każdy obszar mieszkalny na podstawie odległości w linii prostej (wzór Haversine'a) od środka okręgu o promieniu `500 m` do wybranej lokalizacji uczelni oraz najbliższych obiektów kategorii `shop`, `bus_stop` i `park`, z uwzględnieniem wag `1–3` oraz limitu czasu marszu przy stałej prędkości `4,5 km/h` (`75 m/min`).
+
+Architektura dzieli system na warstwę danych i konfiguracji (`../data/`, `../config/`), warstwę logiki analitycznej i walidacji (`scripts/recommendation_engine.py`, `scripts/data_validation.py`, `scripts/prepare_data.py`, `scripts/check_data.py`, `scripts/audit_data.py`, `scripts/verify_repeatability.py`) oraz interfejs użytkownika Streamlit (`../app.py`), komunikujące się poprzez publiczną funkcję `generate_recommendations(request, engine=None)`. Pełny opis znajduje się w [Architekturze systemu](./architecture.md).
+
+---
+
+## 5. Wyniki i ocena
+- **Jakość i powtarzalność danych:** Skrypty `scripts/check_data.py` (w tym `--test-invalid`: `3/3` testy) oraz `scripts/verify_repeatability.py` potwierdziły zgodność schematu i identyczność wyników względem zestawu referencyjnego w `../data/test/repeatability-reference/`.
+- **Testy automatyczne:** W repozytorium znajduje się zestaw **51 testów automatycznych** (`tests/test_data_validation.py`, `tests/test_request_validation.py`, `tests/test_recommendation_engine.py`, `tests/test_weight_scoring.py`), które przeszły w komplecie (`51/51 PASS` — patrz [Plan i wyniki testów](./tests.md)).
+- **Eksperymenty porównawcze (Lab 4):** Porównanie metod (w tym Weighted Scoring oraz KNN) wykazało zbieżność najlepszych wskazań dla analizowanych profili preferencji przy krótszym czasie wykonania Weighted Scoring w przeprowadzonym benchmarku.
+- **Stan weryfikacji UI i wydajności:** Ręczne sprawdzenie interfejsu Streamlit potwierdziło działanie rankingu TOP 3, mapy z okręgami `500 m` oraz obsłużenie przypadku braku dopasowań (`WSIiZ, Sucharskiego 2`, limit `15 min` → `NO_MATCHES`). Funkcja eksportu rankingu do pliku nie istnieje (`U09: NOT RUN`), a pomiar niefunkcjonalny całego przepływu ma status `NOT RUN` (dostępny jest skrypt `scripts/benchmark_recommendation.py`).
+
+---
+
+## 6. Użycie i odtworzenie
+- **Wersja prezentowana:** Aktualny stan gałęzi `main` po scaleniu gałęzi roboczych (wskazywany przez tag wersji utworzony po połączeniu ostatnich zmian — patrz [Scenariusz prezentacji](./presentation.md)).
+- **Dokumentacja uruchomieniowa:** Instrukcja uruchomienia środowiska, skryptów i aplikacji Streamlit znajduje się w [README](../README.md) oraz w [Dokumentacji wdrożenia](./implementation.md) (a także w [Przewodniku użytkownika](./user-guide.md), gdy plik zostanie dodany do `docs/`).
+- **Uruchomienie testów:**
+  ```bash
+  python -m unittest discover -s tests -v
+  ```
+
+---
+
+## 7. Ograniczenia i kierunki rozwoju
+- **Odległość w linii prostej i stała prędkość marszu:** System liczy dystans w linii prostej (Haversine) od środka koła `500 m` i przyjmuje `4,5 km/h` (`75 m/min`), pomijając rzeczywistą sieć chodników, przejścia dla pieszych oraz bariery terenowe (np. rzekę Wisłok czy linie kolejowe).
+- **Uproszczona ocena usług i brak danych rynkowych:** Liczony jest najbliższy obiekt danej kategorii bez zagęszczenia usług, rozkładów jazdy komunikacji miejskiej ani aktualnych ofert i cen najmu.
+- **Orientacyjne etykiety obszarów i statyczne dane OSM:** Etykiety obszarów względem pola `district` mają charakter orientacyjny (`./area-name-audit.md`), a dane z Overpass API wymagają ręcznego odświeżenia skryptem `scripts/prepare_data.py`.
+- **Kierunki rozwoju:** Integracja z silnikiem wyznaczania tras pieszych (np. OSRM), uzupełnienie danych o ceny najmu i rozkłady jazdy, dodanie automatycznego testu zgodności treści `justification` z punktacją (`R5`), wykonanie uzgodnionego pomiaru niefunkcjonalnego oraz automatyzacja aktualizacji danych.
+
+---
+
+## 8. Wkład zespołu i źródła
+
+### Podział prac i rezultaty członków zespołu
+
+| Osoba | Główne rezultaty i pliki / PR |
+|---|---|
+| **Paulina Michalska** | Dokumentacja projektu (`./architecture.md`, `./implementation.md`, `./report.md`, `./presentation.md`, aktualizacje `./problem.md` i `../README.md`) oraz skrypty kontroli i audytu danych w historii repozytorium (`scripts/check_data.py`, `scripts/audit_data.py`). |
+| **Serhii Popovych** | Silnik rekomendacji (`scripts/recommendation_engine.py`), testy silnika (`tests/test_recommendation_engine.py`), benchmark (`scripts/benchmark_recommendation.py`) oraz audyt nazw obszarów (`./area-name-audit.md`). |
+| **Dana Stadnyk** | Interfejs użytkownika w Streamlit (`../app.py`, `../.streamlit/config.toml`) z mapą i widokiem rankingu TOP 3. |
+| **Valentyna Boksha** | Pozyskanie danych z Overpass API (Lab 1–3, `data/processed/services.json`, `data/processed/universities.json`, `./problem.md`, `./data.md`), walidacja i testy (`scripts/data_validation.py`, `tests/test_data_validation.py`, `tests/test_request_validation.py`, `tests/test_weight_scoring.py`, `./tests.md`), przegląd architektury (`Issue #8`), przegląd kodu oraz wkład w ramach PR #15, #17 i #19. |
+
+Potwierdzeniem działania całości na prezentowanej wersji jest uruchomienie `python -m unittest discover -s tests -v` — `51/51 PASS` na gałęzi `main` (w tym `44` testy z zakresu walidacji, żądań i punktacji wag).
+
+### Źródła danych i licencje
+- **Dane mapowe i przestrzenne:** [OpenStreetMap](https://www.openstreetmap.org/) (pobierane z Overpass API) — udostępniane na licencji **Open Database License (ODbL)** (`© OpenStreetMap contributors`).
+
+### Wykorzystanie narzędzi AI
+Podczas prac nad dokumentacją, kodem i testami wykorzystywano asystentów AI do porządkowania treści, sprawdzania spójności opisów oraz wsparcia przy pisaniu i przeglądzie dokumentacji i kodu; wszystkie zmiany zostały zweryfikowane przez zespół na podstawie kodu, danych oraz wyników testów.
