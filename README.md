@@ -418,6 +418,25 @@ KNN stanowi alternatywną metodę opartą na podobieństwie okolic do zadanego p
 
 **Do dalszego rozwoju systemu wybrano Weighted Scoring jako metodę podstawową.**
 
+## Architektura systemu — Lab 5
+
+**Odpowiedzialna: Paulina Michalska**
+
+Pełna dokumentacja architektoniczna znajduje się w pliku [`docs/architecture.md`](docs/architecture.md).
+
+### Założenia architektoniczne
+
+- Lekka aplikacja analityczna w języku **Python** połączona z interfejsem **Streamlit**, przetwarzająca dane in-memory z plików **JSON** i **CSV** (bez osobnej relacyjnej bazy danych ani serwera REST API).
+- Skala przetwarzanego zbioru (528 obiektów: 28 lokalizacji uczelni i 500 usług oraz 25 obszarów mieszkalnych) pozwala na szybkie obliczenia w pamięci operacyjnej.
+- Podział na warstwy:
+  - warstwa prezentacji (interfejs użytkownika Streamlit w `app.py`),
+  - warstwa logiki analitycznej (`scripts/recommendation_engine.py` oraz skrypty przetwarzania i benchmarków),
+  - warstwa danych i konfiguracji (`data/`, `config/`, `results/`).
+
+### Główny przypadek użycia (`UC-01`)
+
+- Generowanie rankingu maksymalnie **3 najlepszych okolic** mieszkalnych dla studenta na podstawie wybranej uczelni, wag preferencji oraz maksymalnego czasu dojścia.
+- Obsługa przypadków brzegowych i błędów (m.in. brak obszarów spełniających limit czasu oraz niepoprawne dane wejściowe).
 
 ---
 

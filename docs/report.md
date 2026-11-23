@@ -21,7 +21,7 @@ Prace podzielono na spójne etapy inżynierskie realizowane w repozytorium GitHu
    * **Paulina Michalska:** Opracowanie dokumentacji architektury (`docs/architecture.md`), kontraktu interfejsu, modelu logicznego/fizycznego danych, dokumentacji wdrożeniowej (`docs/implementation.md`) oraz raportu końcowego (`docs/report.md`).
    * **Serhii:** Implementacja silnika rekomendacji (`scripts/recommendation_engine.py`), testów jednostkowych (`tests/test_recommendation_engine.py`) oraz skryptu pomiaru wydajności (`scripts/benchmark_recommendation.py`).
    * **Dana:** Budowa interaktywnego interfejsu użytkownika w Streamlit (`app.py`), wizualizacja mapy Rzeszowa oraz eksport wyników.
-   * **Valentyna:** Walidacja danych wejściowych, testy integracyjne i przypadków brzegowych oraz dokumentacja testów (`docs/tests.md`).
+   * **Valentyna:** Walidacja danych wejściowych, testy integracyjne i przypadków brzegowych oraz dokumentacja testów.
 
 ---
 
@@ -43,7 +43,7 @@ Prace podzielono na spójne etapy inżynierskie realizowane w repozytorium GitHu
 * **Jakość i powtarzalność danych:** Skrypty `check_data.py` oraz `verify_repeatability.py` potwierdziły `100%` zgodności schematu oraz identyczność wygenerowanych plików z zestawem referencyjnym w `data/test/repeatability-reference/`.
 * **Poprawność logiki rekomendacji:** Testy w `tests/test_recommendation_engine.py` zweryfikowały poprawność obliczania odległości Haversine, odrzucanie niepoprawnych danych wejściowych (`ValueError`), działanie filtra `max_walk_minutes` (w tym poprawne zachowanie przy braku dopasowań), deterministyczne rozstrzyganie remisów po `area_id` oraz generowanie uzasadnień.
 * **Wydajność obliczeń:** Pomiary wykonane skryptem `scripts/benchmark_recommendation.py` wykazały, że pełna inicjalizacja silnika oraz wygenerowanie rankingu TOP 3 dla 25 obszarów i 500 usług realizowane są w pamięci operacyjnej w czasie pojedynczych milisekund, zapewniając płynną pracę interfejsu Streamlit.
-* **Testy interfejsu i integracji:** `[DO UZUPEŁNIENIA PO MERGU UI: wpisać wynik testów end-to-end UI Dany oraz podsumowanie z docs/tests.md Valentyny]`.
+* **Integracja interfejsu Streamlit i logiki rekomendacji:** Moduł interfejsu graficznego (`app.py`, `.streamlit/config.toml`) został połączony z silnikiem rekomendacji (`scripts/recommendation_engine.py`), udostępniając wybór lokalizacji uczelni, wag kryteriów, limitu czasu dojścia, prezentację rankingu TOP 3 z uzasadnieniami oraz wizualizację obszarów na mapie.
 
 ---
 
