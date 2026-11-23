@@ -1,7 +1,7 @@
-"""Silnik rekomendacji okolic mieszkalnych.
+"""Silnik rekomendacji okolic mieszkalnych i publiczny kontrakt dla aplikacji.
 
 Odległości są mierzone w linii prostej od środka obszaru. Czas dojścia jest
-wartością orientacyjną: odległość dzielimy przez 80 metrów na minutę.
+wartością orientacyjną przy prędkości 4,5 km/h (75 metrów na minutę).
 """
 
 from __future__ import annotations
@@ -14,7 +14,13 @@ from pathlib import Path
 CATEGORIES = ("shop", "bus_stop", "park")
 DEFAULT_WEIGHTS = {"university": 3.0, "shop": 2.0, "bus_stop": 2.0, "park": 2.0}
 DEFAULT_LIMITS_M = {"university": 3000.0, "shop": 1000.0, "bus_stop": 600.0, "park": 1500.0}
-WALKING_SPEED_M_PER_MINUTE = 80.0
+WALKING_SPEED_M_PER_MINUTE = 75.0
+DEFAULT_AREA_RADIUS_M = 500
+DISCLAIMER = (
+    "Odległości są liczone w linii prostej od środka obszaru, a czas dojścia "
+    "jest szacowany przy prędkości 4,5 km/h. Wynik nie uwzględnia rzeczywistych "
+    "tras pieszych, przejść ani przeszkód terenowych."
+)
 
 
 def load_json(path: str | Path) -> dict:
@@ -51,10 +57,14 @@ def score(distance: float, limit: float) -> float:
 class RecommendationEngine:
     """Waliduje dane i tworzy ranking obszarów dla wybranej lokalizacji."""
 
-    def __init__(self, services: list[dict], locations: list[dict], areas: list[dict]):
+    def __init__(self, services: list[dict], locations: list[dict], areas: list[dict],
+                 area_radius_m: int = DEFAULT_AREA_RADIUS_M):
         self.services = self._validate_records(services, "services")
         self.locations = self._validate_records(locations, "locations")
         self.areas = self._validate_records(areas, "areas")
+        if type(area_radius_m) is not int or area_radius_m <= 0:
+            raise ValueError("Promień obszaru musi być dodatnią liczbą całkowitą.")
+        self.area_radius_m = area_radius_m
         if not self.services or not self.locations or not self.areas:
             raise ValueError("Zbiory usług, lokalizacji i obszarów nie mogą być puste.")
         self._services_by_category = {
@@ -75,6 +85,7 @@ class RecommendationEngine:
             services_document.get("services", []),
             locations_document.get("locations", []),
             areas_document.get("areas", []),
+            area_radius_m=areas_document.get("radius_m", DEFAULT_AREA_RADIUS_M),
         )
 
     @staticmethod
@@ -159,12 +170,15 @@ class RecommendationEngine:
                 "area_id": area["id"],
                 "area_name": area["name"],
                 "district": area["district"],
+                "center_lat": float(area["latitude"]),
+                "center_lon": float(area["longitude"]),
+                "radius_m": self.area_radius_m,
                 "score": round(total_score, 4),
                 "walk_distance_m": round(distances["university"], 2),
-                "walk_time_minutes": round(walk_minutes, 2),
+                "walk_time_to_univ_min": round(walk_minutes, 2),
                 "distances_m": {key: round(value, 2) for key, value in distances.items()},
                 "scores": {key: round(value, 4) for key, value in scores.items()},
-                "reason": "; ".join(reasons),
+                "justification": "; ".join(reasons),
             })
         results.sort(key=lambda row: (-row["score"], row["area_id"]))
         for rank_number, result in enumerate(results[:top_n], 1):
@@ -179,3 +193,96 @@ class RecommendationEngine:
             "bus_stop": "przystanek",
             "park": "park",
         }[category]
+
+
+def generate_recommendations(request: object,
+                             engine: RecommendationEngine | None = None) -> dict:
+    """Realizuje publiczny kontrakt Request/Response wykorzystywany przez UI.
+
+    Oczekiwane pola żądania: ``location_id``, ``max_walk_time_minutes`` i
+    ``weights``. Błędy wejścia i danych są zwracane jako statusy, nie wyjątki.
+    ``engine`` można przekazać z aplikacji, aby użyć już wczytanych danych.
+    """
+    def response(status: str, message: str, recommendations: list[dict] | None = None) -> dict:
+        return {
+            "status": status,
+            "message": message,
+            "disclaimer": DISCLAIMER,
+            "recommendations": recommendations or [],
+        }
+
+    if not isinstance(request, dict):
+        return response("VALIDATION_ERROR", "Żądanie musi być słownikiem parametrów.")
+
+    required = {"location_id", "max_walk_time_minutes", "weights"}
+    missing = required - request.keys()
+    if missing:
+        return response(
+            "VALIDATION_ERROR",
+            "Brak wymaganych pól: " + ", ".join(sorted(missing)) + ".",
+        )
+
+    location_id = request["location_id"]
+    if not isinstance(location_id, str) or not location_id.strip():
+        return response("VALIDATION_ERROR", "location_id musi być niepustym tekstem.")
+
+    max_walk_minutes = request["max_walk_time_minutes"]
+    if max_walk_minutes is not None and (
+            type(max_walk_minutes) is not int or max_walk_minutes not in (15, 30, 45)):
+        return response(
+            "VALIDATION_ERROR",
+            "Limit czasu musi wynosić 15, 30 lub 45 minut albo być równy None.",
+        )
+
+    weights = request["weights"]
+    if not isinstance(weights, dict) or set(weights) != set(DEFAULT_WEIGHTS):
+        return response(
+            "VALIDATION_ERROR",
+            "Wagi muszą zawierać kryteria university, shop, bus_stop i park.",
+        )
+    if any(type(value) is not int or value not in (1, 2, 3) for value in weights.values()):
+        return response("VALIDATION_ERROR", "Każda waga musi być liczbą całkowitą od 1 do 3.")
+
+    if engine is None:
+        root = Path(__file__).resolve().parents[1]
+        try:
+            engine = RecommendationEngine.from_files(
+                root / "data/processed/services.json",
+                root / "data/processed/universities.json",
+                root / "config/residential-areas.json",
+            )
+        except (OSError, ValueError, KeyError, TypeError, AttributeError) as error:
+            return response(
+                "DATA_ERROR",
+                f"Nie można wczytać danych rekomendacji: {error}. "
+                "Sprawdź pliki danych i uruchom scripts/prepare_data.py.",
+            )
+
+    if not isinstance(engine, RecommendationEngine):
+        return response("DATA_ERROR", "Nieprawidłowy silnik rekomendacji.")
+
+    if not any(location.get("id") == location_id for location in engine.locations):
+        return response("VALIDATION_ERROR", f"Nie znaleziono lokalizacji uczelni: {location_id}.")
+
+    try:
+        recommendations = engine.recommend(
+            location_id=location_id,
+            weights=weights,
+            max_walk_minutes=max_walk_minutes,
+            top_n=3,
+        )
+    except (ValueError, KeyError, TypeError) as error:
+        return response("DATA_ERROR", f"Nie udało się obliczyć rekomendacji: {error}.")
+
+    if not recommendations:
+        return response(
+            "NO_MATCHES",
+            "Nie znaleziono okolic spełniających limit czasu dojścia. "
+            "Zwiększ limit lub wybierz brak limitu.",
+        )
+
+    return response(
+        "SUCCESS",
+        f"Znaleziono {len(recommendations)} dopasowanych okolic.",
+        recommendations,
+    )
