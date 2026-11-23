@@ -445,8 +445,6 @@ KNN stanowi alternatywną metodę opartą na podobieństwie okolic do zadanego p
 
 ## Architektura systemu — Lab 5
 
-**Odpowiedzialna: Paulina Michalska**
-
 Pełna dokumentacja architektoniczna znajduje się w pliku [`docs/architecture.md`](docs/architecture.md).
 
 ### Założenia architektoniczne
@@ -558,3 +556,13 @@ python scripts/benchmark_recommendation.py
 - `tests/test_recommendation_engine.py` — testy automatyczne.
 - `docs/implementation.md` — dokumentacja implementacji MVP.
 - `docs/area-name-audit.md` — etykiety 25 obszarów i linki do sprawdzonych współrzędnych na mapie OSM.
+
+---
+
+## Raport końcowy i prezentacja — Lab 8
+
+- Raport końcowy projektu: [`docs/report.md`](docs/report.md)
+- Scenariusz prezentacji i próby: [`docs/presentation.md`](docs/presentation.md)
+- Plan i wyniki testów (gałąź `valentyna-data-validation`, 51/51 testów): [`docs/tests.md`](docs/tests.md)
+
+Uwaga: wyniki testów opisane w `docs/tests.md` (**51/51 PASS**) dotyczą gałęzi `valentyna-data-validation` (opartej na zmianach z `serhii-recommendation-engine`), a nie jeszcze gałęzi `main` przed scaleniem wszystkich gałęzi roboczych. Pomiar niefunkcjonalny ma status `NOT RUN`, a funkcja eksportu rankingu do pliku nie istnieje.
