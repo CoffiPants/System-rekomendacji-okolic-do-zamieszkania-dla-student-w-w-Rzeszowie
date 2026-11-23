@@ -45,7 +45,7 @@ Przypadek użycia uznaje się za poprawnie zrealizowany, gdy spełnione są wszy
 1. Dla poprawnych danych wejściowych system zwraca od 1 do 3 obszarów posortowanych malejąco według `score`.
 2. Żaden ze zwróconych obszarów nie ma `walk_time_to_univ_min` większego niż zadeklarowany `max_walk_time_minutes`.
 3. Przy dwóch obszarach z identycznym wynikiem punktowym wyżej w rankingu znajduje się obszar o leksykograficznie mniejszym `area_id`.
-4. Gdy limit czasu wynosi np. 1 min (brak obszarów w zasięgu), system nie przerywa działania błędem, lecz zwraca obiekt ze statusem `NO_MATCHES` oraz czytelny komunikat w UI.
+4. Gdy limit czasu wynosi 15 min i żaden obszar nie mieści się w limicie, system zwraca obiekt ze statusem `NO_MATCHES` oraz czytelny komunikat w UI. Limit 15 min jest akceptowaną wartością wejściową; limit 1 min skutkuje `VALIDATION_ERROR`.
 5. Każdy wynik zawiera uzasadnienie zgodne z punktacją oraz zastrzeżenie o szacowaniu odległości w linii prostej od środka obszaru.
 
 ---
@@ -119,12 +119,13 @@ Interfejs przekazuje wcześniej wczytany obiekt `RecommendationEngine` przez par
 ### 4.2. Struktura wyjściowa (Response)
 * `status` (`str`) — kod wyniku: `"SUCCESS"`, `"NO_MATCHES"`, `"VALIDATION_ERROR"` lub `"DATA_ERROR"`.
 * `message` (`str`) — komunikat tekstowy w języku polskim dla użytkownika.
-* `disclaimer` (`str`) — stałe zastrzeżenie o liczeniu odległości w linii prostej od środka obszaru o promieniu 500 m.
+* `disclaimer` (`str`) — stałe zastrzeżenie, że odległości są liczone w linii prostej od środka obszaru, a czas dojścia jest szacowany przy prędkości 4,5 km/h bez uwzględniania rzeczywistych tras pieszych, przejść i przeszkód terenowych. Promień obszaru jest zwracany osobno w polu `radius_m` każdego rekordu rekomendacji.
 * `recommendations` (`list[dict]`) — lista od `0` do `3` obszarów posortowana malejąco według `score`, gdzie każdy element zawiera:
   * `rank` (`int`: `1..3`), `area_id` (`str`), `area_name` (`str`), `district` (`str`),
   * `center_lat` (`float`, stopnie WGS84), `center_lon` (`float`, stopnie WGS84), `radius_m` (`int`, stała `500` m),
-  * `score` (`float`, punkty `0.00–100.00`), `walk_time_to_univ_min` (`float`, minuty `>= 0.0`),
+  * `score` (`float`, punkty `0.00–100.00`), `walk_distance_m` (`float`, metry `>= 0.0`), `walk_time_to_univ_min` (`float`, minuty `>= 0.0`),
   * `distances_m` (`dict[str, float]`, metry `>= 0.0` dla kluczy `university`, `shop`, `bus_stop`, `park`),
+  * `scores` (`dict[str, float]`, oceny cząstkowe `0.00–100.00` dla kluczy `university`, `shop`, `bus_stop`, `park`),
   * `justification` (`str`, wygenerowane uzasadnienie zgodnie z wymaganiem R5).
 
 ### 4.3. Kody i obsługa błędów
