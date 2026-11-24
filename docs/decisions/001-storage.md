@@ -32,7 +32,7 @@ Należy podjąć decyzję dotyczącą sposobu przechowywania danych wejściowych
 * **Zalety:**
   * **Natywna zgodność z danymi źródłowymi:** Dane pozyskane z OpenStreetMap (Overpass API) docierają w formacie JSON.
   * **Bezpośrednia integracja z Pythonem:** Biblioteka standardowa (`json`, `csv`) umożliwia szybki odczyt i zapis bez zewnętrznych zależności.
-  * **Kompatybilność ze Streamlit:** Dane w formacie JSON/CSV można łatwo buforować w pamięci aplikacji webowej za pomocą dekoratora `@st.cache_data`, co eliminuje opóźnienia przy interakcji użytkownika z formularzem i mapą.
+  * **Kompatybilność ze Streamlit:** Dane w formacie JSON/CSV można łatwo buforować w pamięci aplikacji webowej za pomocą dekoratora `@st.cache_resource`, co eliminuje opóźnienia przy interakcji użytkownika z formularzem i mapą.
   * **Pełna kontrola wersji w Git:** Pliki tekstowe JSON/CSV pozwalają na precyzyjne śledzenie zmian (diffs), audytowanie jakości oraz weryfikację powtarzalności wyników.
   * **Wystarczająca skala:** Zbiór danych obejmuje 528 obiektów, co sprawia, że ładowanie całej struktury do pamięci RAM (in-memory processing) trwa ułamek sekundy.
 

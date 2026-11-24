@@ -35,14 +35,17 @@ Skrypt nie zmienia plików raw. Nie pobiera aktualizacji API i nie oblicza jeszc
 
 ## Struktura projektu
 
-- `config/` — konfiguracja wyboru lokalizacji uczelni.
+- `app.py` — interfejs użytkownika aplikacji w Streamlit (formularz, mapa, ranking TOP 3 i eksport CSV).
+- `config/` — konfiguracja wyboru lokalizacji uczelni oraz definicje 25 obszarów mieszkalnych.
 - `data/raw/` — oryginalne dane pobrane z OpenStreetMap.
 - `data/processed/` — dane po przetworzeniu.
-- `data/test/` — raporty kontroli jakości i audytu danych.
+- `data/test/` — raporty kontroli jakości, audytu danych oraz zestaw referencyjny powtarzalności.
 - `docs/` — dokumentacja projektu.
+- `results/` — wyniki eksperymentów i pomiarów (np. `results/lab4/`).
 - `scripts/prepare_data.py` — skrypt przygotowania danych.
 - `scripts/check_data.py` — skrypt automatycznej kontroli jakości danych.
 - `scripts/audit_data.py` — skrypt szczegółowego audytu kompletności i spójności danych.
+- `tests/` — testy jednostkowe i integracyjne (`unittest`).
 
 ---
 
@@ -252,8 +255,8 @@ Dane przeszły zaimplementowane kontrole automatyczne. Dodatkowa weryfikacja mer
 ## Wymagania techniczne
 
 - Python 3.10 lub nowszy.
-- Brak dodatkowych bibliotek.
-- Brak konieczności połączenia z internetem podczas lokalnego przetwarzania danych.
+- Zależności wymienione w `requirements.txt` (m.in. `streamlit` i `folium` dla interfejsu webowego i mapy; same skrypty przetwarzania i testy korzystają z biblioteki standardowej Pythona).
+- Brak konieczności połączenia z internetem podczas lokalnego przetwarzania danych i uruchamiania aplikacji.
 
 ### Kolejność uruchamiania skryptów
 
@@ -324,7 +327,7 @@ orientacyjny i przyjmuje prędkość 4,5 km/h (75 metrów na minutę). Aplikacja
 wywołuje publiczne `generate_recommendations(request, engine=None)`, które
 zwraca status, komunikat, zastrzeżenie oraz ranking TOP 3.
 
-Testy silnika:
+Wszystkie testy automatyczne:
 
 ```shell
 python -m unittest discover -s tests -v

@@ -48,7 +48,7 @@ Dla parków środek geometrii nie oznacza wejścia.
 Brak obiektu w danych nie dowodzi braku usługi.
 
 ## Wymagania
-„Potwierdzone” oznacza ustalenie projektu. Kolumna „Osoba” wskazuje osobę opracowującą wymaganie. Aktualny stan testów i weryfikacji opisuje `docs/tests.md` (na gałęzi `valentyna-data-validation`).
+„Potwierdzone” oznacza ustalenie projektu. Kolumna „Osoba” wskazuje osobę opracowującą wymaganie. Aktualny stan testów i weryfikacji opisuje `docs/tests.md`.
 
 | ID | Wymaganie | Kryterium sprawdzenia | Źródło lub uzasadnienie | Status | Osoba |
 |---|---|---|---|---|---|
@@ -65,7 +65,7 @@ Aktualny podział ról i odpowiedzialności w zespole:
 
 | Osoba | Zakres odpowiedzialności |
 |---|---|
-| Dana Stadnyk | Interfejs użytkownika w Streamlit (`app.py`), wizualizacja wyników i mapy. |
-| Valentyna Boksha | Dane oraz testy (`docs/tests.md`, testy walidacji i punktacji, kontrola jakości danych). |
-| Serhii Popovych | Silnik rekomendacji (`scripts/recommendation_engine.py`), benchmarki i integracja modułów. |
-| Paulina Michalska | Architektura systemu (`docs/architecture.md`) oraz dokumentacja (`docs/implementation.md`, `docs/report.md`, `docs/presentation.md`, `README.md`). |
+| Dana Stadnyk | Interfejs użytkownika w Streamlit (`app.py`), wizualizacja wyników i mapy, eksport rankingu do CSV, przewodnik użytkownika (`docs/user-guide.md`) oraz scenariusz prezentacji (`docs/presentation.md`). |
+| Valentyna Boksha | Pozyskanie danych, walidacja danych wejściowych (`scripts/data_validation.py`), testy (`docs/tests.md`, testy walidacji, żądań i punktacji) oraz przegląd architektury (`Issue #8`). |
+| Serhii Popovych | Silnik rekomendacji (`scripts/recommendation_engine.py`), przygotowanie danych i eksperymenty/benchmarki oraz integracja modułów. |
+| Paulina Michalska | Architektura systemu (`docs/architecture.md`), weryfikacja powtarzalności oraz dokumentacja (`docs/implementation.md`, `docs/report.md`, `README.md`). |
