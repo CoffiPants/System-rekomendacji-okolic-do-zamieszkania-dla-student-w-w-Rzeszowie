@@ -7,22 +7,24 @@ System został zaprojektowany jako lekka aplikacja analityczna w języku **Pytho
 
 ### Trzy najważniejsze stwierdzenia o projekcie
 1. **System realizuje deterministyczne rekomendacje TOP 3 dla 25 obszarów w Rzeszowie:**  
-   - *Dowód:* Zaimplementowana funkcja `generate_recommendations()` w `scripts/recommendation_engine.py`, interfejs `app.py` oraz przejście `51/51` testów automatycznych (`./tests.md`), w tym testów punktacji (`tests/test_weight_scoring.py`) i walidacji żądań (`tests/test_request_validation.py`).  
+   - *Dowód:* Funkcja `generate_recommendations()` w `scripts/recommendation_engine.py`, interfejs `../app.py` (wraz z eksportem rankingu TOP 3 do CSV) oraz wynik `51/51 PASS` w [Planie i wynikach testów](./tests.md), w tym testy punktacji (`tests/test_weight_scoring.py`) i walidacji żądań (`tests/test_request_validation.py`).  
    - *Granica wnioskowania:* Wyniki dotyczą wyłącznie 25 zdefiniowanych obszarów (promień `500 m`), odległości w linii prostej przy prędkości `4,5 km/h` (`75 m/min`) oraz statycznego zbioru danych bez aktualnych ofert czy cen najmu.
 2. **Walidacja danych i żądań chroni aplikację przed błędnymi wejściami i brakami w plikach:**  
-   - *Dowód:* Moduł `scripts/data_validation.py`, skrypty `scripts/check_data.py` i `scripts/audit_data.py` oraz testy w `tests/test_data_validation.py` i `tests/test_request_validation.py` (`51/51 PASS`).  
+   - *Dowód:* Moduł `scripts/data_validation.py`, skrypty kontroli/audytu i powtarzalności (`scripts/check_data.py`, `scripts/audit_data.py`, `scripts/verify_repeatability.py`) oraz testy w `tests/test_data_validation.py` i `tests/test_request_validation.py` (`51/51 PASS`).  
    - *Granica wnioskowania:* Kontrole weryfikują schemat, współrzędne WGS84, unikalność `id`, wagi (`1–3`) i limity czasu (`15`, `30`, `45` lub brak limitu), ale nie gwarantują pełności opcjonalnych pól źródłowych OSM (np. braków adresów czy nazw źródłowych).
 3. **Część obszarów weryfikacji jakości wymaga dalszych prac w zespole:**  
-   - *Dowód:* Zapisy w [Planie i wynikach testów](./tests.md) oraz w [Audycie nazw obszarów](./area-name-audit.md) (pomiar niefunkcjonalny ma status `NOT RUN`, zgodność treści `justification` z punktacją w `R5` ma status `NOT RUN`, funkcja eksportu rankingu nie istnieje, a etykiety nazw obszarów mają charakter orientacyjny).  
+   - *Dowód:* Zapisy w [Planie i wynikach testów](./tests.md) oraz w [Audycie nazw obszarów](./area-name-audit.md) (pomiar niefunkcjonalny ma status `NOT RUN`, zgodność treści `justification` z punktacją w `R5` ma status `NOT RUN`, a etykiety nazw obszarów mają charakter orientacyjny).  
    - *Granica wnioskowania:* Brak pomiaru niefunkcjonalnego dla całego przepływu oznacza, że nie oceniono jeszcze czasu odpowiedzi pod obciążeniem ani na innych środowiskach niż testowane lokalnie.
 
 ---
 
 ## 2. Zakres wykonany
 Prace zrealizowano w repozytorium GitHub z użyciem gałęzi tematycznych i przeglądów kodu (*Pull Requests*) w następujących etapach:
-- **Lab 1–3 (Problem i dane):** Pozyskanie danych przestrzennych z Overpass API (OpenStreetMap), budowa potoku przetwarzania (`scripts/prepare_data.py`), skryptów kontroli i audytu (`scripts/check_data.py`, `scripts/audit_data.py`) oraz sprawdzenia powtarzalności (`scripts/verify_repeatability.py`).
-- **Lab 4 (Eksperymenty):** Porównanie metod oceny obszarów — m.in. Weighted Scoring względem podejść sąsiedztwa i KNN (`scripts/compare_methods.py`, `scripts/knn_recommender.py`, `scripts/compare_knn_weighted.py`, `scripts/benchmark_knn_weighted.py`, `../results/lab4/`).
-- **Lab 5–8 (Architektura, MVP, testy i finalizacja):** Projekt architektury (`./architecture.md`), implementacja silnika rekomendacji (`scripts/recommendation_engine.py`), walidacji i testów automatycznych (`scripts/data_validation.py`, `tests/`), interfejsu Streamlit (`app.py`, `.streamlit/config.toml`), audytu nazw obszarów (`./area-name-audit.md`), scenariusza prezentacji (`./presentation.md`) oraz niniejszego raportu końcowego.
+- **Lab 1–3 (Problem i dane):** Pozyskanie danych przestrzennych z Overpass API (OpenStreetMap), przetwarzanie danych (`scripts/prepare_data.py`), skrypt kontroli i audytu (`scripts/check_data.py`, `scripts/audit_data.py`) oraz weryfikacja powtarzalności (`scripts/verify_repeatability.py`).
+- **Lab 4 (Eksperymenty):** Porównanie metod oceny obszarów — m.in. Weighted Scoring względem podejść sąsiedztwa i KNN (`scripts/compare_methods.py`, `scripts/knn_recommender.py`, `scripts/compare_knn_weighted.py`, `scripts/benchmark_knn_weighted.py`, `../results/lab4/`, opisane w [Eksperymentach](./experiment.md)).
+- **Lab 5–8 (Architektura, MVP, testy i finalizacja):** Projekt architektury (`./architecture.md`), implementacja silnika rekomendacji (`scripts/recommendation_engine.py`), walidacji i testów automatycznych (`scripts/data_validation.py`, `tests/`), interfejsu Streamlit z eksportem CSV (`../app.py`, `../.streamlit/config.toml`), przewodnika użytkownika (`./user-guide.md`), audytu nazw obszarów (`./area-name-audit.md`), scenariusza prezentacji (`./presentation.md`) oraz niniejszego raportu końcowego.
+
+Szczegóły wdrożenia i konfiguracji środowiska opisuje [Dokumentacja wdrożenia](./implementation.md), a bieżące zadania i uwagi są śledzone w otwartych *Issues* na GitHubie (m.in. w Issue #10).
 
 Weryfikacja wymagań funkcjonalnych (**R1–R6**) na podstawie wyników z [Planu i wyników testów](./tests.md):
 
@@ -33,7 +35,7 @@ Weryfikacja wymagań funkcjonalnych (**R1–R6**) na podstawie wyników z [Planu
 | **R3** | Czas dojścia pieszo i filtr maksymalnego czasu | Obliczanie odległości wzorem Haversine, przeliczanie na czas marszu przy prędkości `4,5 km/h` (`75 m/min`), filtrowanie wg `max_walk_time_minutes` (`15`, `30`, `45` min lub brak limitu) oraz zwracanie statusu `NO_MATCHES` bez błędu aplikacji. | Spełnione |
 | **R4** | Ranking do 3 najlepszych okolic | Deterministyczne sortowanie kluczem `(-score, area_id)` i zwracanie maksymalnie `3` obszarów z punktacją `0–100` oraz prezentacja kół `500 m` na mapie. | Spełnione |
 | **R5** | Uzasadnienie ocen i ograniczeń | Generowanie pola `justification` oraz stałego zastrzeżenia `disclaimer` o liczeniu odległości w linii prostej od środka koła `500 m` przy `4,5 km/h` (zgodność treści uzasadnienia z punktacją ma w `./tests.md` status `NOT RUN`). | Częściowo |
-| **R6** | Zakres przestrzenny ograniczony do Rzeszowa | Walidacja współrzędnych WGS84 i ograniczenie zbiorów uczelni, usług oraz 25 obszarów wyłącznie do Rzeszowa, bez danych o ofertach czy cenach najmu. | Spełnione |
+| **R6** | Zakres przestrzenny ograniczony do Rzeszowa | Zbiory danych przygotowano dla Rzeszowa; ranking nie wymaga danych o ofertach ani cenach najmu. | Spełnione |
 
 ---
 
@@ -51,28 +53,29 @@ Szczegółowy opis zbiorów oraz procedur przetwarzania znajduje się w dokument
 ---
 
 ## 4. Metoda i architektura
-Aplikacja opiera się na metodzie **Weighted Scoring**, oceniającej każdy obszar mieszkalny na podstawie odległości w linii prostej (wzór Haversine'a) od środka okręgu o promieniu `500 m` do wybranej lokalizacji uczelni oraz najbliższych obiektów kategorii `shop`, `bus_stop` i `park`, z uwzględnieniem wag `1–3` oraz limitu czasu marszu przy stałej prędkości `4,5 km/h` (`75 m/min`).
+Aplikacja opiera się na metodzie **Weighted Scoring** (przyjętej jako wariant bazowy rekomendacji), oceniającej każdy obszar mieszkalny na podstawie odległości w linii prostej (wzór Haversine'a) od środka okręgu o promieniu `500 m` do wybranej lokalizacji uczelni oraz najbliższych obiektów kategorii `shop`, `bus_stop` i `park`, z uwzględnieniem wag `1–3` oraz limitu czasu marszu przy stałej prędkości `4,5 km/h` (`75 m/min`).
 
-Architektura dzieli system na warstwę danych i konfiguracji (`../data/`, `../config/`), warstwę logiki analitycznej i walidacji (`scripts/recommendation_engine.py`, `scripts/data_validation.py`, `scripts/prepare_data.py`, `scripts/check_data.py`, `scripts/audit_data.py`, `scripts/verify_repeatability.py`) oraz interfejs użytkownika Streamlit (`../app.py`), komunikujące się poprzez publiczną funkcję `generate_recommendations(request, engine=None)`. Pełny opis znajduje się w [Architekturze systemu](./architecture.md).
+Architektura dzieli system na warstwę danych i konfiguracji (`../data/`, `../config/`), warstwę logiki analitycznej i walidacji (`scripts/recommendation_engine.py`, `scripts/data_validation.py`, `scripts/prepare_data.py`, `scripts/check_data.py`, `scripts/audit_data.py`, `scripts/verify_repeatability.py`) oraz interfejs użytkownika Streamlit (`../app.py`), komunikujące się poprzez publiczną funkcję `generate_recommendations(request, engine=None)`.
+
+Szczegóły analizy porównawczej metod oraz wyboru rozwiązania opisują [Eksperymenty](./experiment.md), [ADR 001 — Wybór formatu plików JSON/CSV](./decisions/001-storage.md) oraz [Architektura systemu](./architecture.md).
 
 ---
 
 ## 5. Wyniki i ocena
-- **Jakość i powtarzalność danych:** Skrypty `scripts/check_data.py` (w tym `--test-invalid`: `3/3` testy) oraz `scripts/verify_repeatability.py` potwierdziły zgodność schematu i identyczność wyników względem zestawu referencyjnego w `../data/test/repeatability-reference/`.
+- **Jakość i powtarzalność danych:** Skrypty `scripts/check_data.py` (w tym `--test-invalid`: `3/3` testy) oraz `scripts/verify_repeatability.py` potwierdziły zgodność schematu i współrzędnych oraz identyczność wyników względem zestawu referencyjnego w `../data/test/repeatability-reference/`.
 - **Testy automatyczne:** W repozytorium znajduje się zestaw **51 testów automatycznych** (`tests/test_data_validation.py`, `tests/test_request_validation.py`, `tests/test_recommendation_engine.py`, `tests/test_weight_scoring.py`), które przeszły w komplecie (`51/51 PASS` — patrz [Plan i wyniki testów](./tests.md)).
-- **Eksperymenty porównawcze (Lab 4):** Porównanie metod (w tym Weighted Scoring oraz KNN) wykazało zbieżność najlepszych wskazań dla analizowanych profili preferencji przy krótszym czasie wykonania Weighted Scoring w przeprowadzonym benchmarku.
-- **Stan weryfikacji UI i wydajności:** Ręczne sprawdzenie interfejsu Streamlit potwierdziło działanie rankingu TOP 3, mapy z okręgami `500 m` oraz obsłużenie przypadku braku dopasowań (`WSIiZ, Sucharskiego 2`, limit `15 min` → `NO_MATCHES`). Funkcja eksportu rankingu do pliku nie istnieje (`U09: NOT RUN`), a pomiar niefunkcjonalny całego przepływu ma status `NOT RUN` (dostępny jest skrypt `scripts/benchmark_recommendation.py`).
+- **Eksperymenty porównawcze (Lab 4):** Porównanie metod (w tym Weighted Scoring oraz KNN) opisane w [Eksperymentach](./experiment.md) wykazało zbieżność najlepszych wskazań dla analizowanych profili preferencji przy krótszym czasie wykonania Weighted Scoring w przeprowadzonym benchmarku.
+- **Stan weryfikacji UI i wydajności:** Ręczne sprawdzenie interfejsu Streamlit potwierdziło działanie rankingu TOP 3, eksportu rankingu do CSV (`Pobierz ranking TOP 3 (CSV)`), mapy z okręgami `500 m` oraz obsłużenie przypadku braku dopasowań (`WSIiZ, Sucharskiego 2`, limit `15 min` → `NO_MATCHES`). Pomiar niefunkcjonalny całego przepływu ma w `./tests.md` status `NOT RUN` (w repozytorium znajduje się `scripts/benchmark_recommendation.py`).
 
 ---
 
 ## 6. Użycie i odtworzenie
-- **Wersja prezentowana:** Aktualny stan gałęzi `main` po scaleniu gałęzi roboczych (wskazywany przez tag wersji utworzony po połączeniu ostatnich zmian — patrz [Scenariusz prezentacji](./presentation.md)).
-- **Dokumentacja uruchomieniowa:** Instrukcja uruchomienia środowiska, skryptów i aplikacji Streamlit znajduje się w [README](../README.md) oraz w [Dokumentacji wdrożenia](./implementation.md) (a także w [Przewodniku użytkownika](./user-guide.md), gdy plik zostanie dodany do `docs/`).
+- **Wersja prezentowana:** Aktualny stan gałęzi `main` po scaleniu PR #21 (`ed0366c`), z tagiem wersji `lab8-demo` (do aktualizacji po zakończeniu ostatnich prac zgodnie ze [Scenariuszem prezentacji](./presentation.md)).
+- **Dokumentacja uruchomieniowa:** Instrukcja uruchomienia środowiska, skryptów i aplikacji Streamlit znajduje się w [README](../README.md), w [Przewodniku użytkownika](./user-guide.md) oraz w [Dokumentacji wdrożenia](./implementation.md).
 - **Uruchomienie testów:**
   ```bash
   python -m unittest discover -s tests -v
   ```
-
 ---
 
 ## 7. Ograniczenia i kierunki rozwoju
@@ -87,17 +90,31 @@ Architektura dzieli system na warstwę danych i konfiguracji (`../data/`, `../co
 
 ### Podział prac i rezultaty członków zespołu
 
-| Osoba | Główne rezultaty i pliki / PR |
+| Osoba | Główne rezultaty i PR / pliki |
 |---|---|
-| **Paulina Michalska** | Dokumentacja projektu (`./architecture.md`, `./implementation.md`, `./report.md`, `./presentation.md`, aktualizacje `./problem.md` i `../README.md`) oraz skrypty kontroli i audytu danych w historii repozytorium (`scripts/check_data.py`, `scripts/audit_data.py`). |
-| **Serhii Popovych** | Silnik rekomendacji (`scripts/recommendation_engine.py`), testy silnika (`tests/test_recommendation_engine.py`), benchmark (`scripts/benchmark_recommendation.py`) oraz audyt nazw obszarów (`./area-name-audit.md`). |
-| **Dana Stadnyk** | Interfejs użytkownika w Streamlit (`../app.py`, `../.streamlit/config.toml`) z mapą i widokiem rankingu TOP 3. |
-| **Valentyna Boksha** | Pozyskanie danych z Overpass API (Lab 1–3, `data/processed/services.json`, `data/processed/universities.json`, `./problem.md`, `./data.md`), walidacja i testy (`scripts/data_validation.py`, `tests/test_data_validation.py`, `tests/test_request_validation.py`, `tests/test_weight_scoring.py`, `./tests.md`), przegląd architektury (`Issue #8`), przegląd kodu oraz wkład w ramach PR #15, #17 i #19. |
+| **Paulina Michalska** | Weryfikacja powtarzalności przetwarzania danych (`scripts/verify_repeatability.py`), dokumentacja architektoniczna i projektowa (`./architecture.md`, `./decisions/001-storage.md`, `./implementation.md`, `./report.md`, `./presentation.md`, aktualizacje `./problem.md` i `../README.md`) — m.in. PR #11, #14, #18. |
+| **Serhii Popovych** | Przetwarzanie danych (`scripts/prepare_data.py`), silnik rekomendacji (`scripts/recommendation_engine.py`), testy silnika (`tests/test_recommendation_engine.py`), eksperymenty i benchmarki (`scripts/compare_methods.py`, `scripts/knn_recommender.py`, `scripts/compare_knn_weighted.py`, `scripts/benchmark_knn_weighted.py`, `./experiment.md`) oraz audyt nazw obszarów (`./area-name-audit.md`) — m.in. PR #16. |
+| **Dana Stadnyk** | Skrypty kontroli i audytu danych (`scripts/check_data.py`, `scripts/audit_data.py`), benchmark rekomendacji (`scripts/benchmark_recommendation.py`), interfejs użytkownika w Streamlit (`../app.py`, `../.streamlit/config.toml`) z mapą i eksportem rankingu TOP 3 do CSV oraz [Przewodnik użytkownika](./user-guide.md) — m.in. PR #20. |
+| **Valentyna Boksha** | Pozyskanie danych z Overpass API (Lab 1–3, `../data/processed/services.json`, `../data/processed/universities.json`, `./problem.md`, `./data.md`), walidacja i testy (`scripts/data_validation.py`, `tests/test_data_validation.py`, `tests/test_request_validation.py`, `tests/test_weight_scoring.py`, `./tests.md`), przegląd architektury (`Issue #8`) oraz przegląd kodu — m.in. PR #15, #17, #19, #21. |
 
 Potwierdzeniem działania całości na prezentowanej wersji jest uruchomienie `python -m unittest discover -s tests -v` — `51/51 PASS` na gałęzi `main` (w tym `44` testy z zakresu walidacji, żądań i punktacji wag).
 
+### Audyt gotowości Lab 1–8 (lista kontrolna)
+
+| Element gotowości | Stan | Uwagi |
+|---|---|---|
+| Układ 8 rozdziałów raportu końcowego i linki względne | Gotowe | Zrealizowane w `./report.md` (z uzupełnieniem pomiaru po stronie Serhiego w kolejnym etapie). |
+| Trzy główne stwierdzenia (dowód + granica wnioskowania) | Gotowe | Ujęte w rozdziale 1 `./report.md`. |
+| Weryfikacja wymagań R1–R6 zgodna z `./tests.md` | Gotowe | R1–R4 i R6 spełnione; R5 częściowo (`justification` bez testu zgodności z punktacją). |
+| Testy automatyczne na gałęzi `main` | Gotowe | `51/51 PASS` (`python3 -m unittest discover -s tests -v`). |
+| Eksport wyników rankingu do CSV i instrukcja użytkownika | Gotowe | Przycisk eksportu CSV w `../app.py` oraz `./user-guide.md` dodane w PR #20. |
+| Scenariusz prezentacji i tag wersji końcowej | Gotowe | `./presentation.md` zaktualizowany; tag `lab8-demo` |
+
 ### Źródła danych i licencje
-- **Dane mapowe i przestrzenne:** [OpenStreetMap](https://www.openstreetmap.org/) (pobierane z Overpass API) — udostępniane na licencji **Open Database License (ODbL)** (`© OpenStreetMap contributors`).
+- **OpenStreetMap Contributors** — *OpenStreetMap (Rzeszów, dane pobierane przez Overpass API)*, [https://www.openstreetmap.org/](https://www.openstreetmap.org/), dostęp: 2026-11; licencja: **Open Database License (ODbL)** (`© OpenStreetMap contributors`).
+- **Streamlit** — *Streamlit Documentation*, [https://docs.streamlit.io/](https://docs.streamlit.io/), dostęp: 2026-11.
+- **Folium** — *Folium Documentation*, [https://python-visualization.github.io/folium/](https://python-visualization.github.io/folium/), dostęp: 2026-11.
+- **Metody analityczne i obliczanie odległości** — *Weighted scoring* (wielokryterialna średnia ważona znormalizowanych ocen `0–100`), *k-nearest neighbors (KNN)* w eksperymencie Lab 4 (`./experiment.md`) oraz formuła *Haversine* dla odległości sferycznej w linii prostej.
 
 ### Wykorzystanie narzędzi AI
-Podczas prac nad dokumentacją, kodem i testami wykorzystywano asystentów AI do porządkowania treści, sprawdzania spójności opisów oraz wsparcia przy pisaniu i przeglądzie dokumentacji i kodu; wszystkie zmiany zostały zweryfikowane przez zespół na podstawie kodu, danych oraz wyników testów.
+Podczas prac nad dokumentacją, kodem i testami wykorzystywano asystentów AI (m.in. asystent konwersacyjny AI do porządkowania treści, sprawdzania spójności opisów oraz wsparcia przy pisaniu i przeglądzie dokumentacji i kodu). Wszystkie zmiany były weryfikowane przez zespół na podstawie kodu, danych wejściowych oraz wyników testów automatycznych i ręcznych.
