@@ -633,9 +633,16 @@ else:
             )
 
     if 0 < len(recommendations) < 3:
+        count = len(recommendations)
+        area_label = (
+            "okolicę spełniającą"
+            if count == 1
+            else "okolice spełniające"
+        )
+
         st.info(
             f"W wybranym limicie czasu znaleziono tylko "
-            f"{len(recommendations)} okolice spełniające kryteria. "
+            f"{count} {area_label} kryteria. "
             "Aby zobaczyć więcej wyników, zwiększ limit czasu dojścia "
             "lub wybierz opcję „Bez limitu”."
         )

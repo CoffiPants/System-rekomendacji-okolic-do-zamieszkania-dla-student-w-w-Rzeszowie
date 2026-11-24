@@ -1,14 +1,47 @@
 # Instrukcja użytkownika — StudentFinder Rzeszów
 
-## 1. Cel aplikacji
-
 StudentFinder Rzeszów to aplikacja wspomagająca studentów w wyborze okolicy do zamieszkania w Rzeszowie.
 
-System generuje ranking trzech najlepiej dopasowanych obszarów mieszkalnych na podstawie lokalizacji uczelni oraz preferencji użytkownika.
+System generuje ranking maksymalnie trzech najlepiej dopasowanych obszarów mieszkalnych na podstawie lokalizacji uczelni oraz preferencji użytkownika.
 
-## 2. Uruchomienie aplikacji
+## 1. Wymagane dane wejściowe
 
-Aby uruchomić aplikację lokalnie:
+### 1.1. Wymagania techniczne
+
+Do korzystania z aplikacji wymagane są:
+
+- Python.
+- Biblioteki wymienione w pliku `requirements.txt`.
+- Przeglądarka internetowa.
+- Dostęp do Internetu w celu wyświetlania podkładu mapowego.
+
+Aplikacja wykorzystuje przygotowane wcześniej dane dotyczące lokalizacji uczelni, obiektów usługowych oraz obszarów mieszkalnych. Użytkownik nie musi samodzielnie wprowadzać ani przygotowywać tych danych.
+
+### 1.2. Dane wprowadzane przez użytkownika
+
+Użytkownik określa następujące parametry:
+
+| Parametr | Dostępne wartości |
+|---|---|
+| Uczelnia | Uczelnia z dostępnej listy |
+| Budynek lub wydział | Lokalizacja przypisana do wybranej uczelni |
+| Maksymalny czas dojścia | 15, 30, 45 minut lub „Bez limitu” |
+| Bliskość uczelni | Waga od 1 do 3 |
+| Dostępność sklepów | Waga od 1 do 3 |
+| Dostępność komunikacji miejskiej | Waga od 1 do 3 |
+| Dostępność parków | Waga od 1 do 3 |
+
+Domyślny maksymalny czas dojścia wynosi 30 minut.
+
+Ważność każdego kryterium określana jest w skali:
+
+- 1 — mniej ważne.
+- 2 — średnio ważne.
+- 3 — bardzo ważne.
+
+## 2. Wykonanie krok po kroku
+
+### 2.1. Uruchomienie aplikacji
 
 1. Otwórz terminal w głównym katalogu projektu.
 2. Zainstaluj wymagane biblioteki:
@@ -21,9 +54,7 @@ Aby uruchomić aplikację lokalnie:
 
 4. Otwórz adres lokalny wyświetlony w terminalu.
 
-Do korzystania z aplikacji wymagane są Python oraz przeglądarka internetowa.
-
-## 3. Wybór uczelni i budynku
+### 2.2. Wybór uczelni i budynku
 
 W panelu bocznym:
 
@@ -33,36 +64,62 @@ W panelu bocznym:
 
 System wykorzystuje lokalizację wskazanego budynku do obliczania odległości.
 
-## 4. Ustawienie maksymalnego czasu dojścia
+### 2.3. Ustawienie maksymalnego czasu dojścia
 
-W polu „Maksymalny czas dojścia do uczelni” wybierz dostępny limit.
+W polu „Maksymalny czas dojścia do uczelni” wybierz jedną z dostępnych opcji:
 
-Możesz również wybrać opcję „Bez limitu”.
+- 15 minut.
+- 30 minut — wartość domyślna.
+- 45 minut.
+- Bez limitu.
 
 Jeżeli zbyt mało obszarów spełnia wybrane kryterium, zwiększ limit czasu lub wybierz opcję „Bez limitu”.
 
-## 5. Ustawienie ważności kryteriów
+### 2.4. Ustawienie ważności kryteriów
 
-Aplikacja umożliwia określenie ważności czterech kryteriów:
+Za pomocą suwaków określ ważność czterech kryteriów:
 
 - Bliskość uczelni.
 - Dostępność sklepów.
 - Dostępność komunikacji miejskiej.
 - Dostępność parków.
 
-Każde kryterium można ustawić w skali od 1 do 3:
+Im wyższa waga, tym większy wpływ danego kryterium na końcową ocenę okolicy.
 
-- 1 — mniej ważne.
-- 2 — średnio ważne.
-- 3 — bardzo ważne.
-
-## 6. Generowanie rekomendacji
+### 2.5. Generowanie rekomendacji
 
 Po ustawieniu preferencji kliknij przycisk „Generuj rekomendacje”.
 
-System wyświetli maksymalnie trzy najlepiej ocenione okolice mieszkalne.
+System wyświetli maksymalnie trzy najlepiej ocenione okolice mieszkalne spełniające wybrane kryteria.
 
-Dla każdej rekomendacji prezentowane są między innymi:
+Po zmianie ustawień wcześniejsze wyniki zostają usunięte. Aby otrzymać ranking odpowiadający nowym preferencjom, należy ponownie kliknąć przycisk „Generuj rekomendacje”.
+
+### 2.6. Korzystanie z mapy
+
+Poniżej rankingu znajduje się interaktywna mapa rekomendowanych okolic.
+
+Mapę można przybliżać, oddalać i przesuwać.
+
+### 2.7. Eksport rankingu do CSV
+
+Aby pobrać wyniki:
+
+1. Wygeneruj rekomendacje.
+2. Kliknij przycisk „Pobierz ranking TOP 3 (CSV)”.
+3. Zapisz pobrany plik `studentfinder_top3.csv`.
+4. Otwórz plik w programie Excel lub innym programie obsługującym CSV.
+
+Plik zawiera pozycję w rankingu, nazwę uczelni i budynku, nazwę okolicy, osiedle, ocenę, szacowany czas dojścia oraz odległości do uczelni i wybranych usług.
+
+### 2.8. Zakończenie pracy
+
+Aby zakończyć działanie aplikacji uruchomionej lokalnie, przejdź do terminala i naciśnij `Ctrl+C`.
+
+## 3. Interpretacja wyniku
+
+### 3.1. Ranking rekomendowanych okolic
+
+Dla każdej rekomendacji prezentowane są:
 
 - Nazwa okolicy.
 - Pozycja w rankingu.
@@ -71,9 +128,19 @@ Dla każdej rekomendacji prezentowane są między innymi:
 - Odległość od uczelni.
 - Informacje o odległościach do wybranych usług.
 
-## 7. Mapa rekomendowanych okolic
+### 3.2. Znaczenie oceny 0–100
 
-Poniżej rankingu znajduje się interaktywna mapa.
+Ocena określa stopień dopasowania okolicy do preferencji użytkownika.
+
+Im wyższa ocena, tym lepiej dana okolica spełnia uwzględnione kryteria z przypisanymi im wagami.
+
+Ocena jest obliczana metodą Weighted Scoring, która uwzględnia bliskość uczelni, sklepów, przystanków komunikacji miejskiej oraz parków.
+
+Wartość 100 oznacza maksymalną możliwą ocenę w przyjętym modelu, natomiast 0 oznacza najniższą możliwą ocenę.
+
+Ocena nie jest prawdopodobieństwem znalezienia mieszkania ani procentową oceną jakości życia w danej okolicy.
+
+### 3.3. Interpretacja mapy
 
 Kolory oznaczają pozycje w rankingu:
 
@@ -83,22 +150,7 @@ Kolory oznaczają pozycje w rankingu:
 
 Na mapie oznaczono również wybraną lokalizację uczelni.
 
-Mapę można przybliżać, oddalać i przesuwać.
-
-## 8. Eksport rankingu do CSV
-
-Aplikacja umożliwia pobranie wyników w formacie CSV.
-
-Aby pobrać plik:
-
-1. Wygeneruj rekomendacje.
-2. Kliknij przycisk „Pobierz ranking TOP 3 (CSV)”.
-3. Zapisz pobrany plik `studentfinder_top3.csv`.
-4. Otwórz plik w programie Excel lub innym programie obsługującym CSV.
-
-Plik zawiera pozycję w rankingu, nazwę uczelni i budynku, nazwę okolicy, osiedle, ocenę, szacowany czas dojścia oraz odległości do uczelni i wybranych usług.
-
-## 9. Ograniczenia systemu
+### 3.4. Ograniczenia systemu
 
 - Odległości są obliczane w linii prostej od środka obszaru.
 - Czas dojścia jest szacowany przy prędkości 4,5 km/h.
@@ -106,6 +158,10 @@ Plik zawiera pozycję w rankingu, nazwę uczelni i budynku, nazwę okolicy, osie
 - Wyniki zależą od dostępnych danych oraz ustawionych preferencji.
 - Rekomendacje mają charakter pomocniczy i nie stanowią oceny dostępności konkretnych mieszkań.
 
-## 10. Zakończenie pracy
+## 4. Komunikaty błędów i sposób postępowania
 
-Aby zakończyć działanie aplikacji uruchomionej lokalnie, przejdź do terminala i naciśnij `Ctrl+C`.
+| Komunikat aplikacji | Znaczenie | Zalecane postępowanie |
+|---|---|---|
+| „Nie znaleziono okolic spełniających limit czasu dojścia…” | Żaden obszar mieszkalny nie spełnia wybranego limitu czasu. | Zwiększ maksymalny czas dojścia lub wybierz opcję „Bez limitu”, a następnie ponownie wygeneruj rekomendacje. |
+| „W wybranym limicie czasu znaleziono tylko…” | W wybranym limicie mieszczą się mniej niż trzy okolice. Jest to poprawny wynik działania systemu, a nie błąd. | Zaakceptuj dostępne rekomendacje lub zwiększ limit czasu, aby uzyskać więcej wyników. |
+| „Nie można wczytać danych projektu…” | Aplikacja nie może wczytać wymaganych danych projektu. | Sprawdź obecność i poprawność plików w katalogach `data/processed/` oraz `config/`. Następnie ponownie uruchom aplikację. Jeżeli problem nadal występuje, skontaktuj się z zespołem projektu. |
