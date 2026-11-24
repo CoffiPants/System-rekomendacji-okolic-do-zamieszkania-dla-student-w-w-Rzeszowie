@@ -89,7 +89,16 @@ Polecenie: `python -m streamlit run app.py`. Wykonała Valentyna Boksha, 23.11.2
 
 ## 3. Pomiar niefunkcjonalny
 
-**NOT RUN.** Kryterium akceptacji czasu odpowiedzi nie zostało jeszcze uzgodnione w zespole, a katalog `results/lab7/` nie istnieje. Skrypt `scripts/benchmark_recommendation.py` uruchamia się poprawnie, ale bez kryterium wynik nie jest oceniany. Pomiar należy do części Serhiia Popovycha.
+**PASS.** Kryterium ustalono przed pomiarem: mediana czasu obliczenia rankingu ≤ 100 ms przy 100 powtórzeniach, 25 obszarach mieszkalnych i 500 usługach. Pomiar wykonał Serhii Popovych, 24.11.2026, na `main` `ed0366c`, Apple M1 Max (10 rdzeni, 32 GB), macOS 27.2.1, Python 3.15.2.
+
+| Miara | Wynik |
+|---|---|
+| Mediana | 16,000 ms |
+| Minimum | 15,748 ms |
+| Maksimum | 17,090 ms |
+| Powtórzenia | 100 |
+
+Polecenie `python scripts/benchmark_recommendation.py --repetitions 100` użyło lokalizacji `way/197227711`, limitu 30 min i wag 3/2/2/2. Mierzono wyłącznie `recommend()`, bez wczytywania plików. Obciążenie maszyny: średnia 7,40 (1 min). Szczegóły i pełne wyjście: `results/lab7/benchmark.md`.
 
 ## 4. Ocena danych, wyników i kodu
 
@@ -157,7 +166,7 @@ Statusy dotyczą wersji `main` `653393e`. `docs/report.md` podaje te same status
 3. Eksport CSV: czas ma przecinek dziesiętny (`27,2`), a ocena i odległości kropkę (`69.2`, `2038.0`). Excel z polskimi ustawieniami wczytuje wartości z kropką jako tekst. Wartości w pliku są poprawne; zespół zdecydował nie zmieniać formatu. Obejście: zamienić kropki na przecinki w kolumnach F oraz H–K. Brak testu automatycznego eksportu w repozytorium.
 4. Nazwy obszarów mogą być niezgodne z polem `district`; przynależność administracyjna nie została niezależnie sprawdzona.
 5. Odległości są liczone w linii prostej od środka obszaru; czas nie uwzględnia rzeczywistych tras.
-6. Brak pomiaru niefunkcjonalnego (punkt 3).
+6. Pomiar niefunkcjonalny wykonano przy wysokim obciążeniu maszyny (średnia 7,40 na 10 rdzeni); podane czasy są górnym oszacowaniem (punkt 3).
 7. Testy interfejsu nie są zautomatyzowane w repozytorium.
 8. Plik danych ze znacznikiem BOM jest odrzucany przez aplikację, choć przechodzi `scripts/check_data.py` (punkt 4).
 9. `docs/user-guide.md` nie opisuje komunikatów błędów; `docs/report.md` i `docs/presentation.md` nadal podają, że eksportu nie ma.

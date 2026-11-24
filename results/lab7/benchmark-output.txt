@@ -1,0 +1,5 @@
+TOP 3: Tadeusza Boya-Żeleńskiego (Staroniwa), Strażacka (Drabinianka), Stanisława Staszica (Podpromie)
+Powtórzenia: 100
+Mediana: 16.000 ms
+Minimum: 15.748 ms
+Maksimum: 17.090 ms
