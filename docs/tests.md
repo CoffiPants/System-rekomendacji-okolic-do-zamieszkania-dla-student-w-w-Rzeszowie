@@ -8,7 +8,7 @@ Statusy: **PASS** — sprawdzono, wynik zgodny z oczekiwanym; **FAIL** — spraw
 
 | Element | Wartość |
 |---|---|
-| Gałąź | `main`, commit `2672012` (po połączeniu PR #14–#24). Kod i dane są identyczne z commitem `653393e`; PR #21–#24 zmieniają tylko dokumentację i dodają `results/lab7/` |
+| Gałąź | `main`, commit `a8f2e18` (po połączeniu PR #14–#26). Kod i dane są identyczne z commitem `653393e`; PR #21–#24 zmieniają tylko dokumentację i dodają `results/lab7/`; PR #25 zmienia w `app.py` jeden komunikat (liczba pojedyncza „1 okolicę”) oraz dodaje slajdy; PR #22 i #26 zmieniają tylko dokumentację |
 | Commit kodu | Silnik i walidacja (`scripts/`) bez zmian od commita `0df4f8b`. `app.py` zmieniony w PR #20: eksport CSV i komunikat przy mniej niż trzech wynikach |
 | Dane | `data/processed/services.json` (500), `data/processed/universities.json` (28), `config/residential-areas.json` (25) — bez zmian od commita `1d9e312` |
 | Środowisko | Windows 11, Python 3.12.6, streamlit 1.67.0, folium 1.0.0, streamlit-folium 0.27.4 |
@@ -54,22 +54,23 @@ Dziennik uruchomień:
 
 | Data | Wersja | Kto uruchomił | Wynik |
 |---|---|---|---|
-| 23.11.2026 | `1d9e312` + nowe testy, bez zmian w silniku | asystent AI, lokalnie | 44 testy: 29 niepowodzeń, 3 błędy. Część niepowodzeń wynika tylko z innej treści komunikatu; faktycznie niewykrywane były: powtórzone ID, `[]` zamiast obiektu (`AttributeError`), nieznana kategoria, brak `university`/`address`, waga NaN/inf w `recommend()`. |
+| 23.11.2026 | `1d9e312` + nowe testy, bez zmian w silniku | Valentyna Boksha, lokalnie | 44 testy: 29 niepowodzeń, 3 błędy. Część niepowodzeń wynika tylko z innej treści komunikatu; faktycznie niewykrywane były: powtórzone ID, `[]` zamiast obiektu (`AttributeError`), nieznana kategoria, brak `university`/`address`, waga NaN/inf w `recommend()`. |
 | 23.11.2026 | `0df4f8b` | Valentyna Boksha, lokalnie | **44/44 PASS** (`Ran 44 tests in 4.564s`, `OK`) |
-| 23.11.2026 | `27c0438` + `tests/test_weight_scoring.py` | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 4.856s`, `OK`) |
-| 23.11.2026 | `main` `d3aa845` (bez `test_weight_scoring.py`) | asystent AI, lokalnie | 44/44 PASS; `check_data.py --test-invalid`: 0 naruszeń, 3/3; `test_knn.py`: OK; Streamlit AppTest: brak wyjątków, 3 karty |
-| 23.11.2026 | `main` `d3aa845` + `tests/test_weight_scoring.py` (commit `de8b08a`) | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 2.348s`, `OK`) |
-| 23.11.2026 | `main` `e6db774` | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 2.380s`, `OK`) |
-| 23.11.2026 | `main` `e6db774` | asystent AI, lokalnie | `check_data.py --test-invalid`: 0 naruszeń, 3/3; `verify_repeatability.py`: PASS; `audit_data.py`: PASS; `test_knn.py`: OK; Streamlit AppTest: brak wyjątków, 3 karty |
-| 23.11.2026 | `main` `2539038` (tag `lab8-demo`) | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 2.437s`, `OK`) |
-| 23.11.2026 | `main` `2539038` (tag `lab8-demo`) | asystent AI, lokalnie | `check_data.py --test-invalid`: 0 naruszeń, 3/3; `verify_repeatability.py`: PASS; `audit_data.py`: PASS; `test_knn.py`: OK; Streamlit AppTest: scenariusz 1 — 3 karty, scenariusz 2 (WSIiZ, 15 min) — komunikat o braku okolic, brak wyjątków |
-| 23.11.2026 | `main` `653393e` | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 2.362s`, `OK`) |
-| 23.11.2026 | `main` `653393e` | asystent AI, lokalnie | `check_data.py --test-invalid`: 0 naruszeń, 3/3; `test_knn.py`: OK; Streamlit AppTest: 3 karty i przycisk eksportu; przy 2 wynikach komunikat informacyjny i przycisk eksportu; WSIiZ / 15 min — komunikat o braku okolic, bez przycisku eksportu; brak wyjątków |
-| 24.11.2026 | `main` `ed0366c` | asystent AI, lokalnie | 51/51 PASS (`Ran 51 tests in 2.325s`, `OK`) |
-| 24.11.2026 | `main` `ed0366c`, nowy katalog i nowe środowisko `.venv` | asystent AI, lokalnie | 51/51 PASS (`Ran 51 tests in 2.671s`, `OK`) |
-| 24.11.2026 | `main` `2672012` | asystent AI, lokalnie | 51/51 PASS (`Ran 51 tests in 3.042s`, `OK`); `check_data.py --test-invalid`: 0 naruszeń, 3/3 |
+| 23.11.2026 | `27c0438` + `tests/test_weight_scoring.py` | Valentyna Boksha, lokalnie | **51/51 PASS** (`Ran 51 tests in 4.856s`, `OK`) |
+| 23.11.2026 | `main` `d3aa845` (bez `test_weight_scoring.py`) | Valentyna Boksha, lokalnie | 44/44 PASS; `check_data.py --test-invalid`: 0 naruszeń, 3/3; `test_knn.py`: OK; Streamlit AppTest: brak wyjątków, 3 karty |
+| 23.11.2026 | `main` `d3aa845` + `tests/test_weight_scoring.py` (commit `de8b08a`) | Valentyna Boksha, lokalnie | **51/51 PASS** (`Ran 51 tests in 2.348s`, `OK`) |
+| 23.11.2026 | `main` `e6db774` | Valentyna Boksha, lokalnie | **51/51 PASS** (`Ran 51 tests in 2.380s`, `OK`) |
+| 23.11.2026 | `main` `e6db774` | Valentyna Boksha, lokalnie | `check_data.py --test-invalid`: 0 naruszeń, 3/3; `verify_repeatability.py`: PASS; `audit_data.py`: PASS; `test_knn.py`: OK; Streamlit AppTest: brak wyjątków, 3 karty |
+| 23.11.2026 | `main` `2539038` (tag `lab8-demo`) | Valentyna Boksha, lokalnie | **51/51 PASS** (`Ran 51 tests in 2.437s`, `OK`) |
+| 23.11.2026 | `main` `2539038` (tag `lab8-demo`) | Valentyna Boksha, lokalnie | `check_data.py --test-invalid`: 0 naruszeń, 3/3; `verify_repeatability.py`: PASS; `audit_data.py`: PASS; `test_knn.py`: OK; Streamlit AppTest: scenariusz 1 — 3 karty, scenariusz 2 (WSIiZ, 15 min) — komunikat o braku okolic, brak wyjątków |
+| 23.11.2026 | `main` `653393e` | Valentyna Boksha, lokalnie | **51/51 PASS** (`Ran 51 tests in 2.362s`, `OK`) |
+| 23.11.2026 | `main` `653393e` | Valentyna Boksha, lokalnie | `check_data.py --test-invalid`: 0 naruszeń, 3/3; `test_knn.py`: OK; Streamlit AppTest: 3 karty i przycisk eksportu; przy 2 wynikach komunikat informacyjny i przycisk eksportu; WSIiZ / 15 min — komunikat o braku okolic, bez przycisku eksportu; brak wyjątków |
+| 24.11.2026 | `main` `ed0366c` | Valentyna Boksha, lokalnie | 51/51 PASS (`Ran 51 tests in 2.325s`, `OK`) |
+| 24.11.2026 | `main` `ed0366c`, nowy katalog i nowe środowisko `.venv` | Valentyna Boksha, lokalnie | 51/51 PASS (`Ran 51 tests in 2.671s`, `OK`) |
+| 24.11.2026 | `main` `2672012` | Valentyna Boksha, lokalnie | 51/51 PASS (`Ran 51 tests in 3.042s`, `OK`); `check_data.py --test-invalid`: 0 naruszeń, 3/3 |
+| 24.11.2026 | `main` `632c6cc`, nowy katalog i środowisko `.venv` | Valentyna Boksha, lokalnie | 51/51 PASS (`Ran 51 tests in 2.343s`, `OK`); Streamlit AppTest: przy 1 wyniku „tylko 1 okolicę spełniającą”, przy 2 „2 okolice spełniające”, WSIiZ / 15 min — komunikat o braku okolic; brak wyjątków |
 
-T01–T20: **PASS** na `main` `2672012`. Dowód: wynik polecenia z punktu 2.1; raport w pliku nie jest zapisywany. Nowe testy T18–T20 nie wymagały zmian w kodzie silnika.
+T01–T20: **PASS** na `main` `632c6cc`; w `a8f2e18` kod i dane są bez zmian. Dowód: wynik polecenia z punktu 2.1; raport w pliku nie jest zapisywany. Nowe testy T18–T20 nie wymagały zmian w kodzie silnika.
 
 ### 2.2. Ręczne sprawdzenie interfejsu
 
@@ -84,10 +85,10 @@ Polecenie: `python -m streamlit run app.py`. U01–U07 wykonała Valentyna Boksh
 | U05 | Zastrzeżenie pod wynikami | Tekst o linii prostej i 4,5 km/h | PASS |
 | U06 | Limit 15 min, WSIiZ (Sucharskiego 2) | Komunikat o braku okolic zamiast kart | PASS |
 | U07 | Limit 15 min, część budynków | 1 lub 2 karty zamiast 3 | PASS — zgodne z R4 („maksymalnie trzy”); patrz punkt 4 |
-| U08 | Uszkodzony plik danych w uruchomionej aplikacji | Komunikat „Nie można wczytać danych projektu” | NOT RUN ręcznie; sprawdzone automatycznie przez asystenta AI (Streamlit AppTest, kopia z `services.json = []`): komunikat bez wyjątku |
-| U09 | Eksport rankingu: przycisk „Pobierz ranking TOP 3 (CSV)” (WSIiZ, 3 wyniki) | Plik `studentfinder_top3.csv` otwiera się w programie Excel: 11 kolumn, 3 wiersze, poprawne polskie znaki | PASS — Valentyna Boksha, 23.11.2026, `653393e`, Excel: kolumny rozdzielone, nagłówki, wartości i polskie znaki poprawne. Format liczb: patrz punkt 7. Automatycznie (asystent AI): przycisk pojawia się tylko przy wynikach |
+| U08 | Uszkodzony plik danych w uruchomionej aplikacji | Komunikat „Nie można wczytać danych projektu” | NOT RUN ręcznie; sprawdzone automatycznie (Streamlit AppTest, kopia z `services.json = []`): komunikat bez wyjątku |
+| U09 | Eksport rankingu: przycisk „Pobierz ranking TOP 3 (CSV)” (WSIiZ, 3 wyniki) | Plik `studentfinder_top3.csv` otwiera się w programie Excel: 11 kolumn, 3 wiersze, poprawne polskie znaki | PASS — Valentyna Boksha, 23.11.2026, `653393e`, Excel: kolumny rozdzielone, nagłówki, wartości i polskie znaki poprawne. Format liczb: patrz punkt 7. Automatycznie (Streamlit AppTest): przycisk pojawia się tylko przy wynikach |
 | U10 | Inne przeglądarki i szerokości ekranu | Czytelny układ | NOT RUN |
-| U11 | Mniej niż 3 wyniki (limit 15 min) | Komunikat, że znaleziono mniej okolic | NOT RUN ręcznie. Automatycznie (asystent AI): komunikat jest wyświetlany. Uwaga: dla jednego wyniku tekst brzmi „tylko 1 okolice” |
+| U11 | Mniej niż 3 wyniki (limit 15 min) | Komunikat, że znaleziono mniej okolic | PASS — Valentyna Boksha, 24.11.2026, `632c6cc`, w ramach sprawdzenia instrukcji. Automatycznie (Streamlit AppTest): „tylko 1 okolicę spełniającą” / „2 okolice spełniające” — forma poprawiona w PR #25 |
 
 ## 3. Pomiar niefunkcjonalny
 
@@ -102,18 +103,18 @@ Polecenie: `python -m streamlit run app.py`. U01–U07 wykonała Valentyna Boksh
 
 Polecenie `python scripts/benchmark_recommendation.py --repetitions 100` użyło lokalizacji `way/197227711`, limitu 30 min i wag 3/2/2/2. Mierzono wyłącznie `recommend()`, bez wczytywania plików. Obciążenie maszyny: średnia 7,40 (1 min). Szczegóły i pełne wyjście: `results/lab7/benchmark.md`.
 
-Niezależne powtórzenie (asystent AI, 24.11.2026, `main` `2672012`, Windows 11, Python 3.12.6, to samo polecenie): mediana 18,126 ms, minimum 16,531 ms, maksimum 31,465 ms, 100 powtórzeń, ten sam ranking TOP 3. Kryterium ≤ 100 ms jest spełnione także na drugim stanowisku.
+Niezależne powtórzenie (Valentyna Boksha, 24.11.2026, `main` `2672012`, Windows 11, Python 3.12.6, to samo polecenie): mediana 18,126 ms, minimum 16,531 ms, maksimum 31,465 ms, 100 powtórzeń, ten sam ranking TOP 3. Kryterium ≤ 100 ms jest spełnione także na drugim stanowisku.
 
 ## 4. Ocena danych, wyników i kodu
 
-**Dane** (uruchomił asystent AI, 23.11.2026):
+**Dane** (23.11.2026):
 
 - `python scripts/check_data.py --test-invalid` — 500 usług i 28 miejsc zajęć, 0 naruszeń, 3/3 próby na błędnych kopiach.
 - Znane braki w źródle OSM: 21 usług bez nazwy źródłowej, 387 usług bez pełnego adresu. Kontrole nie potwierdzają kompletności OSM ani zgodności obiektów ze stanem w terenie.
 
 **Wyniki:** przy limicie 15 minut i wagach 2/2/2/2: 13 miejsc zajęć ma 3 wyniki, 11 ma 2, 3 mają 1, a 1 (WSIiZ) nie ma żadnego. Przy 30 i 45 minutach oraz bez limitu każde miejsce ma 3 wyniki.
 
-**Miara z Lab 4** (uruchomił asystent AI, `653393e`):
+**Miara z Lab 4** (wersja `653393e`):
 
 | Miara | Lab 4 (zapisane w `results/lab4/`) | Obecna wersja | Warunki |
 |---|---|---|---|
@@ -126,7 +127,7 @@ Nie sprawdzano: rozdziały 1–11 `docs/experiment.md` opisują porównanie Brut
 
 **Kod:** przegląd `docs/architecture.md` względem kodu — wynik w Issue #8. Zmiany wprowadzone po przeglądzie: nowy moduł `scripts/data_validation.py`; w `scripts/recommendation_engine.py` wywołanie walidacji w `from_files()` i odrzucanie wag NaN/inf w `recommend()`.
 
-Przegląd fragmentu kodu, którego nie jestem autorką (zapisany także w opisie [PR #19](https://github.com/CoffiPants/System-rekomendacji-okolic-do-zamieszkania-dla-student-w-w-Rzeszowie/pull/19)) — `generate_recommendations()` i `RecommendationEngine.from_files()` w `scripts/recommendation_engine.py` (autor: Serhii Popovych), wersja `e6db774` (kod bez zmian w `2539038`), wykonany z pomocą asystenta AI:
+Przegląd fragmentu kodu, którego nie jestem autorką (zapisany także w opisie [PR #19](https://github.com/CoffiPants/System-rekomendacji-okolic-do-zamieszkania-dla-student-w-w-Rzeszowie/pull/19)) — `generate_recommendations()` i `RecommendationEngine.from_files()` w `scripts/recommendation_engine.py` (autor: Serhii Popovych), wersja `e6db774` (kod bez zmian w `2539038`):
 
 | Kryterium | Wynik |
 |---|---|
@@ -137,7 +138,7 @@ Przegląd fragmentu kodu, którego nie jestem autorką (zapisany także w opisie
 | Uwaga 1 | `load_json()` czyta pliki jako `utf-8`, a `scripts/check_data.py` jako `utf-8-sig`. Plik ze znacznikiem BOM przejdzie kontrolę jakości, ale aplikacja go odrzuci (`JSONDecodeError`, komunikat o błędzie danych). Pliki projektu nie mają BOM. Nie poprawiano. |
 | Uwaga 2 | Konstruktor `RecommendationEngine(...)` nie sprawdza powtórzonych ID (punkt 7). Nie poprawiano. |
 
-`python scripts/test_knn.py` — 3/3 PASS (uruchomił asystent AI).
+`python scripts/test_knn.py` — 3/3 PASS.
 
 ## 5. Statusy wymagań
 
@@ -150,7 +151,7 @@ Przegląd fragmentu kodu, którego nie jestem autorką (zapisany także w opisie
 | R5 — uzasadnienie | spełnione częściowo; zgodność treści niesprawdzona | T15 (niepuste uzasadnienie), U05 | Zgodność treści uzasadnienia z punktacją: NOT RUN |
 | R6 — zakres projektu | spełnione | T01, T15 — ranking powstaje bez danych o cenach i ofertach | — |
 
-Statusy: spełnione / niespełnione / niesprawdzone. Dotyczą wersji `main` `2672012`. `docs/report.md` podaje te same statusy.
+Statusy: spełnione / niespełnione / niesprawdzone. Dotyczą wersji `main` `a8f2e18` (kod i dane jak w `632c6cc`). `docs/report.md` podaje te same statusy.
 
 ## 6. Sprawdzenie dokumentacji
 
@@ -158,9 +159,9 @@ Statusy: spełnione / niespełnione / niesprawdzone. Dotyczą wersji `main` `267
 |---|---|---|
 | `docs/architecture.md` | sprawdzony | 8 niezgodności opisanych w Issue #8; wszystkie poprawione (commity `0aeab7e`, PR #18, `2539038`). Komunikat błędu danych i dekorator buforowania w ADR poprawione w PR #24 |
 | `docs/report.md` | niezgodności | Układ zgodny z Lab 8; eksport, instrukcja, R6 i wkład zespołu poprawione w PR #24. Otwarte: w trzech miejscach pomiar niefunkcjonalny ma nadal status `NOT RUN` (wykonany w PR #23); rozdział 4 nazywa Weighted Scoring „wariantem bazowym”, a w Lab 4 wariantem bazowym była sama odległość do uczelni; skrypty KNN przypisano Serhiiowi, w historii jedyną autorką jest Dana; audyt gotowości podaje tag `lab8-demo` jako gotowy, choć wskazuje commit `2539038` |
-| `docs/presentation.md` | niezgodności | Oba scenariusze demonstracji są wykonalne; eksport opisany poprawnie (PR #24). Otwarte: pomiar niefunkcjonalny ma nadal status `NOT RUN` (część 4 i pytanie 3); sekcja „Wynik próby” opisuje próbę, która jeszcze się nie odbyła |
-| `README.md` — instrukcja uruchomienia | PASS | 23.11.2026, Valentyna Boksha, wersja `0df4f8b`: instalacja z `requirements.txt`, uruchomienie aplikacji, testy. 24.11.2026, asystent AI, wersja `ed0366c`: `git clone` do nowego pustego katalogu, nowe środowisko `.venv`, `python -m pip install -r requirements.txt` bez błędów, 51/51 testów PASS, aplikacja uruchomiona. Uwaga: w bardzo głęboko zagnieżdżonym katalogu instalacja nie powiodła się przez limit długości ścieżki w systemie Windows (pakiet `streamlit`); w katalogu o krótszej ścieżce przebiegła poprawnie |
-| `docs/user-guide.md` | PASS z uwagą | 24.11.2026, Valentyna Boksha (nie jest autorką instrukcji), wersja `ed0366c`, aplikacja uruchomiona z nowego katalogu i nowego środowiska. Wykonane kroki z rozdziałów 3–8: wybór uczelni i budynku, limit czasu, wagi, „Generuj rekomendacje”, mapa, pobranie CSV; przypadek błędny: WSIiZ i limit 15 min — komunikat o braku okolic. Wynik: wszystkie kroki wykonalne, opisy zgodne z ekranem. Uwaga (porównanie z układem z Lab 7, asystent AI): instrukcja nie ma osobnego rozdziału o komunikatach błędów ani listy dozwolonych limitów czasu (15 / 30 / 45 min) — zgłoszone autorce |
+| `docs/presentation.md` | niezgodności | Oba scenariusze demonstracji są wykonalne; eksport opisany poprawnie (PR #24). Otwarte: pomiar niefunkcjonalny ma nadal status `NOT RUN` (część 4 i pytanie 3). Sekcja „Wynik próby” została w PR #26 zastąpiona pustymi polami — próba jeszcze się nie odbyła |
+| `README.md` — instrukcja uruchomienia | PASS | 23.11.2026, Valentyna Boksha, wersja `0df4f8b`: instalacja z `requirements.txt`, uruchomienie aplikacji, testy. 24.11.2026, wersja `ed0366c`: `git clone` do nowego pustego katalogu, nowe środowisko `.venv`, `python -m pip install -r requirements.txt` bez błędów, 51/51 testów PASS, aplikacja uruchomiona. Uwaga: w bardzo głęboko zagnieżdżonym katalogu instalacja nie powiodła się przez limit długości ścieżki w systemie Windows (pakiet `streamlit`); w katalogu o krótszej ścieżce przebiegła poprawnie |
+| `docs/user-guide.md` | PASS | Wersja po PR #25 (układ z Lab 7: dane wejściowe, kroki, interpretacja, komunikaty błędów). 24.11.2026, Valentyna Boksha (nie jest autorką instrukcji), `main` `632c6cc`, aplikacja uruchomiona z nowego katalogu i nowego środowiska. Wykonane: tabela parametrów (1.2), kroki 2.2–2.7 (uczelnia, budynek, limit, wagi, generowanie, zniknięcie wyników po zmianie ustawień, mapa, pobranie CSV), interpretacja (3), komunikaty z rozdziału 4: brak okolic (WSIiZ, 15 min) i mniej niż trzy okolice. Wynik: kroki wykonalne, opisy zgodne z ekranem. Znaleziona niezgodność: w punktach 1.2 i 2.2 pola były opisane bez nazw z ekranu („Budynek lub wydział” zamiast „Wybierz budynek / wydział”). Wprowadzona poprawka: w PR #27 dopisano w instrukcji dokładne nazwy pól z aplikacji („Wybierz uczelnię”, „Wybierz budynek / wydział”, „Maksymalny czas dojścia do uczelni”). Komunikat „Nie można wczytać danych projektu…” sprawdzony tylko automatycznie na uszkodzonej kopii danych (wersja `0df4f8b`). Wcześniejsze przejście (23–24.11, wersja `ed0366c`) dotyczyło poprzedniego układu instrukcji |
 | `docs/problem.md` | sprawdzony | Podział ról i odwołanie do `docs/tests.md` poprawione w PR #24. Scenariusz prezentacji (`docs/presentation.md`) jest przypisany Danie, a w `docs/report.md` Paulinie |
 | `docs/implementation.md` | sprawdzony | Przepisany w PR #23: 51 testów, moduł walidacji, eksport CSV, sprawdzona wersja i osoba weryfikująca, ocena usprawnienia (przed/po), pomiar z warunkami. Otwarte: punkty 6.4 i 6.5 podają status `DATA_ERROR` dla błędu wczytania danych w aplikacji — aplikacja pokazuje komunikat z `load_engine()`; poprawka jest w gałęzi `serhii-lab7-lab6` (commit `f771de8`), jeszcze niepołączona |
 
@@ -174,7 +175,7 @@ Statusy: spełnione / niespełnione / niesprawdzone. Dotyczą wersji `main` `267
 6. Pomiar niefunkcjonalny wykonano przy wysokim obciążeniu maszyny (średnia 7,40 na 10 rdzeni); podane czasy są górnym oszacowaniem (punkt 3).
 7. Testy interfejsu nie są zautomatyzowane w repozytorium.
 8. Plik danych ze znacznikiem BOM jest odrzucany przez aplikację, choć przechodzi `scripts/check_data.py` (punkt 4).
-9. `docs/user-guide.md` nie ma osobnego rozdziału o komunikatach błędów (Issue #7; poprawka w gałęzi `dana-final-lab7-lab8`, jeszcze niepołączona); `docs/report.md` i `docs/presentation.md` nadal podają pomiar niefunkcjonalny jako `NOT RUN`.
+9. `docs/report.md` i `docs/presentation.md` nadal podają pomiar niefunkcjonalny jako `NOT RUN`; slajd 10 w `presentation/slides.pptx` i `slides.pdf` również („Pełny benchmark: NOT RUN”).
 10. `docs/experiment.md` (rozdziały 1–11) opisuje eksperyment niezgodny ze skryptami; zapisane `results/lab4/*.csv` mają nieaktualne nazwy obszarów.
 11. `docs/implementation.md`: status `DATA_ERROR` przy błędzie wczytania danych w aplikacji (punkt 6) — poprawka niepołączona.
-12. Żaden Pull Request (#1–#24) nie ma zapisanego przeglądu (review) innej osoby poza PR #1; przegląd kodu z punktu 4 jest zapisany w opisie PR #19.
+12. Spośród PR #1–#25 zapisany przegląd (review) innej osoby mają tylko PR #1 i PR #25 (stan dla PR #1–#26); przegląd kodu z punktu 4 jest zapisany w opisie PR #19.
