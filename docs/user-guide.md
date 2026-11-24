@@ -23,9 +23,9 @@ Użytkownik określa następujące parametry:
 
 | Parametr | Dostępne wartości |
 |---|---|
-| Uczelnia | Uczelnia z dostępnej listy |
-| Budynek lub wydział | Lokalizacja przypisana do wybranej uczelni |
-| Maksymalny czas dojścia | 15, 30, 45 minut lub „Bez limitu” |
+| Uczelnia (pole „Wybierz uczelnię”) | Uczelnia z dostępnej listy |
+| Budynek lub wydział (pole „Wybierz budynek / wydział”) | Lokalizacja przypisana do wybranej uczelni |
+| Maksymalny czas dojścia (pole „Maksymalny czas dojścia do uczelni”) | 15, 30, 45 minut lub „Bez limitu” |
 | Bliskość uczelni | Waga od 1 do 3 |
 | Dostępność sklepów | Waga od 1 do 3 |
 | Dostępność komunikacji miejskiej | Waga od 1 do 3 |
@@ -58,8 +58,8 @@ Ważność każdego kryterium określana jest w skali:
 
 W panelu bocznym:
 
-1. Wybierz uczelnię z dostępnej listy.
-2. Wybierz budynek lub wydział.
+1. W polu „Wybierz uczelnię” wybierz uczelnię z dostępnej listy.
+2. W polu „Wybierz budynek / wydział” wybierz budynek lub wydział.
 3. Sprawdź wyświetlony adres wybranej lokalizacji.
 
 System wykorzystuje lokalizację wskazanego budynku do obliczania odległości.
