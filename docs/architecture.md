@@ -16,9 +16,8 @@ System rekomendacji okolic zamieszkania dla studentów w Rzeszowie został zapro
    * **Odpowiedzialność:** Walidacja danych wejściowych, obliczanie odległości w linii prostej i szacowanego czasu marszu (4,5 km/h), filtrowanie obszarów przekraczających limit czasu (**R3**), obliczanie punktacji metodą Weighted Scoring oraz generowanie tekstowego uzasadnienia (**R5**). KNN pozostaje metodą porównywaną w eksperymencie Lab 4.
    * **Granica:** Działa bezstanowo na przekazanych parametrach; nie zarządza widokiem ani stanem sesji przeglądarki.
 3. **Warstwa Danych i Konfiguracji (`data/` oraz `config/`):**
-   * **Odpowiedzialność:** Trwałe przechowywanie surowych i przetworzonych danych o uczelniach, usługach, obszarach mieszkalnych oraz eksport raportów badawczych w `results/`.
-   * **Granica:** Brak logiki biznesowej; pliki są wyłącznie odczytywane przez silnik rekomendacji.
-
+  - **Odpowiedzialność:** Trwałe przechowywanie surowych i przetworzonych danych o uczelniach, usługach, obszarach mieszkalnych oraz eksport raportów badawczych w `results/`.
+  - **Granica:** Brak logiki biznesowej; pliki są wyłącznie odczytywane przez silnik rekomendacji.
 ---
 
 ## 2. Przypadek użycia: UC-01 — Generowanie rekomendacji okolic dla studenta
@@ -129,7 +128,7 @@ Interfejs przekazuje wcześniej wczytany obiekt `RecommendationEngine` przez par
 
 ### 4.3. Kody i obsługa błędów
 * `VALIDATION_ERROR`: nieistniejące `location_id`, waga spoza zbioru `{1, 2, 3}` lub limit spoza `{15, 30, 45, None}` → zatrzymanie obliczeń i wyświetlenie `st.error` w UI.
-* `DATA_ERROR`: Brak plików w `data/processed/`, uszkodzony JSON lub brak wymaganych pól przy starcie aplikacji: zatrzymanie uruchomienia i wyświetlenie komunikatu błędu w interfejsie (`st.error`) z informacją o sprawdzeniu danych i uruchomieniu `scripts/prepare_data.py`.
+* `DATA_ERROR`: Brak plików w `data/processed/`, uszkodzony JSON lub brak wymaganych pól przy starcie aplikacji: zatrzymanie uruchomienia i wyświetlenie komunikatu „Nie można wczytać danych projektu: …” w interfejsie (`st.error`).
 * `NO_MATCHES`: poprawne dane wejściowe, ale wszystkie 25 obszarów przekracza `max_walk_time_minutes` → zwrócenie pustej listy `recommendations: []` i wyświetlenie `st.warning` w UI.
 
 ---

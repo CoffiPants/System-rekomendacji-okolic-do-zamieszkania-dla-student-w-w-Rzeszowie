@@ -8,7 +8,7 @@ Statusy: **PASS** — sprawdzono, wynik zgodny z oczekiwanym; **FAIL** — spraw
 
 | Element | Wartość |
 |---|---|
-| Gałąź | `main`, commit `ed0366c` (po połączeniu PR #14–#21). Kod i dane są identyczne z commitem `653393e`, na którym wykonano ostatnie uruchomienia; późniejsze commity zmieniają tylko ten dokument |
+| Gałąź | `main`, commit `2672012` (po połączeniu PR #14–#24). Kod i dane są identyczne z commitem `653393e`; PR #21–#24 zmieniają tylko dokumentację i dodają `results/lab7/` |
 | Commit kodu | Silnik i walidacja (`scripts/`) bez zmian od commita `0df4f8b`. `app.py` zmieniony w PR #20: eksport CSV i komunikat przy mniej niż trzech wynikach |
 | Dane | `data/processed/services.json` (500), `data/processed/universities.json` (28), `config/residential-areas.json` (25) — bez zmian od commita `1d9e312` |
 | Środowisko | Windows 11, Python 3.12.6, streamlit 1.67.0, folium 1.0.0, streamlit-folium 0.27.4 |
@@ -66,8 +66,10 @@ Dziennik uruchomień:
 | 23.11.2026 | `main` `653393e` | Valentyna Boksha, lokalnie (polecenie wpisał asystent AI) | **51/51 PASS** (`Ran 51 tests in 2.362s`, `OK`) |
 | 23.11.2026 | `main` `653393e` | asystent AI, lokalnie | `check_data.py --test-invalid`: 0 naruszeń, 3/3; `test_knn.py`: OK; Streamlit AppTest: 3 karty i przycisk eksportu; przy 2 wynikach komunikat informacyjny i przycisk eksportu; WSIiZ / 15 min — komunikat o braku okolic, bez przycisku eksportu; brak wyjątków |
 | 24.11.2026 | `main` `ed0366c` | asystent AI, lokalnie | 51/51 PASS (`Ran 51 tests in 2.325s`, `OK`) |
+| 24.11.2026 | `main` `ed0366c`, nowy katalog i nowe środowisko `.venv` | asystent AI, lokalnie | 51/51 PASS (`Ran 51 tests in 2.671s`, `OK`) |
+| 24.11.2026 | `main` `2672012` | asystent AI, lokalnie | 51/51 PASS (`Ran 51 tests in 3.042s`, `OK`); `check_data.py --test-invalid`: 0 naruszeń, 3/3 |
 
-T01–T20: **PASS** na `main` `ed0366c`. Dowód: wynik polecenia z punktu 2.1; raport w pliku nie jest zapisywany. Nowe testy T18–T20 nie wymagały zmian w kodzie silnika.
+T01–T20: **PASS** na `main` `2672012`. Dowód: wynik polecenia z punktu 2.1; raport w pliku nie jest zapisywany. Nowe testy T18–T20 nie wymagały zmian w kodzie silnika.
 
 ### 2.2. Ręczne sprawdzenie interfejsu
 
@@ -89,7 +91,18 @@ Polecenie: `python -m streamlit run app.py`. U01–U07 wykonała Valentyna Boksh
 
 ## 3. Pomiar niefunkcjonalny
 
-**NOT RUN.** Kryterium akceptacji czasu odpowiedzi nie zostało jeszcze uzgodnione w zespole, a katalog `results/lab7/` nie istnieje. Skrypt `scripts/benchmark_recommendation.py` uruchamia się poprawnie, ale bez kryterium wynik nie jest oceniany. Pomiar należy do części Serhiia Popovycha.
+**PASS.** Kryterium ustalono przed pomiarem: mediana czasu obliczenia rankingu ≤ 100 ms przy 100 powtórzeniach, 25 obszarach mieszkalnych i 500 usługach. Pomiar wykonał Serhii Popovych, 24.11.2026, na `main` `ed0366c`, Apple M1 Max (10 rdzeni, 32 GB), macOS 27.2.1, Python 3.15.2.
+
+| Miara | Wynik |
+|---|---|
+| Mediana | 16,000 ms |
+| Minimum | 15,748 ms |
+| Maksimum | 17,090 ms |
+| Powtórzenia | 100 |
+
+Polecenie `python scripts/benchmark_recommendation.py --repetitions 100` użyło lokalizacji `way/197227711`, limitu 30 min i wag 3/2/2/2. Mierzono wyłącznie `recommend()`, bez wczytywania plików. Obciążenie maszyny: średnia 7,40 (1 min). Szczegóły i pełne wyjście: `results/lab7/benchmark.md`.
+
+Niezależne powtórzenie (asystent AI, 24.11.2026, `main` `2672012`, Windows 11, Python 3.12.6, to samo polecenie): mediana 18,126 ms, minimum 16,531 ms, maksimum 31,465 ms, 100 powtórzeń, ten sam ranking TOP 3. Kryterium ≤ 100 ms jest spełnione także na drugim stanowisku.
 
 ## 4. Ocena danych, wyników i kodu
 
@@ -137,19 +150,19 @@ Przegląd fragmentu kodu, którego nie jestem autorką (zapisany także w opisie
 | R5 — uzasadnienie | spełnione częściowo; zgodność treści niesprawdzona | T15 (niepuste uzasadnienie), U05 | Zgodność treści uzasadnienia z punktacją: NOT RUN |
 | R6 — zakres projektu | spełnione | T01, T15 — ranking powstaje bez danych o cenach i ofertach | — |
 
-Statusy: spełnione / niespełnione / niesprawdzone. Dotyczą wersji `main` `ed0366c`. `docs/report.md` podaje te same statusy.
+Statusy: spełnione / niespełnione / niesprawdzone. Dotyczą wersji `main` `2672012`. `docs/report.md` podaje te same statusy.
 
 ## 6. Sprawdzenie dokumentacji
 
 | Dokument | Status | Uwagi |
 |---|---|---|
-| `docs/architecture.md` | sprawdzony | 8 niezgodności opisanych w Issue #8; wszystkie poprawione (commity `0aeab7e`, PR #18, `2539038`) |
-| `docs/report.md` | niezgodności | Układ zgodny z Lab 8. Po PR #20 nieaktualne: „funkcja eksportu rankingu nie istnieje” (rozdziały 1 i 5). Nie podano nazwy taga ani commita prezentowanej wersji |
-| `docs/presentation.md` | niezgodności | Oba scenariusze demonstracji są wykonalne. Po PR #20 nieaktualne: „brak eksportu rankingu” (część 4, pytanie 3, wynik próby) |
+| `docs/architecture.md` | sprawdzony | 8 niezgodności opisanych w Issue #8; wszystkie poprawione (commity `0aeab7e`, PR #18, `2539038`). Komunikat błędu danych i dekorator buforowania w ADR poprawione w PR #24 |
+| `docs/report.md` | niezgodności | Układ zgodny z Lab 8; eksport, instrukcja, R6 i wkład zespołu poprawione w PR #24. Otwarte: w trzech miejscach pomiar niefunkcjonalny ma nadal status `NOT RUN` (wykonany w PR #23); rozdział 4 nazywa Weighted Scoring „wariantem bazowym”, a w Lab 4 wariantem bazowym była sama odległość do uczelni; skrypty KNN przypisano Serhiiowi, w historii jedyną autorką jest Dana; audyt gotowości podaje tag `lab8-demo` jako gotowy, choć wskazuje commit `2539038` |
+| `docs/presentation.md` | niezgodności | Oba scenariusze demonstracji są wykonalne; eksport opisany poprawnie (PR #24). Otwarte: pomiar niefunkcjonalny ma nadal status `NOT RUN` (część 4 i pytanie 3); sekcja „Wynik próby” opisuje próbę, która jeszcze się nie odbyła |
 | `README.md` — instrukcja uruchomienia | PASS | 23.11.2026, Valentyna Boksha, wersja `0df4f8b`: instalacja z `requirements.txt`, uruchomienie aplikacji, testy. 24.11.2026, asystent AI, wersja `ed0366c`: `git clone` do nowego pustego katalogu, nowe środowisko `.venv`, `python -m pip install -r requirements.txt` bez błędów, 51/51 testów PASS, aplikacja uruchomiona. Uwaga: w bardzo głęboko zagnieżdżonym katalogu instalacja nie powiodła się przez limit długości ścieżki w systemie Windows (pakiet `streamlit`); w katalogu o krótszej ścieżce przebiegła poprawnie |
 | `docs/user-guide.md` | PASS z uwagą | 24.11.2026, Valentyna Boksha (nie jest autorką instrukcji), wersja `ed0366c`, aplikacja uruchomiona z nowego katalogu i nowego środowiska. Wykonane kroki z rozdziałów 3–8: wybór uczelni i budynku, limit czasu, wagi, „Generuj rekomendacje”, mapa, pobranie CSV; przypadek błędny: WSIiZ i limit 15 min — komunikat o braku okolic. Wynik: wszystkie kroki wykonalne, opisy zgodne z ekranem. Uwaga (porównanie z układem z Lab 7, asystent AI): instrukcja nie ma osobnego rozdziału o komunikatach błędów ani listy dozwolonych limitów czasu (15 / 30 / 45 min) — zgłoszone autorce |
-| `docs/problem.md` | niezgodności | Podział zadań zaktualizowany w PR #18. Nieaktualne: wiersz 51 („`docs/tests.md` na gałęzi `valentyna-data-validation`” — plik jest w `main`) i wiersz 35 („Lista w bazie” — projekt nie ma bazy danych) |
-| `docs/implementation.md` | niezgodności | Podaje „7 testów, 7/7 PASS” — polecenie uruchamia 51 testów; nie wymienia `scripts/data_validation.py`, trzech plików testów ani eksportu CSV; pomiar „mediana 20,060 ms” bez sprzętu, commita i parametrów. Brak wymaganych w Lab 6 pozycji: sprawdzona wersja i osoba weryfikująca, ocena usprawnienia implementacji |
+| `docs/problem.md` | sprawdzony | Podział ról i odwołanie do `docs/tests.md` poprawione w PR #24. Scenariusz prezentacji (`docs/presentation.md`) jest przypisany Danie, a w `docs/report.md` Paulinie |
+| `docs/implementation.md` | sprawdzony | Przepisany w PR #23: 51 testów, moduł walidacji, eksport CSV, sprawdzona wersja i osoba weryfikująca, ocena usprawnienia (przed/po), pomiar z warunkami. Otwarte: punkty 6.4 i 6.5 podają status `DATA_ERROR` dla błędu wczytania danych w aplikacji — aplikacja pokazuje komunikat z `load_engine()`; poprawka jest w gałęzi `serhii-lab7-lab6` (commit `f771de8`), jeszcze niepołączona |
 
 ## 7. Znane błędy i ograniczenia
 
@@ -158,10 +171,10 @@ Statusy: spełnione / niespełnione / niesprawdzone. Dotyczą wersji `main` `ed0
 3. Eksport CSV: czas ma przecinek dziesiętny (`27,2`), a ocena i odległości kropkę (`69.2`, `2038.0`). Excel z polskimi ustawieniami wczytuje wartości z kropką jako tekst. Wartości w pliku są poprawne; zespół zdecydował nie zmieniać formatu. Obejście: zamienić kropki na przecinki w kolumnach F oraz H–K. Brak testu automatycznego eksportu w repozytorium.
 4. Nazwy obszarów mogą być niezgodne z polem `district`; przynależność administracyjna nie została niezależnie sprawdzona.
 5. Odległości są liczone w linii prostej od środka obszaru; czas nie uwzględnia rzeczywistych tras.
-6. Brak pomiaru niefunkcjonalnego (punkt 3) — Issue #9.
+6. Pomiar niefunkcjonalny wykonano przy wysokim obciążeniu maszyny (średnia 7,40 na 10 rdzeni); podane czasy są górnym oszacowaniem (punkt 3).
 7. Testy interfejsu nie są zautomatyzowane w repozytorium.
 8. Plik danych ze znacznikiem BOM jest odrzucany przez aplikację, choć przechodzi `scripts/check_data.py` (punkt 4).
-9. `docs/user-guide.md` nie ma osobnego rozdziału o komunikatach błędów (Issue #7); `docs/report.md` i `docs/presentation.md` nadal podają, że eksportu nie ma.
+9. `docs/user-guide.md` nie ma osobnego rozdziału o komunikatach błędów (Issue #7; poprawka w gałęzi `dana-final-lab7-lab8`, jeszcze niepołączona); `docs/report.md` i `docs/presentation.md` nadal podają pomiar niefunkcjonalny jako `NOT RUN`.
 10. `docs/experiment.md` (rozdziały 1–11) opisuje eksperyment niezgodny ze skryptami; zapisane `results/lab4/*.csv` mają nieaktualne nazwy obszarów.
-11. `docs/implementation.md` podaje nieaktualną liczbę testów i nie opisuje modułu walidacji (punkt 6) — Issue #10.
-12. Żaden Pull Request nie ma zapisanego przeglądu (review) innej osoby; przegląd kodu z punktu 4 jest zapisany w opisie PR #19.
+11. `docs/implementation.md`: status `DATA_ERROR` przy błędzie wczytania danych w aplikacji (punkt 6) — poprawka niepołączona.
+12. Żaden Pull Request (#1–#24) nie ma zapisanego przeglądu (review) innej osoby poza PR #1; przegląd kodu z punktu 4 jest zapisany w opisie PR #19.
