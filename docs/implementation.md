@@ -297,7 +297,7 @@ Porównanie stanu przed walidacją i po jej dodaniu. Dane pochodzą z `docs/test
 | Przypadek | Przed (`1d9e312` + nowe testy) | Po (`0df4f8b`, obecnie `ed0366c`) |
 |---|---|---|
 | Powtórzony `id` | przyjmowany | odrzucany przez `validate_documents()` |
-| Dokument `[]` zamiast obiektu | `AttributeError`, aplikacja bez komunikatu | `DataValidationError`, odpowiedź `DATA_ERROR` z komunikatem |
+| Dokument `[]` zamiast obiektu | `AttributeError`, aplikacja bez komunikatu | `DataValidationError`; aplikacja pokazuje komunikat o błędzie danych, API zwraca `DATA_ERROR` |
 | Nieznana kategoria usługi | przyjmowana | odrzucana |
 | Brak `university` lub `address` | niewykryty | odrzucany |
 | Waga `NaN` lub `inf` w `recommend()` | wynik `nan` | `ValueError`, publiczne API zwraca `VALIDATION_ERROR` |
@@ -315,7 +315,7 @@ Interfejs przewiduje komunikaty, gdy:
 
 - żadna okolica nie spełnia limitu czasu (`NO_MATCHES`);
 - pasujących okolic jest mniej niż trzy (wyświetla dostępne wyniki);
-- nie można wczytać danych projektu (`DATA_ERROR`).
+- nie można wczytać danych projektu (komunikat z `load_engine()`).
 
 Aplikacja nie przerywa działania w tych sytuacjach.
 
