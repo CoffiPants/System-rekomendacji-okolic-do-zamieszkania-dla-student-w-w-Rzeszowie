@@ -61,7 +61,19 @@
 
 ---
 
+## Plan próby generalnej
+
+- **Planowana kolejność wystąpień:** Paulina (części 1–2) → Dana / Serhii (część 3: scenariusz standardowy + przypadek `WSIiZ, Sucharskiego 2` z limitem `15 min`) → Valentyna / Paulina (część 4 i pytania).
+- **Na co zwrócić uwagę:** formularz ma tylko limity 15 / 30 / 45 min lub brak limitu — nie próbować ustawiać innych wartości (np. 1 lub 5 min).
+
 ## Wynik próby generalnej (Dry Run)
-- **Łączny czas próby:** ok. 7–8,5 minuty (mieści się w założonym przedziale 7–10 minut, pod warunkiem trzymania się limitów czasowych na część 3).
-- **Kolejność wystąpień:** Paulina (części 1–2) → Dana / Serhii (część 3: scenariusz standardowy + przypadek `WSIiZ, Sucharskiego 2` z limitem `15 min`) → Valentyna / Paulina (część 4 i Q&A).
-- **Co zadziałało / na co zwrócić uwagę:** Przełączenie na `WSIiZ, Sucharskiego 2` z limitem `15 min` poprawnie pokazuje stan `NO_MATCHES` bez błędu aplikacji; podczas próby należy pilnować, by nie próbować ustawiać nieistniejących w formularzu limitów (np. 1 lub 5 min).
+
+Próba jeszcze się nie odbyła. Po próbie należy uzupełnić:
+
+- **Data próby:**
+- **Prezentowana wersja (tag / commit):**
+- **Środowisko (komputer, system, przeglądarka):**
+- **Łączny czas:**
+- **Uwagi (co najmniej jedna konkretna):**
+- **Wprowadzone poprawki:**
+- **Wynik ponownego sprawdzenia:**
